@@ -31,11 +31,11 @@ dependencies:
   firebase_messaging: ^14.7.21
   firebase_remote_config: ^4.3.4
   # video
-  image_picker: ^1.0.7
+  # image_picker: ^1.0.7
   flick_video_player: ^0.7.0
   video_player: ^2.8.4
   # image collage
-  image_collapse: ^1.0.1
+  # image_collapse: ^1.0.1
   flutter_layout_grid: ^2.0.6
   
 dev_dependencies:
