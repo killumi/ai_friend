@@ -4,7 +4,7 @@ import 'package:ai_friend/gpt/chat_script/chat_script_storage.dart';
 import 'package:ai_friend/gpt/gpt_provider.dart';
 import 'package:ai_friend/gpt/gpt_screen.dart';
 import 'package:ai_friend/locator.dart';
-import 'package:ai_friend/test_img_screen.dart';
+// import 'package:ai_friend/test_img_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -16,7 +16,7 @@ void main() async {
   await initLocator();
   await Hive.initFlutter();
   await ChatScriptStorage.openStorage();
-  await ChatScriptStorage().setCurrentDay(1);
+  // await ChatScriptStorage().setCurrentDay(1);
   await locator<GPTProvider>().createThreads();
   runApp(const MyApp());
 }
