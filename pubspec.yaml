@@ -1,0 +1,81 @@
+name: ai_friend
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.2 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.18.1
+  http: ^1.2.1
+  dio: ^5.4.2+1
+  cupertino_icons: ^1.0.2
+  uuid: ^4.3.3
+  # web_socket_channel: ^2.4.4
+  chat_gpt_sdk: ^3.0.4
+  get_it: ^7.6.7
+  provider: ^6.1.2
+  rxdart: ^0.27.7
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  flutter_svg:
+  # firebase
+  firebase_core: ^2.27.2
+  firebase_storage: ^11.6.11
+  firebase_analytics: ^10.9.0
+  firebase_messaging: ^14.7.21
+  firebase_remote_config: ^4.3.4
+  # video
+  image_picker: ^1.0.7
+  flick_video_player: ^0.7.0
+  video_player: ^2.8.4
+  # image collage
+  image_collapse: ^1.0.1
+  flutter_layout_grid: ^2.0.6
+  
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  build_runner: ^2.4.9
+  json_serializable: ^6.7.1
+  hive_generator: ^2.0.1
+  flutter_gen_runner: ^5.4.0
+
+# The following section is specific to Flutter packages.
+flutter:
+  uses-material-design: true
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/
+    - assets/images/
+    - assets/paywall/
+    - assets/colored_icons/
+    - assets/icons/
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware
+
+  # example:
+  fonts:
+    - family: SFPro
+      fonts:
+        - asset: fonts/SFProText-Regular.ttf
+    - family: GothamPro
+      fonts:
+        - asset: fonts/GothamProRegular.ttf
+        - asset: fonts/GothamProBold.ttf
+
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
+# Gen
+flutter_gen:
+  output: lib/gen/
+  integrations:
+    flutter_svg: true
+    flare_flutter: false
