@@ -34,9 +34,17 @@ dependencies:
   # image_picker: ^1.0.7
   flick_video_player: ^0.7.0
   video_player: ^2.8.4
+  audioplayers: ^6.0.0
   # image collage
   # image_collapse: ^1.0.1
+  progressive_image: ^2.0.1
+  flutter_acrylic: ^1.1.3
   flutter_layout_grid: ^2.0.6
+  # spoiler_widget: ^1.0.4
+  bounce: ^1.0.2
+  contained_tab_bar_view: ^0.8.0
+  path_provider: ^2.1.3
+  swipe_image_gallery: ^0.8.3
   
 dev_dependencies:
   flutter_test:
@@ -57,6 +65,8 @@ flutter:
     - assets/paywall/
     - assets/colored_icons/
     - assets/icons/
+    - assets/video.mp4
+    - assets/new_message.mp3
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

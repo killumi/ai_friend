@@ -42,9 +42,11 @@ class _VideoMessageWidgetState extends State<VideoMessageWidget>
     await _controller!.initialize().then((_) {
       _controller!.addListener(() {
         if (!_controller!.value.isPlaying) {
-          setState(() {
-            _isPlaying = false;
-          });
+          if (mounted) {
+            setState(() {
+              _isPlaying = false;
+            });
+          }
         }
       });
     });

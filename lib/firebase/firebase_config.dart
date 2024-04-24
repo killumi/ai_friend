@@ -4,16 +4,19 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 
 class FirebaseConfig {
   final FirebaseRemoteConfig config = FirebaseRemoteConfig.instance;
-  FirebaseConfig() {
-    config.fetchAndActivate();
-    config.onConfigUpdated.listen((event) {
-      config.fetch();
-    });
-  }
+  // FirebaseConfig();
 
   int get dayLength => config.getAll().length - 1;
 
-  IScriptDay? getDailyChatScript(int dayNumber) {
+  Future<void> init() async {
+    await config.fetchAndActivate();
+    config.onConfigUpdated.listen((event) async {
+      await config.fetch();
+    });
+  }
+
+  Future<IScriptDay?> getDailyChatScript(int dayNumber) async {
+    await config.fetch();
     if (dayNumber > dayLength) return null;
     final value = config.getValue('day_$dayNumber');
     final decoded = jsonDecode(value.asString());

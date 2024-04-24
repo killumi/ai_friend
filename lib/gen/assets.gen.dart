@@ -127,6 +127,14 @@ class $AssetsColoredIconsGen {
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/arrow_down_icon.svg
+  SvgGenImage get arrowDownIcon =>
+      const SvgGenImage('assets/icons/arrow_down_icon.svg');
+
+  /// File path: assets/icons/arrow_up_icon.svg
+  SvgGenImage get arrowUpIcon =>
+      const SvgGenImage('assets/icons/arrow_up_icon.svg');
+
   /// File path: assets/icons/attention_icon.svg
   SvgGenImage get attentionIcon =>
       const SvgGenImage('assets/icons/attention_icon.svg');
@@ -135,9 +143,24 @@ class $AssetsIconsGen {
   SvgGenImage get feedbackIcon =>
       const SvgGenImage('assets/icons/feedback_icon.svg');
 
+  /// File path: assets/icons/gallery_icon.svg
+  SvgGenImage get galleryIcon =>
+      const SvgGenImage('assets/icons/gallery_icon.svg');
+
   /// File path: assets/icons/left_chevron.svg
   SvgGenImage get leftChevron =>
       const SvgGenImage('assets/icons/left_chevron.svg');
+
+  /// File path: assets/icons/lightbulb.svg
+  SvgGenImage get lightbulb => const SvgGenImage('assets/icons/lightbulb.svg');
+
+  /// File path: assets/icons/lips_profile.svg
+  SvgGenImage get lipsProfile =>
+      const SvgGenImage('assets/icons/lips_profile.svg');
+
+  /// File path: assets/icons/message_icon.svg
+  SvgGenImage get messageIcon =>
+      const SvgGenImage('assets/icons/message_icon.svg');
 
   /// File path: assets/icons/play_icon.svg
   SvgGenImage get playIcon => const SvgGenImage('assets/icons/play_icon.svg');
@@ -152,18 +175,29 @@ class $AssetsIconsGen {
   /// File path: assets/icons/rate_icon.svg
   SvgGenImage get rateIcon => const SvgGenImage('assets/icons/rate_icon.svg');
 
+  /// File path: assets/icons/settings_icon.svg
+  SvgGenImage get settingsIcon =>
+      const SvgGenImage('assets/icons/settings_icon.svg');
+
   /// File path: assets/icons/share_icon.svg
   SvgGenImage get shareIcon => const SvgGenImage('assets/icons/share_icon.svg');
 
   /// List of all assets
   List<SvgGenImage> get values => [
+        arrowDownIcon,
+        arrowUpIcon,
         attentionIcon,
         feedbackIcon,
+        galleryIcon,
         leftChevron,
+        lightbulb,
+        lipsProfile,
+        messageIcon,
         playIcon,
         proIcon,
         profileIcon,
         rateIcon,
+        settingsIcon,
         shareIcon
       ];
 }
@@ -223,7 +257,12 @@ class Assets {
   static const $AssetsColoredIconsGen coloredIcons = $AssetsColoredIconsGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const String newMessage = 'assets/new_message.mp3';
   static const $AssetsPaywallGen paywall = $AssetsPaywallGen();
+  static const String video = 'assets/video.mp4';
+
+  /// List of all assets
+  static List<String> get values => [newMessage, video];
 }
 
 class AssetGenImage {

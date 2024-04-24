@@ -22,13 +22,14 @@ class IScriptMessageAdapter extends TypeAdapter<IScriptMessage> {
       points: fields[2] as int,
       isScriptBot: fields[3] as bool?,
       action: fields[4] as String?,
+      answer: (fields[5] as List?)?.cast<IChatMessage>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, IScriptMessage obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.text)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class IScriptMessageAdapter extends TypeAdapter<IScriptMessage> {
       ..writeByte(3)
       ..write(obj.isScriptBot)
       ..writeByte(4)
-      ..write(obj.action);
+      ..write(obj.action)
+      ..writeByte(5)
+      ..write(obj.answer);
   }
 
   @override

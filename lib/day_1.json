@@ -1,0 +1,146 @@
+{
+    "day": 1,
+    "data": [
+        {
+            "id": 1,
+            "description": "If a girl shows interest, you need to show her mutual interest",
+            "messages": [
+                {
+                    "text": "Very glad that you wrote, your name is Alice, right?",
+                    "isPremium": false,
+                    "points": 1
+                },
+                {
+                    "text": "Yeah, sure, I'd love to get to know you better, Alice",
+                    "isPremium": false,
+                    "points": 2
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "description": "To start dating a girl, you just need to ask her a question",
+            "textfieldAvailable": true,
+            "messages": [
+                {
+                    "text": "Alice, I'd like to get to know you better, what do you think about it??",
+                    "isPremium": false,
+                    "points": 1
+                },
+                {
+                    "text": "Alice, hi, I was captivated by your eyes, you look beautiful! I have a desire to chat with you, what do you think about it?",
+                    "isPremium": false,
+                    "points": 2
+                },
+                {
+                    "text": "Hi, honey! Can a gentleman like me get your wonderful selfies?",
+                    "isPremium": true,
+                    "points": 3
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "description": "Great, now introduce yourself...",
+            "textfieldAvailable": true,
+            "messages": []
+        },
+        {
+            "id": 4,
+            "description": "...and ask another engaging question",
+            "textfieldAvailable": true,
+            "messages": [
+                {
+                    "text": "Alice, what topics do you like to chat with men about?",
+                    "isPremium": false,
+                    "points": 1
+                },
+                {
+                    "text": "Alice, what's most important to you in a man?",
+                    "isPremium": false,
+                    "points": 2
+                },
+                {
+                    "text": "Alice, how do you feel about more explicit dialog with a man?",
+                    "isPremium": true,
+                    "points": 3
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "description": "Wow, she sure liked you! Now ask her something about her life?",
+            "messages": [
+                {
+                    "text": "Alice, can you tell how you spend your free time?",
+                    "isPremium": false,
+                    "points": 1
+                },
+                {
+                    "text": "Alice, I know you do a lot for the society, tell me why?",
+                    "isPremium": false,
+                    "points": 2
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "description": "I suspect you will be able to afford more after these general questions. In the meantime, answer Alice's question",
+            "textfieldAvailable": true,
+            "messages": [
+                {
+                    "text": "Тут ошибка в сценарии стоит Свой Вариант в ответ на который должно приходить определенное сообщение и фото но это не предусмотрено в боте",
+                    "isPremium": true,
+                    "points": 3
+                },
+                {
+                    "text": "I've already missed teasing your videos, show me yourself, sweetie",
+                    "isPremium": true,
+                    "points": 3
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "description": "You managed to get her to send you a teasing photo! Need to keep that sexy vibe.",
+            "textfieldAvailable": true,
+            "messages": [
+                {
+                    "text": "Mmm, you look so sexy, if you're trying to make me horny, you're doing a great job",
+                    "isPremium": false,
+                    "points": 1
+                },
+                {
+                    "text": "Alice, baby, my day will never be the same, thank you for your teasing gift",
+                    "isPremium": false,
+                    "points": 2
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "description": "Say something nice back to her or rewind time to your next date with Alice",
+            "textfieldAvailable": true,
+            "messages": [
+                {
+                    "text": "it's mutual, sweetie, Alice!  xo xo",
+                    "isPremium": false,
+                    "points": 1,
+                    "isScriptBot": false
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "description": "Сценарий 1 дня закончен, продлевать будем ?",
+            "messages": [
+                {
+                    "text": "Конечно будем! Деньги не проблема!",
+                    "isPremium": false,
+                    "points": 1,
+                    "action": "no_send_pay_go_next_day"
+                }
+            ]
+        }
+    ]
+}
