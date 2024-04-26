@@ -1,4 +1,5 @@
 import 'package:ai_friend/chat/chat_provider.dart';
+import 'package:ai_friend/chat/chat_script/chat_script_helper.dart';
 import 'package:ai_friend/chat/chat_script/chat_script_provider.dart';
 import 'package:ai_friend/entity/i_script_message/i_script_message.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
@@ -66,7 +67,7 @@ class ChatScriptMessage extends StatelessWidget {
             if (data.isPremium) const SizedBox(width: 8),
             Expanded(
               child: Text(
-                data.text,
+                data.text.replaceUserName(),
                 style: const TextStyle(color: Colors.white),
               ),
             ),
@@ -111,7 +112,7 @@ class ChatScriptMessage extends StatelessWidget {
       }
     }
 
-    chatProvider.sendMessageGetAnswer(data);
-    scriptProvider.showNextMessage();
+    await chatProvider.sendMessageGetAnswer(data);
+    await scriptProvider.showNextMessage();
   }
 }

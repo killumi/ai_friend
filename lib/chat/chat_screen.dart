@@ -4,6 +4,7 @@ import 'package:ai_friend/chat/chat_script/chat_script_provider.dart';
 import 'package:ai_friend/chat/chat_script/widgets/chat_script_messages_box.dart';
 import 'package:ai_friend/chat/widgets/chat_header.dart';
 import 'package:ai_friend/chat/widgets/chat_input.dart';
+import 'package:ai_friend/chat/widgets/continue_chat_widget.dart';
 import 'package:ai_friend/chat/widgets/message_widget.dart';
 import 'package:ai_friend/entity/i_chat_message/i_chat_message.dart';
 import 'package:ai_friend/widgets/screen_wrap.dart';
@@ -23,14 +24,14 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<ChatProvider>().initChat();
-  }
-
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-    context.read<ChatScriptProvider>().initScript();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await context.read<ChatProvider>().initChat().then((value) async {
+        await Future.delayed(const Duration(seconds: 1));
+        context.read<ChatScriptProvider>().initScript();
+        context.read<ChatScriptProvider>().showScriptBox(true);
+        context.read<ChatProvider>().scrollDown();
+      });
+    });
   }
 
   @override
@@ -39,7 +40,8 @@ class _ChatScreenState extends State<ChatScreen> {
     final messages = chatProvider.messages;
     final listKey = chatProvider.chatListKey;
     final scrollController = chatProvider.scrollController;
-    // print('messages: ${messages.length}');
+    final daylyScriptIsEnd =
+        context.select((ChatScriptProvider e) => e.daylyScriptIsEnd);
 
     return ScreenWrap(
       resizeToAvoidBottomInset: true,
@@ -59,8 +61,9 @@ class _ChatScreenState extends State<ChatScreen> {
                         _buildItem(messages[index], animation),
                   ),
                 ),
-                const ChatScriptMessagesBox(),
-                const ChatInput(),
+                if (!daylyScriptIsEnd) const ChatScriptMessagesBox(),
+                if (!daylyScriptIsEnd) const ChatInput(),
+                if (daylyScriptIsEnd) const ContinueChatWidget(),
               ],
             ),
           ),

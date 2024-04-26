@@ -131,13 +131,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         child: const SafeArea(
           bottom: false,
           child: Text(
-            'AI Girlfriend',
+            'AI Girlfriend: Friendly Chat',
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Color(0xFFFBFBFB),
               fontSize: 20,
               fontFamily: FontFamily.gothamPro,
-              fontWeight: FontWeight.w400,
+              fontWeight: FontWeight.w600,
               height: 0,
             ),
           ),

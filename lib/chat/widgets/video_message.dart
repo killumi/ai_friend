@@ -4,8 +4,10 @@ import 'package:ai_friend/entity/i_chat_message/i_chat_message.dart';
 import 'package:ai_friend/firebase/fire_storage.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
 import 'package:ai_friend/locator.dart';
+import 'package:ai_friend/widgets/app_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pro_animated_blur/pro_animated_blur.dart';
 import 'package:swipe_image_gallery/swipe_image_gallery.dart';
 import 'package:video_player/video_player.dart';
 
@@ -24,6 +26,7 @@ class _VideoMessageState extends State<VideoMessage>
   VideoPlayerController? _controller;
   bool _isPlaying = true;
   final firebaseProvider = locator<FireStorageProvider>();
+  bool _isBlurred = true;
 
   @override
   bool get wantKeepAlive => true;
@@ -31,6 +34,7 @@ class _VideoMessageState extends State<VideoMessage>
   @override
   void initState() {
     super.initState();
+    _isBlurred = widget.isPreview!;
     _initVideoController();
   }
 
@@ -38,6 +42,11 @@ class _VideoMessageState extends State<VideoMessage>
   void dispose() {
     _controller?.dispose();
     super.dispose();
+  }
+
+  void toggleBlur() {
+    _isBlurred = !_isBlurred;
+    setState(() {});
   }
 
   Future<void> _initVideoController() async {
@@ -90,10 +99,12 @@ class _VideoMessageState extends State<VideoMessage>
       onTap: () {
         if (widget.isPreview!) {
           final videos = locator<ChatStorage>().media;
-          final index = videos.indexOf(widget.message);
+          final index = videos
+              .indexWhere((e) => e.content.contains(widget.message.content));
+          // final index = videos.indexOf(widget.message);
           SwipeImageGallery(
             context: context,
-            initialIndex: index == -1 ? videos.length - 1 : index,
+            initialIndex: index,
             transitionDuration: 300,
             dismissDragDistance: 100,
             backgroundOpacity: 0.95,
@@ -120,15 +131,50 @@ class _VideoMessageState extends State<VideoMessage>
         child: _controller?.value.isInitialized ?? false
             ? AspectRatio(
                 aspectRatio: _controller!.value.aspectRatio,
-                child: Stack(
-                  children: [
-                    ClipRRect(
-                        borderRadius:
-                            BorderRadius.circular(widget.isPreview! ? 10 : 0),
-                        child: VideoPlayer(_controller!)),
-                    if (!_controller!.value.isPlaying)
-                      Center(child: Assets.icons.playIcon.svg(width: 30)),
-                  ],
+                child: ClipRRect(
+                  borderRadius:
+                      BorderRadius.circular(widget.isPreview! ? 10 : 0),
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      VideoPlayer(_controller!),
+                      if (!_controller!.value.isPlaying)
+                        Center(child: Assets.icons.playIcon.svg(width: 30)),
+                      Positioned.fill(
+                        child: IgnorePointer(
+                          ignoring: !_isBlurred,
+                          child: ProAnimatedBlur(
+                            blur: _isBlurred ? 15 : 0,
+                            duration: const Duration(milliseconds: 200),
+                            curve: Curves.ease,
+                            child: GestureDetector(
+                                onTap: () => toggleBlur(),
+                                child: Container(
+                                  color: Colors.transparent,
+                                  child: Center(
+                                    child: AnimatedOpacity(
+                                      opacity: _isBlurred ? 1 : 0,
+                                      duration:
+                                          const Duration(milliseconds: 200),
+                                      curve: Curves.ease,
+                                      child: SizedBox(
+                                        height: 40,
+                                        width: 120,
+                                        child: AppButton(
+                                          title: 'Unblur',
+                                          icon: Assets.icons.proIcon
+                                              .svg(width: 23),
+                                          onTap: () => toggleBlur(),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                )),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               )
             : const AspectRatio(

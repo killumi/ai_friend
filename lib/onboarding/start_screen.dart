@@ -23,7 +23,7 @@ class StartScreen extends StatelessWidget {
               children: [
                 const SizedBox(height: 47),
                 const Text(
-                  'AI Girlfriend',
+                  'AI Girlfriend:\nFriendly Chat',
                   style: TextStyle(
                     color: Color(0xFFFBFBFB),
                     fontSize: 32,
@@ -53,7 +53,7 @@ class StartScreen extends StatelessWidget {
                     title: 'Start Chat',
                   ),
                 ),
-                const SizedBox(height: 37),
+                const SizedBox(height: 22),
                 Row(
                   children: [
                     Expanded(

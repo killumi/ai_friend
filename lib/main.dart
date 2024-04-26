@@ -5,17 +5,10 @@ import 'package:ai_friend/chat/chat_script/chat_script_storage.dart';
 import 'package:ai_friend/chat/chat_storage.dart';
 import 'package:ai_friend/firebase/firebase_config.dart';
 import 'package:ai_friend/firebase_options.dart';
-import 'package:ai_friend/gpt/gpt_provider.dart';
-// import 'package:ai_friend/gpt/gpt_screen.dart';
-import 'package:ai_friend/gpt/gpt_storage.dart';
 import 'package:ai_friend/locator.dart';
 import 'package:ai_friend/onboarding/onboarding_provider.dart';
-import 'package:ai_friend/onboarding/onboarding_screen.dart';
-// import 'package:ai_friend/onboarding/onboarding_screen.dart';
 import 'package:ai_friend/onboarding/onboarding_storage.dart';
 import 'package:ai_friend/onboarding/start_screen.dart';
-// import 'package:ai_friend/onboarding/start_screen.dart';
-// import 'package:ai_friend/test_img_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -31,6 +24,8 @@ void main() async {
   await OnboardingStorage.openStorage();
   await locator<FirebaseConfig>().init();
   await locator<ChatScriptProvider>().initScript();
+  await locator<ChatProvider>().createThread();
+  await locator<ChatProvider>().initMessages();
 
   // await ChatScriptStorage().setCurrentDay(1);
   // await locator<GPTProvider>().createThreads();
@@ -56,6 +51,9 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         home: introWasShown ? const ChatScreen() : const StartScreen(),
+        // home: FlightStateDemoPage(),
+        // home: FadeScaleTransitionDemo(),
+        // home: OpenContainerTransformDemo(),
         // home: const OnboardingScreen(),
         // home: const ChatScreen(),
         // home: BubbleScreen(),

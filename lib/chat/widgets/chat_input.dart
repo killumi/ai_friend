@@ -1,3 +1,4 @@
+import 'package:ai_friend/chat/chat_provider.dart';
 import 'package:ai_friend/chat/chat_script/chat_script_provider.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
 import 'package:ai_friend/gen/fonts.gen.dart';
@@ -13,29 +14,35 @@ class ChatInput extends StatefulWidget {
 }
 
 class _ChatInputState extends State<ChatInput> {
-  final _node = FocusNode();
-  final _controller = TextEditingController();
-  bool showButton = false;
-  bool isHasFocus = false;
-
   double get height => MediaQuery.of(context).size.height;
   bool get safeBottom => height < 750;
+  ChatProvider get chatProvider => context.read<ChatProvider>();
+  ChatScriptProvider get scriptProvider => context.read<ChatScriptProvider>();
+
   @override
   void initState() {
     super.initState();
-    _node.addListener(() {
-      isHasFocus = _node.hasFocus;
-      setState(() {});
-    });
+    chatProvider.node.addListener(chatProvider.onChangeFocusListener);
   }
 
   @override
   Widget build(BuildContext context) {
+    final chatProvider = context.read<ChatProvider>();
     final scriptProvider = context.read<ChatScriptProvider>();
+    final isShowScriptBox =
+        context.select((ChatScriptProvider e) => e.isShowScriptBox);
+    final textfieldAvailable =
+        context.select((ChatScriptProvider e) => e.textfieldAvailable);
+    final currentScriptMessageData =
+        context.select((ChatScriptProvider e) => e.scriptMessage);
+    final isShowRollUpBoxButton =
+        context.select((ChatScriptProvider e) => e.isShowRollUpBoxButton);
+    final isHasFocus = context.select((ChatProvider e) => e.isHasFocus);
+    final showSendButton = context.select((ChatProvider e) => e.showSendButton);
 
     return AnimatedContainer(
-      padding:
-          EdgeInsets.only(left: 16, right: 16, bottom: isHasFocus ? 16 : 0),
+      padding: EdgeInsets.only(
+          top: 10, left: 16, right: 16, bottom: isHasFocus ? 16 : 0),
       duration: const Duration(milliseconds: 240),
       child: Row(
         children: [
@@ -43,51 +50,94 @@ class _ChatInputState extends State<ChatInput> {
             child: SizedBox(
               height: 56,
               child: CupertinoTextField(
-                focusNode: _node,
-                controller: _controller,
-                onChanged: (e) {
-                  if (e.isNotEmpty) {
-                    showButton = true;
-                  } else {
-                    showButton = false;
-                  }
-
-                  setState(() {});
-                },
+                focusNode: chatProvider.node,
+                controller: chatProvider.textController,
+                onChanged: chatProvider.onChangeTextValue,
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                suffix: AnimatedScale(
-                  scale: showButton ? 1 : 0,
-                  duration: const Duration(milliseconds: 350),
-                  curve: Curves.ease,
-                  child: AnimatedOpacity(
-                    opacity: showButton ? 1 : 0,
-                    duration: const Duration(milliseconds: 260),
-                    curve: Curves.ease,
-                    child: Bounce(
-                      onTap: () {
-                        scriptProvider.showNextMessage();
-                      },
-                      tilt: false,
-                      scaleFactor: 0.89,
-                      child: Container(
-                        width: 48,
-                        height: 48,
-                        margin: const EdgeInsets.only(right: 4),
-                        decoration: const ShapeDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment(-0.71, 0.71),
-                            end: Alignment(0.71, -0.71),
-                            colors: [Color(0xFFBB3DA0), Color(0xFFA762EA)],
+                suffix: isHasFocus
+                    ? AnimatedScale(
+                        scale: showSendButton ? 1 : 0,
+                        duration: const Duration(milliseconds: 350),
+                        curve: Curves.ease,
+                        child: AnimatedOpacity(
+                          opacity: showSendButton ? 1 : 0,
+                          duration: const Duration(milliseconds: 260),
+                          curve: Curves.ease,
+                          child: Bounce(
+                            onTap: () async {
+                              if (textfieldAvailable) {
+                                await chatProvider.sendMessageGetAnswer(
+                                  null,
+                                  messageData: currentScriptMessageData,
+                                );
+                                await scriptProvider.showNextMessage();
+                              } else {
+                                chatProvider.sendMessageToGPT();
+                              }
+                            },
+                            tilt: false,
+                            scaleFactor: 0.89,
+                            child: Container(
+                              width: 48,
+                              height: 48,
+                              margin: const EdgeInsets.only(right: 4),
+                              decoration: const ShapeDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment(-0.71, 0.71),
+                                  end: Alignment(0.71, -0.71),
+                                  colors: [
+                                    Color(0xFFBB3DA0),
+                                    Color(0xFFA762EA)
+                                  ],
+                                ),
+                                shape: OvalBorder(),
+                              ),
+                              child: Center(
+                                child: Assets.icons.messageIcon.svg(),
+                              ),
+                            ),
                           ),
-                          shape: OvalBorder(),
                         ),
-                        child: Center(
-                          child: Assets.icons.messageIcon.svg(),
+                      )
+                    : AnimatedScale(
+                        scale:
+                            isShowRollUpBoxButton && !isShowScriptBox ? 1 : 0,
+                        duration: const Duration(milliseconds: 350),
+                        curve: Curves.ease,
+                        child: AnimatedOpacity(
+                          opacity:
+                              isShowRollUpBoxButton && !isShowScriptBox ? 1 : 0,
+                          duration: const Duration(milliseconds: 260),
+                          curve: Curves.ease,
+                          child: Bounce(
+                            onTap: () {
+                              scriptProvider.showScriptBox(true);
+                              chatProvider.scrollDown();
+                            },
+                            tilt: false,
+                            scaleFactor: 0.89,
+                            child: Container(
+                              width: 48,
+                              height: 48,
+                              margin: const EdgeInsets.only(right: 4),
+                              decoration: const ShapeDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment(-0.71, 0.71),
+                                  end: Alignment(0.71, -0.71),
+                                  colors: [
+                                    Color(0xFFBB3DA0),
+                                    Color(0xFFA762EA)
+                                  ],
+                                ),
+                                shape: OvalBorder(),
+                              ),
+                              child: Center(
+                                child: Assets.icons.lightbulb.svg(),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                ),
                 decoration: BoxDecoration(
                   color: const Color(0xff322835),
                   borderRadius: BorderRadius.circular(40),

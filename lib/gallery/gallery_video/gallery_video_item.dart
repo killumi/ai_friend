@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:typed_data';
-import 'package:ai_friend/chat/widgets/image_message.dart';
 import 'package:ai_friend/chat/widgets/video_message.dart';
 import 'package:ai_friend/firebase/fire_storage.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
@@ -8,8 +7,6 @@ import 'package:ai_friend/locator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ai_friend/entity/i_chat_message/i_chat_message.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:swipe_image_gallery/swipe_image_gallery.dart';
 import 'package:video_player/video_player.dart';
 
@@ -60,7 +57,6 @@ class _GalleryVideoItemState extends State<GalleryVideoItem>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-
     return GestureDetector(
       onTap: () {
         SwipeImageGallery(

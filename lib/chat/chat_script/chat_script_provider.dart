@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 class ChatScriptProvider extends ChangeNotifier {
   final FirebaseConfig _config;
   final ChatScriptStorage _storage;
+  bool _isShowScriptBox = false;
 
   late IScriptDay? dailyScript;
   bool unlockTextField = false;
@@ -18,11 +19,11 @@ class ChatScriptProvider extends ChangeNotifier {
   IScriptMessageData? get scriptMessage =>
       dailyScript?.data[currentMessageNumber];
 
-  bool get needShowNextDay =>
-      currentMessageNumber + 1 == dailyScript!.data.length;
+  bool get isShowScriptBox => _isShowScriptBox;
+  bool get isShowRollUpBoxButton => dailyScript != null;
 
-  bool get needSendToScriptBot =>
-      currentDayNumber == 1 && currentMessageNumber == 2;
+  bool get daylyScriptIsEnd =>
+      currentMessageNumber + 1 == dailyScript?.data.length;
 
   bool get textfieldAvailable => scriptMessage?.textfieldAvailable ?? false;
 
@@ -30,6 +31,8 @@ class ChatScriptProvider extends ChangeNotifier {
 
   Future<void> initScript() async {
     dailyScript = await _config.getDailyChatScript(currentDayNumber);
+    notifyListeners();
+    // print('$dailyScript');
   }
 
   void unlock(bool val) {
@@ -43,7 +46,7 @@ class ChatScriptProvider extends ChangeNotifier {
   }
 
   Future<void> showNextMessage() async {
-    if (needShowNextDay) {
+    if (daylyScriptIsEnd) {
       log('NEED SHOW PREMIUM SCREEN TO SHOW NEX DAY SCRIPT');
       await _storage.setCurrentDay(currentDayNumber + 1);
       dailyScript = await _config.getDailyChatScript(currentDayNumber);
@@ -106,6 +109,16 @@ class ChatScriptProvider extends ChangeNotifier {
     await _storage.setCurrentDay(1);
     dailyScript = await _config.getDailyChatScript(currentDayNumber);
     await _storage.setCurrentMessage(0);
+    notifyListeners();
+  }
+
+  void toggleShowScriptBox() {
+    _isShowScriptBox = !_isShowScriptBox;
+    notifyListeners();
+  }
+
+  void showScriptBox(bool show) {
+    _isShowScriptBox = show;
     notifyListeners();
   }
 }

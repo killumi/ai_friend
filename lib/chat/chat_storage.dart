@@ -15,6 +15,9 @@ class ChatStorage {
       .where((e) => e.type.contains('video') || e.type.contains('image'))
       .toList();
 
+  List<IChatMessage> get textMessages =>
+      box.values.where((e) => e.type.contains('text')).toList();
+
   static openStorage() async {
     if (!Hive.isBoxOpen(name)) {
       Hive.registerAdapter(IChatMessageAdapter());

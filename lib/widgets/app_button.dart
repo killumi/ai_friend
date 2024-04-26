@@ -1,16 +1,19 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:flutter/cupertino.dart';
 
+import 'package:flutter/cupertino.dart';
 import 'package:ai_friend/gen/fonts.gen.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AppButton extends StatefulWidget {
   final String title;
+  final SvgPicture? icon;
   final GestureTapCallback onTap;
 
   const AppButton({
     Key? key,
     required this.title,
     required this.onTap,
+    this.icon,
   }) : super(key: key);
 
   @override
@@ -50,6 +53,8 @@ class _AppButtonState extends State<AppButton> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            if (widget.icon != null) widget.icon!,
+            if (widget.icon != null) const SizedBox(width: 7),
             Text(
               widget.title,
               style: const TextStyle(

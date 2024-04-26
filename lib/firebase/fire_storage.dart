@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:ai_friend/entity/i_chat_message/i_chat_message.dart';
@@ -47,12 +49,71 @@ class FireStorageProvider {
     return file;
   }
 
-  Future<Uint8List?> downloadVideo(String assetName) async {
+  // Future<Uint8List?> downloadVideo(String assetName) async {
+  //   final ref = instance.ref();
+  // final results = await ref.child('videos').listAll();
+  // final item = results.items.firstWhere((e) => e.name.contains(assetName));
+  //   final data = await item.getData();
+  //   return data;
+  // }
+
+  Future<Uint8List> downloadVideo(String assetName) async {
+    // Uint8List? data;
+    final Completer<Uint8List> completer = Completer<Uint8List>();
+    // TaskState? state;
     final ref = instance.ref();
     final results = await ref.child('videos').listAll();
     final item = results.items.firstWhere((e) => e.name.contains(assetName));
-    final data = await item.getData();
-    return data;
+
+    final appDocDir = await getTemporaryDirectory();
+    final filePath = "${appDocDir.path}/$assetName.mp4";
+    final file = File(filePath);
+
+    final downloadTask = item.writeToFile(file);
+    downloadTask.snapshotEvents.listen((taskSnapshot) async {
+      switch (taskSnapshot.state) {
+        case TaskState.running:
+          // TODO: Handle this case.
+          // state = TaskState.running;
+          log('message: TaskState.running');
+          break;
+        case TaskState.paused:
+          // TODO: Handle this case.
+          // state = TaskState.paused;
+
+          log('message: TaskState.paused');
+
+          break;
+        case TaskState.success:
+          log('message: TaskState.success');
+
+          // data = await file.readAsBytes();
+          completer.complete(file.readAsBytesSync());
+        // state = TaskState.success;
+        // TODO: Handle this case.
+        // return data;
+        // break;
+        case TaskState.canceled:
+          log('message: TaskState.canceled');
+          // state = TaskState.canceled;
+
+          // TODO: Handle this case.
+          break;
+        case TaskState.error:
+          // state = TaskState.error;
+
+          log('message: TaskState.error');
+
+          // TODO: Handle this case.
+          break;
+      }
+    });
+
+    // if (state == TaskState.success) {
+    //   return data!;
+    // }
+
+    return completer.future;
   }
 
   Future<Uint8List?> downloadImage(String assetName) async {
