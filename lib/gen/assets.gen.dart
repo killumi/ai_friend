@@ -11,95 +11,114 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
 
+class $AssetsAlicePhotosGen {
+  const $AssetsAlicePhotosGen();
+
+  /// File path: assets/alice_photos/img1.png
+  AssetGenImage get img1 => const AssetGenImage('assets/alice_photos/img1.png');
+
+  /// File path: assets/alice_photos/img2.png
+  AssetGenImage get img2 => const AssetGenImage('assets/alice_photos/img2.png');
+
+  /// File path: assets/alice_photos/img3.png
+  AssetGenImage get img3 => const AssetGenImage('assets/alice_photos/img3.png');
+
+  /// File path: assets/alice_photos/img4.png
+  AssetGenImage get img4 => const AssetGenImage('assets/alice_photos/img4.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [img1, img2, img3, img4];
+}
+
 class $AssetsColoredIconsGen {
   const $AssetsColoredIconsGen();
 
-  /// File path: assets/colored_icons/animals_icon.svg
-  SvgGenImage get animalsIcon =>
-      const SvgGenImage('assets/colored_icons/animals_icon.svg');
+  /// File path: assets/colored_icons/animals_icon.png
+  AssetGenImage get animalsIcon =>
+      const AssetGenImage('assets/colored_icons/animals_icon.png');
 
-  /// File path: assets/colored_icons/art_icon.svg
-  SvgGenImage get artIcon =>
-      const SvgGenImage('assets/colored_icons/art_icon.svg');
+  /// File path: assets/colored_icons/art_icon.png
+  AssetGenImage get artIcon =>
+      const AssetGenImage('assets/colored_icons/art_icon.png');
 
-  /// File path: assets/colored_icons/career_icon.svg
-  SvgGenImage get careerIcon =>
-      const SvgGenImage('assets/colored_icons/career_icon.svg');
+  /// File path: assets/colored_icons/career_icon.png
+  AssetGenImage get careerIcon =>
+      const AssetGenImage('assets/colored_icons/career_icon.png');
 
-  /// File path: assets/colored_icons/cars_icon.svg
-  SvgGenImage get carsIcon =>
-      const SvgGenImage('assets/colored_icons/cars_icon.svg');
+  /// File path: assets/colored_icons/cars_icon.png
+  AssetGenImage get carsIcon =>
+      const AssetGenImage('assets/colored_icons/cars_icon.png');
 
-  /// File path: assets/colored_icons/cooking_icon.svg
-  SvgGenImage get cookingIcon =>
-      const SvgGenImage('assets/colored_icons/cooking_icon.svg');
+  /// File path: assets/colored_icons/cooking_icon.png
+  AssetGenImage get cookingIcon =>
+      const AssetGenImage('assets/colored_icons/cooking_icon.png');
 
-  /// File path: assets/colored_icons/ecology_icon.svg
-  SvgGenImage get ecologyIcon =>
-      const SvgGenImage('assets/colored_icons/ecology_icon.svg');
+  /// File path: assets/colored_icons/ecology_icon.png
+  AssetGenImage get ecologyIcon =>
+      const AssetGenImage('assets/colored_icons/ecology_icon.png');
 
-  /// File path: assets/colored_icons/fashion_icon.svg
-  SvgGenImage get fashionIcon =>
-      const SvgGenImage('assets/colored_icons/fashion_icon.svg');
+  /// File path: assets/colored_icons/fashion_icon.png
+  AssetGenImage get fashionIcon =>
+      const AssetGenImage('assets/colored_icons/fashion_icon.png');
 
-  /// File path: assets/colored_icons/finance_icon.svg
-  SvgGenImage get financeIcon =>
-      const SvgGenImage('assets/colored_icons/finance_icon.svg');
+  /// File path: assets/colored_icons/finance_icon.png
+  AssetGenImage get financeIcon =>
+      const AssetGenImage('assets/colored_icons/finance_icon.png');
 
-  /// File path: assets/colored_icons/gadgets_icon.svg
-  SvgGenImage get gadgetsIcon =>
-      const SvgGenImage('assets/colored_icons/gadgets_icon.svg');
+  /// File path: assets/colored_icons/gadgets_icon.png
+  AssetGenImage get gadgetsIcon =>
+      const AssetGenImage('assets/colored_icons/gadgets_icon.png');
 
-  /// File path: assets/colored_icons/games_icon.svg
-  SvgGenImage get gamesIcon =>
-      const SvgGenImage('assets/colored_icons/games_icon.svg');
+  /// File path: assets/colored_icons/games_icon.png
+  AssetGenImage get gamesIcon =>
+      const AssetGenImage('assets/colored_icons/games_icon.png');
 
-  /// File path: assets/colored_icons/gardening_icon.svg
-  SvgGenImage get gardeningIcon =>
-      const SvgGenImage('assets/colored_icons/gardening_icon.svg');
+  /// File path: assets/colored_icons/gardening_icon.png
+  AssetGenImage get gardeningIcon =>
+      const AssetGenImage('assets/colored_icons/gardening_icon.png');
 
-  /// File path: assets/colored_icons/health_icon.svg
-  SvgGenImage get healthIcon =>
-      const SvgGenImage('assets/colored_icons/health_icon.svg');
+  /// File path: assets/colored_icons/health_icon.png
+  AssetGenImage get healthIcon =>
+      const AssetGenImage('assets/colored_icons/health_icon.png');
 
-  /// File path: assets/colored_icons/literature_icon.svg
-  SvgGenImage get literatureIcon =>
-      const SvgGenImage('assets/colored_icons/literature_icon.svg');
+  /// File path: assets/colored_icons/literature_icon.png
+  AssetGenImage get literatureIcon =>
+      const AssetGenImage('assets/colored_icons/literature_icon.png');
 
-  /// File path: assets/colored_icons/movies_icon.svg
-  SvgGenImage get moviesIcon =>
-      const SvgGenImage('assets/colored_icons/movies_icon.svg');
+  /// File path: assets/colored_icons/movies_icon.png
+  AssetGenImage get moviesIcon =>
+      const AssetGenImage('assets/colored_icons/movies_icon.png');
 
-  /// File path: assets/colored_icons/music_icon.svg
-  SvgGenImage get musicIcon =>
-      const SvgGenImage('assets/colored_icons/music_icon.svg');
+  /// File path: assets/colored_icons/music_icon.png
+  AssetGenImage get musicIcon =>
+      const AssetGenImage('assets/colored_icons/music_icon.png');
 
-  /// File path: assets/colored_icons/photography_icon.svg
-  SvgGenImage get photographyIcon =>
-      const SvgGenImage('assets/colored_icons/photography_icon.svg');
+  /// File path: assets/colored_icons/photography_icon.png
+  AssetGenImage get photographyIcon =>
+      const AssetGenImage('assets/colored_icons/photography_icon.png');
 
-  /// File path: assets/colored_icons/psychology_icon.svg
-  SvgGenImage get psychologyIcon =>
-      const SvgGenImage('assets/colored_icons/psychology_icon.svg');
+  /// File path: assets/colored_icons/psychology_icon.png
+  AssetGenImage get psychologyIcon =>
+      const AssetGenImage('assets/colored_icons/psychology_icon.png');
 
-  /// File path: assets/colored_icons/science_icon.svg
-  SvgGenImage get scienceIcon =>
-      const SvgGenImage('assets/colored_icons/science_icon.svg');
+  /// File path: assets/colored_icons/science_icon.png
+  AssetGenImage get scienceIcon =>
+      const AssetGenImage('assets/colored_icons/science_icon.png');
 
-  /// File path: assets/colored_icons/sports_icon.svg
-  SvgGenImage get sportsIcon =>
-      const SvgGenImage('assets/colored_icons/sports_icon.svg');
+  /// File path: assets/colored_icons/sports_icon.png
+  AssetGenImage get sportsIcon =>
+      const AssetGenImage('assets/colored_icons/sports_icon.png');
 
-  /// File path: assets/colored_icons/technology_icon.svg
-  SvgGenImage get technologyIcon =>
-      const SvgGenImage('assets/colored_icons/technology_icon.svg');
+  /// File path: assets/colored_icons/technology_icon.png
+  AssetGenImage get technologyIcon =>
+      const AssetGenImage('assets/colored_icons/technology_icon.png');
 
-  /// File path: assets/colored_icons/travel_icon.svg
-  SvgGenImage get travelIcon =>
-      const SvgGenImage('assets/colored_icons/travel_icon.svg');
+  /// File path: assets/colored_icons/travel_icon.png
+  AssetGenImage get travelIcon =>
+      const AssetGenImage('assets/colored_icons/travel_icon.png');
 
   /// List of all assets
-  List<SvgGenImage> get values => [
+  List<AssetGenImage> get values => [
         animalsIcon,
         artIcon,
         careerIcon,
@@ -216,6 +235,14 @@ class $AssetsImagesGen {
   AssetGenImage get chatAvatar =>
       const AssetGenImage('assets/images/chat_avatar.png');
 
+  /// File path: assets/images/settings_avatar.png
+  AssetGenImage get settingsAvatar =>
+      const AssetGenImage('assets/images/settings_avatar.png');
+
+  /// File path: assets/images/settings_popup.png
+  AssetGenImage get settingsPopup =>
+      const AssetGenImage('assets/images/settings_popup.png');
+
   /// File path: assets/images/start_screen.png
   AssetGenImage get startScreen =>
       const AssetGenImage('assets/images/start_screen.png');
@@ -225,8 +252,31 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/start_screen_background.jpg');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [aliceBigAvatar, avatar, chatAvatar, startScreen, startScreenBackground];
+  List<AssetGenImage> get values => [
+        aliceBigAvatar,
+        avatar,
+        chatAvatar,
+        settingsAvatar,
+        settingsPopup,
+        startScreen,
+        startScreenBackground
+      ];
+}
+
+class $AssetsIntroVideosGen {
+  const $AssetsIntroVideosGen();
+
+  /// File path: assets/intro_videos/onboarding_1.mp4
+  String get onboarding1 => 'assets/intro_videos/onboarding_1.mp4';
+
+  /// File path: assets/intro_videos/onboarding_2.mp4
+  String get onboarding2 => 'assets/intro_videos/onboarding_2.mp4';
+
+  /// File path: assets/intro_videos/onboarding_3.mp4
+  String get onboarding3 => 'assets/intro_videos/onboarding_3.mp4';
+
+  /// List of all assets
+  List<String> get values => [onboarding1, onboarding2, onboarding3];
 }
 
 class $AssetsPaywallGen {
@@ -254,15 +304,17 @@ class $AssetsPaywallGen {
 class Assets {
   Assets._();
 
+  static const $AssetsAlicePhotosGen alicePhotos = $AssetsAlicePhotosGen();
   static const $AssetsColoredIconsGen coloredIcons = $AssetsColoredIconsGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsIntroVideosGen introVideos = $AssetsIntroVideosGen();
+  static const String lottieLoader = 'assets/lottie_loader.json';
   static const String newMessage = 'assets/new_message.mp3';
   static const $AssetsPaywallGen paywall = $AssetsPaywallGen();
-  static const String video = 'assets/video.mp4';
 
   /// List of all assets
-  static List<String> get values => [newMessage, video];
+  static List<String> get values => [lottieLoader, newMessage];
 }
 
 class AssetGenImage {

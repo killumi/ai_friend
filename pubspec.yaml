@@ -54,7 +54,18 @@ dependencies:
   hero_animation: ^1.1.4
   proste_route_animation: ^2.0.2
   pro_animated_blur: ^0.0.2+1
-  
+  page_route_animator: ^1.0.4
+  # haptic_feedback: ^0.4.2
+  scroll_datetime_picker: 
+  # flutter_animate:
+  # shimmer_animation:
+  shimmer_animation: ^2.1.0
+  flutter_animate: ^0.3.0+1
+  rate_my_app: ^1.1.3
+  share_plus:
+  smooth_page_indicator: ^1.1.0
+  carousel_slider: ^4.2.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -74,10 +85,10 @@ flutter:
     - assets/paywall/
     - assets/colored_icons/
     - assets/icons/
-    - assets/video.mp4
+    - assets/intro_videos/
+    - assets/alice_photos/
     - assets/new_message.mp3
     - assets/lottie_loader.json
-    - assets/lottie_loader2.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
