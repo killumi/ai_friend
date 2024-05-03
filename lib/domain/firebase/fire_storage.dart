@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
@@ -73,38 +72,33 @@ class FireStorageProvider {
     downloadTask.snapshotEvents.listen((taskSnapshot) async {
       switch (taskSnapshot.state) {
         case TaskState.running:
-          // TODO: Handle this case.
           // state = TaskState.running;
-          log('message: TaskState.running');
+          // log('message: TaskState.running');
           break;
         case TaskState.paused:
-          // TODO: Handle this case.
           // state = TaskState.paused;
 
-          log('message: TaskState.paused');
+          // log('message: TaskState.paused');
 
           break;
         case TaskState.success:
-          log('message: TaskState.success');
+          // log('message: TaskState.success');
 
           // data = await file.readAsBytes();
           completer.complete(file.readAsBytesSync());
         // state = TaskState.success;
-        // TODO: Handle this case.
         // return data;
         // break;
         case TaskState.canceled:
-          log('message: TaskState.canceled');
+          // log('message: TaskState.canceled');
           // state = TaskState.canceled;
 
-          // TODO: Handle this case.
           break;
         case TaskState.error:
           // state = TaskState.error;
 
-          log('message: TaskState.error');
+          // log('message: TaskState.error');
 
-          // TODO: Handle this case.
           break;
       }
     });

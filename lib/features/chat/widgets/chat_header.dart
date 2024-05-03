@@ -1,9 +1,7 @@
 import 'package:ai_friend/app_router.dart';
-import 'package:ai_friend/features/chat/chat_script/chat_script_provider.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
 import 'package:ai_friend/gen/fonts.gen.dart';
-import 'package:ai_friend/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -61,17 +59,7 @@ class _ChatHeaderState extends State<ChatHeader> {
                 ),
                 Expanded(
                   child: GestureDetector(
-                    onTap: () {
-                      // locator<PaymentProvider>().setFreePremium();
-                      // locator<ChatScriptProvider>().showPrevMessage();
-                      print(
-                          '${locator<ChatScriptProvider>().currentDayNumber}');
-                      print(
-                          '${locator<ChatScriptProvider>().currentMessageNumber}');
-                      setState(() {
-                        isShowOptions = !isShowOptions;
-                      });
-                    },
+                    onTap: toggleOpenMenu,
                     child: Container(
                       color: Colors.transparent,
                       child: Row(
@@ -153,7 +141,10 @@ class _ChatHeaderState extends State<ChatHeader> {
                   children: [
                     const SizedBox(height: 20),
                     GestureDetector(
-                      onTap: () => AppRouter.openAliceProfile(context),
+                      onTap: () {
+                        AppRouter.openAliceProfile(context);
+                        toggleOpenMenu();
+                      },
                       child: _buildOption(
                         Assets.icons.lipsProfile.svg(),
                         'Alice’s Profile',
@@ -163,9 +154,7 @@ class _ChatHeaderState extends State<ChatHeader> {
                     GestureDetector(
                       onTap: () {
                         AppRouter.openGallery(context);
-                        setState(() {
-                          isShowOptions = !isShowOptions;
-                        });
+                        toggleOpenMenu();
                       },
                       child: _buildOption(
                         Assets.icons.galleryIcon.svg(),
@@ -180,6 +169,12 @@ class _ChatHeaderState extends State<ChatHeader> {
         ),
       ),
     );
+  }
+
+  void toggleOpenMenu() {
+    setState(() {
+      isShowOptions = !isShowOptions;
+    });
   }
 
   Widget _buildOption(SvgPicture icon, String title) {

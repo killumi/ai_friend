@@ -1,13 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:typed_data';
-import 'package:ai_friend/features/chat/widgets/video_message.dart';
+import 'package:ai_friend/app_router.dart';
 import 'package:ai_friend/domain/firebase/fire_storage.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
 import 'package:ai_friend/locator.dart';
+import 'package:ai_friend/widgets/blur_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
-import 'package:swipe_image_gallery/swipe_image_gallery.dart';
+import 'package:flutter/widgets.dart';
 import 'package:video_player/video_player.dart';
 
 class GalleryVideoItem extends StatefulWidget {
@@ -28,11 +29,7 @@ class GalleryVideoItem extends StatefulWidget {
   State<GalleryVideoItem> createState() => _GalleryVideoItemState();
 }
 
-class _GalleryVideoItemState extends State<GalleryVideoItem>
-    with AutomaticKeepAliveClientMixin {
-  @override
-  bool get wantKeepAlive => true;
-
+class _GalleryVideoItemState extends State<GalleryVideoItem> {
   VideoPlayerController? _controller;
   final firebaseProvider = locator<FireStorageProvider>();
 
@@ -56,27 +53,23 @@ class _GalleryVideoItemState extends State<GalleryVideoItem>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
-    return GestureDetector(
-      onTap: () {
-        SwipeImageGallery(
-          context: context,
-          initialIndex: widget.index,
-          transitionDuration: 300,
-          dismissDragDistance: 100,
-          backgroundOpacity: 0.95,
-          children: widget.videos
-              .map((e) =>
-                  Center(child: VideoMessage(message: e, isPreview: false)))
-              .toList(),
-          onSwipe: (index) {},
-        ).show();
-      },
-      child: _controller?.value.isInitialized ?? false
-          ? Stack(
-              fit: StackFit.expand,
-              children: [
-                LayoutBuilder(
+    return _controller?.value.isInitialized ?? false
+        ? Stack(
+            fit: StackFit.expand,
+            children: [
+              BlurWidget(
+                showButton: false,
+                onTapBlur: () => AppRouter.openGalleryVideoPageView(
+                  context,
+                  widget.videos,
+                  widget.index,
+                ),
+                onTap: () => AppRouter.openGalleryVideoPageView(
+                  context,
+                  widget.videos,
+                  widget.index,
+                ),
+                child: LayoutBuilder(
                   builder: (context, constraints) {
                     final aspect = constraints.maxWidth / constraints.maxHeight;
                     return AspectRatio(
@@ -100,19 +93,19 @@ class _GalleryVideoItemState extends State<GalleryVideoItem>
                     );
                   },
                 ),
-                if (!_controller!.value.isPlaying)
-                  Center(child: Assets.icons.playIcon.svg(width: 24)),
-              ],
-            )
-          : const AspectRatio(
-              aspectRatio: 1,
-              child: Center(
-                child: CupertinoActivityIndicator(
-                  color: Colors.white,
-                  // radius: 18,
-                ),
+              ),
+              IgnorePointer(
+                  ignoring: true,
+                  child: Center(child: Assets.icons.playIcon.svg(width: 24))),
+            ],
+          )
+        : const AspectRatio(
+            aspectRatio: 1,
+            child: Center(
+              child: CupertinoActivityIndicator(
+                color: Colors.white,
               ),
             ),
-    );
+          );
   }
 }

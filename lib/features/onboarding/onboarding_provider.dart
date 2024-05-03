@@ -113,7 +113,8 @@ class OnboardingProvider extends ChangeNotifier {
   Future<void> _step3() async {
     final message = OnboardingMessage(
       text:
-          'Good to hear. Here, you can have unlimited conversations with your AI girlfriend, discussing any topic you want, and openly and safely express your emotions and secret desires.',
+          'Good to hear. Here, you can have unlimited conversations with your AI girlfriend, discussing any topic you want, and openly and safely express your emotions.',
+      // 'Good to hear. Here, you can have unlimited conversations with your AI girlfriend, discussing any topic you want, and openly and safely express your emotions and secret desires.',
       isBot: true,
     );
     final videoMessage = OnboardingMessage(

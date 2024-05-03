@@ -119,10 +119,7 @@ class ChatScriptMessage extends StatelessWidget {
       AppRouter.openPaywall(context, false);
       return;
     }
-
-    if (data.answer!.isNotEmpty) {
-      await chatProvider.sendMessageGetAnswer(data);
-    }
+    await chatProvider.sendMessageGetAnswer(data);
     await scriptProvider.showNextMessage();
   }
 }

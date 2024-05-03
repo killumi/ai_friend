@@ -31,7 +31,10 @@ class ContinueChatWidget extends StatelessWidget {
           child: AppButton(
             title: 'Continue chatting',
             icon: Assets.icons.proIcon.svg(width: 23),
-            onTap: () => AppRouter.openPaywall(context, false),
+            onTap: () {
+              // locator<PaymentProvider>().setFreePremium();
+              AppRouter.openPaywall(context, false);
+            },
           ),
         ),
       ],

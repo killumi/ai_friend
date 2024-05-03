@@ -34,7 +34,7 @@ class PaymentProvider with ChangeNotifier {
       _products = _paywall?.products ?? [];
       jsonData = _paywall?.json ?? {};
       Apphud.paywallShown(_paywall!);
-      print('$_paywall');
+      // print('$_paywall');
       notifyListeners();
     } catch (e) {
       print(e);

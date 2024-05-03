@@ -6,7 +6,8 @@ class FirebaseConfig {
   final FirebaseRemoteConfig config = FirebaseRemoteConfig.instance;
   // FirebaseConfig();
 
-  int get dayLength => config.getAll().length - 1;
+  int get dayLength => config.getAll().length - 2;
+  bool get showMedia => config.getBool('showMedia');
 
   Future<void> init() async {
     await config.fetchAndActivate();

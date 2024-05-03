@@ -11,10 +11,12 @@ class ChatScriptProvider extends ChangeNotifier {
   final FirebaseConfig _config;
   final ChatScriptStorage _storage;
   bool _isShowScriptBox = false;
+  bool showEndDayUI = false;
 
   late IScriptDay? dailyScript;
   bool unlockTextField = false;
 
+  // current int index day and message
   int get currentDayNumber => _storage.currentDay;
   int get currentMessageNumber => _storage.currentMessage;
 
@@ -24,17 +26,39 @@ class ChatScriptProvider extends ChangeNotifier {
   bool get isShowScriptBox => _isShowScriptBox;
   bool get isShowRollUpBoxButton => dailyScript != null;
 
-  bool get daylyScriptIsEnd => currentMessageNumber == dailyScript!.data.length;
+  // bool get showEndDayUI => currentMessageNumber + 1 == dailyScript!.data.length;
+  bool get daylyScriptIsEnd => dailyScript == null
+      ? true
+      : currentMessageNumber == dailyScript!.data.length - 1;
 
   bool get textfieldAvailable => scriptMessage?.textfieldAvailable ?? false;
 
+  // показ баннера после 3 сообщения
   bool get needShowPremiumBanner =>
       currentDayNumber == 1 && currentMessageNumber == 3;
+
+  // bool get isHasPremium => locator<PaymentProvider>().isHasPremium;
+
+  int get allDaysLenght => _config.dayLength;
 
   ChatScriptProvider(this._config, this._storage);
 
   Future<void> initScript() async {
+    // print('allDaysLenght: $allDaysLenght');
     dailyScript = await _config.getDailyChatScript(currentDayNumber);
+
+    // print('dailyScript___: $dailyScript');
+    if (daylyScriptIsEnd && currentDayNumber == allDaysLenght) {
+      dailyScript = null;
+      showEndDayUI = false;
+    }
+
+    if (!locator<PaymentProvider>().isHasPremium &&
+        daylyScriptIsEnd &&
+        currentDayNumber != allDaysLenght) {
+      showEndDayUI = true;
+    }
+
     notifyListeners();
     // print('$dailyScript');
   }
@@ -51,19 +75,22 @@ class ChatScriptProvider extends ChangeNotifier {
 
   Future<void> showNextMessage() async {
     if (daylyScriptIsEnd) {
-      log('NEED SHOW PREMIUM SCREEN TO SHOW NEX DAY SCRIPT');
-      // if()
+      // log('NEED SHOW PREMIUM SCREEN TO SHOW NEX DAY SCRIPT');
+      if (allDaysLenght == currentDayNumber ||
+          locator<PaymentProvider>().isHasPremium) {
+        showEndDayUI = false;
+      } else {
+        showEndDayUI = true;
+      }
       showNextDay();
-      // await _storage.setCurrentDay(currentDayNumber + 1);
-      // dailyScript = await _config.getDailyChatScript(currentDayNumber);
-      // notifyListeners();
-      // await _storage.setCurrentMessage(0);
-      // notifyListeners();
+
+      notifyListeners();
       return;
     }
 
-    // if()
+    // print('currentMessageNumber: $currentMessageNumber');
     await _storage.setCurrentMessage(currentMessageNumber + 1);
+    // print('currentMessageNumber2: $currentMessageNumber');
     notifyListeners();
   }
 

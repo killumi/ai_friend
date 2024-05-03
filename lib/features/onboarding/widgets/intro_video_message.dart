@@ -78,7 +78,7 @@ class _IntroVideoMessageState extends State<IntroVideoMessage>
           ),
           color: const Color(0xff423556),
         ),
-        height: 230,
+        height: 300,
         child: _controller?.value.isInitialized ?? false
             ? AspectRatio(
                 aspectRatio: 1,

@@ -42,7 +42,7 @@ dependencies:
   swipe_image_gallery: ^0.8.3
   animations: ^2.0.11
   lottie: ^3.1.0
-  hero_animation: ^1.1.4
+  # hero_animation: ^1.1.4
   proste_route_animation: ^2.0.2
   pro_animated_blur: ^0.0.2+1
   page_route_animator: ^1.0.4
@@ -50,9 +50,12 @@ dependencies:
   shimmer_animation: ^2.1.0
   flutter_animate: ^0.3.0+1
   rate_my_app: ^1.1.3
+  image_gallery_saver: ^2.0.3
   share_plus:
   url_launcher: ^6.2.6
   apphud: ^2.5.0
+  flutter_native_splash: ^2.3.8
+  oktoast: ^3.4.0
 
 dev_dependencies:
   flutter_test:
@@ -99,3 +102,10 @@ flutter_gen:
   integrations:
     flutter_svg: true
     flare_flutter: false
+
+flutter_native_splash:
+  background_image: "assets/images/splash.jpg"
+  branding_mode: center
+  ios: true
+  android: false
+  web: false

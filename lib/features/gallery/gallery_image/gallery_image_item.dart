@@ -1,11 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:typed_data';
-
-import 'package:ai_friend/features/chat/widgets/image_message.dart';
+import 'package:ai_friend/app_router.dart';
+import 'package:ai_friend/widgets/blur_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
-import 'package:swipe_image_gallery/swipe_image_gallery.dart';
+import 'package:flutter/widgets.dart';
 
 class GalleryImageItem extends StatelessWidget {
   final int index;
@@ -21,20 +21,12 @@ class GalleryImageItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        SwipeImageGallery(
-          context: context,
-          initialIndex: index,
-          transitionDuration: 300,
-          dismissDragDistance: 100,
-          backgroundOpacity: 0.95,
-          children: images
-              .map((e) => ImageMessage(message: e, isPreview: false))
-              .toList(),
-          onSwipe: (index) {},
-        ).show();
-      },
+    return BlurWidget(
+      fit: StackFit.expand,
+      onTap: () => AppRouter.openGalleryImagePageView(context, images, index),
+      onTapBlur: () =>
+          AppRouter.openGalleryImagePageView(context, images, index),
+      showButton: false,
       child: Image.memory(
         data,
         fit: BoxFit.cover,

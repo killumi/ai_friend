@@ -1,15 +1,10 @@
-import 'package:ai_friend/app_router.dart';
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 import 'package:ai_friend/domain/firebase/fire_storage.dart';
-import 'package:ai_friend/features/payment/payment_provider.dart';
-import 'package:ai_friend/gen/assets.gen.dart';
 import 'package:ai_friend/locator.dart';
-import 'package:ai_friend/widgets/app_button.dart';
+import 'package:ai_friend/widgets/blur_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:swipe_image_gallery/swipe_image_gallery.dart';
-import 'package:pro_animated_blur/pro_animated_blur.dart';
 
 class ImageMessage extends StatefulWidget {
   final IChatMessage message;
@@ -71,7 +66,7 @@ class _ImageMessageState extends State<ImageMessage>
 
   @override
   Widget build(BuildContext context) {
-    final isHasPremium = context.select((PaymentProvider e) => e.isHasPremium);
+    // final isHasPremium = context.select((PaymentProvider e) => e.isHasPremium);
 
     super.build(context);
     return Container(
@@ -103,6 +98,7 @@ class _ImageMessageState extends State<ImageMessage>
                               transitionDuration: 300,
                               dismissDragDistance: 100,
                               backgroundOpacity: 0.95,
+
                               children: [
                                 ImageMessage(
                                     message: widget.message, isPreview: false)
@@ -140,42 +136,43 @@ class _ImageMessageState extends State<ImageMessage>
                         //         image: _imageProvider!,
                         //         fit: isPreview ? BoxFit.cover : BoxFit.fitWidth,
                         //       ),
-                        Positioned.fill(
-                          child: IgnorePointer(
-                            ignoring: isHasPremium,
-                            child: ProAnimatedBlur(
-                              blur: isHasPremium ? 0 : 15,
-                              duration: const Duration(milliseconds: 200),
-                              curve: Curves.ease,
-                              child: GestureDetector(
-                                onTap: () =>
-                                    AppRouter.openPaywall(context, false),
-                                child: Container(
-                                  color: Colors.transparent,
-                                  child: Center(
-                                    child: AnimatedOpacity(
-                                      opacity: isHasPremium ? 0 : 1,
-                                      duration:
-                                          const Duration(milliseconds: 200),
-                                      curve: Curves.ease,
-                                      child: SizedBox(
-                                        height: 40,
-                                        width: 120,
-                                        child: AppButton(
-                                          title: 'Unblur',
-                                          icon: Assets.icons.proIcon
-                                              .svg(width: 23),
-                                          onTap: () => AppRouter.openPaywall(
-                                              context, false),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        )
+                        const BlurWidget(),
+                        // Positioned.fill(
+                        //   child: IgnorePointer(
+                        //     ignoring: isHasPremium,
+                        //     child: ProAnimatedBlur(
+                        //       blur: isHasPremium ? 0 : 15,
+                        //       duration: const Duration(milliseconds: 200),
+                        //       curve: Curves.ease,
+                        //       child: GestureDetector(
+                        //         onTap: () =>
+                        //             AppRouter.openPaywall(context, false),
+                        //         child: Container(
+                        //           color: Colors.transparent,
+                        //           child: Center(
+                        //             child: AnimatedOpacity(
+                        //               opacity: isHasPremium ? 0 : 1,
+                        //               duration:
+                        //                   const Duration(milliseconds: 200),
+                        //               curve: Curves.ease,
+                        //               child: SizedBox(
+                        //                 height: 40,
+                        //                 width: 120,
+                        //                 child: AppButton(
+                        //                   title: 'Unblur',
+                        //                   icon: Assets.icons.proIcon
+                        //                       .svg(width: 23),
+                        //                   onTap: () => AppRouter.openPaywall(
+                        //                       context, false),
+                        //                 ),
+                        //               ),
+                        //             ),
+                        //           ),
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // )
                       ],
                     )
 

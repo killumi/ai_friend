@@ -1,7 +1,10 @@
+import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 import 'package:ai_friend/features/bot_profile/bot_profile_screen.dart';
 import 'package:ai_friend/features/bot_profile/bot_short_profile.dart';
 import 'package:ai_friend/features/chat/chat_screen.dart';
+import 'package:ai_friend/features/gallery/gallery_image/gallery_image_pageview.dart';
 import 'package:ai_friend/features/gallery/gallery_screen.dart';
+import 'package:ai_friend/features/gallery/gallery_video/gallery_video_pageview.dart';
 import 'package:ai_friend/features/onboarding/onboarding_screen.dart';
 import 'package:ai_friend/features/onboarding/start_screen.dart';
 import 'package:ai_friend/features/payment/payment_screen.dart';
@@ -103,6 +106,34 @@ class AppRouter {
   static void openSettings(BuildContext context) {
     final route = CupertinoPageRoute(
       builder: (context) => const SettingsScreen(),
+    );
+    Navigator.push(context, route);
+  }
+
+  static void openGalleryVideoPageView(
+    BuildContext context,
+    List<IChatMessage> videos,
+    int initIndex,
+  ) {
+    final route = CupertinoPageRoute(
+      builder: (context) => GalleryVideoPageView(
+        videos: videos,
+        initialIndex: initIndex,
+      ),
+    );
+    Navigator.push(context, route);
+  }
+
+  static void openGalleryImagePageView(
+    BuildContext context,
+    List<IChatMessage> images,
+    int initIndex,
+  ) {
+    final route = CupertinoPageRoute(
+      builder: (context) => GalleryImagePageView(
+        images: images,
+        initialIndex: initIndex,
+      ),
     );
     Navigator.push(context, route);
   }

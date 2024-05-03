@@ -8,6 +8,7 @@ import 'package:ai_friend/widgets/pulse_button.dart';
 import 'package:ai_friend/widgets/screen_wrap.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -28,154 +29,189 @@ class _PaymentScreenState extends State<PaymentScreen> {
       children: [
         ScreenWrap(
           child: SafeArea(
+            // top: false,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Expanded(
-                  child: Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: Stack(
-                          fit: StackFit.loose,
-                          alignment: Alignment.center,
-                          clipBehavior: Clip.none,
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 33),
-                              child: AspectRatio(
-                                aspectRatio: 1 / 1.2,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: Assets.images.paywall.provider(),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const Positioned(
-                              bottom: -20,
-                              child: Text(
-                                'Immerse into deeper\nconnection with Alice',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(0xFFFBFBFB),
-                                  fontSize: 28,
-                                  fontFamily: FontFamily.gothamPro,
-                                  fontWeight: FontWeight.w700,
-                                  height: 1.3,
-                                  shadows: <Shadow>[
-                                    Shadow(
-                                      offset: Offset(0.0, 0.0),
-                                      blurRadius: 13.0,
-                                      color: Color(0xFFFBFBFB),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              left: 16,
-                              top: 0,
-                              child: GestureDetector(
-                                onTap: () async {
-                                  final result = await provider.restore();
-                                  if (!result) return;
-                                  AppRouter.openChat(context,
-                                      removeRoutes: true);
-                                },
-                                child: const Text(
-                                  'Restore Purchase',
-                                  style: TextStyle(
-                                      fontSize: 14, color: Colors.white54),
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              right: 16,
-                              top: 0,
-                              child: GestureDetector(
-                                onTap: () => closeScreen(),
-                                child: Container(
-                                  width: 40,
-                                  height: 40,
-                                  color: Colors.transparent,
-                                  alignment: Alignment.topRight,
-                                  child: const Icon(
-                                    CupertinoIcons.clear,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () async {
+                            final result = await provider.restore();
+                            if (!result) return;
+                            AppRouter.openChat(context, removeRoutes: true);
+                          },
+                          child: const Text(
+                            'Restore Purchase',
+                            style:
+                                TextStyle(fontSize: 14, color: Colors.white54),
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 50),
-                      SizedBox(
-                        width: 230,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Assets.icons.paywallIcon1.image(width: 24),
-                            const SizedBox(width: 6),
-                            const Text(
-                              'Chat without limits',
-                              style: TextStyle(
-                                color: Color(0xFFFBFBFB),
-                                fontSize: 16,
-                                fontFamily: 'Gotham Pro',
-                                fontWeight: FontWeight.w600,
-                              ),
-                            )
-                          ],
+                        GestureDetector(
+                          onTap: () => closeScreen(),
+                          child: Container(
+                            width: 40,
+                            height: 40,
+                            color: Colors.transparent,
+                            alignment: Alignment.center,
+                            child: const Icon(
+                              CupertinoIcons.clear,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 6),
-                      SizedBox(
-                        width: 230,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Assets.icons.paywallIcon2.image(width: 24),
-                            const SizedBox(width: 6),
-                            const Text(
-                              'More photos & videos',
-                              style: TextStyle(
-                                color: Color(0xFFFBFBFB),
-                                fontSize: 16,
-                                fontFamily: 'Gotham Pro',
-                                fontWeight: FontWeight.w600,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 6),
-                      SizedBox(
-                        width: 230,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Assets.icons.paywallIcon3.image(width: 24),
-                            const SizedBox(width: 6),
-                            const Text(
-                              'Discussion of any topics',
-                              style: TextStyle(
-                                color: Color(0xFFFBFBFB),
-                                fontSize: 16,
-                                fontFamily: 'Gotham Pro',
-                                fontWeight: FontWeight.w600,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
+                Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.topCenter,
+                      child: Stack(
+                        fit: StackFit.loose,
+                        alignment: Alignment.center,
+                        clipBehavior: Clip.none,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 33),
+                            child: AspectRatio(
+                              aspectRatio: 1 / 1.2,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: Assets.images.paywall.provider(),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const Positioned(
+                            bottom: -20,
+                            child: Text(
+                              'Immerse into deeper\nconnection with Alice',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Color(0xFFFBFBFB),
+                                fontSize: 28,
+                                fontFamily: FontFamily.gothamPro,
+                                fontWeight: FontWeight.w700,
+                                height: 1.3,
+                                shadows: <Shadow>[
+                                  Shadow(
+                                    offset: Offset(0.0, 0.0),
+                                    blurRadius: 13.0,
+                                    color: Color(0xFFFBFBFB),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          // Positioned(
+                          //   left: 16,
+                          //   top: 0,
+                          //   child: GestureDetector(
+                          //     onTap: () async {
+                          //       final result = await provider.restore();
+                          //       if (!result) return;
+                          //       AppRouter.openChat(context, removeRoutes: true);
+                          //     },
+                          //     child: const Text(
+                          //       'Restore Purchase',
+                          //       style: TextStyle(
+                          //           fontSize: 14, color: Colors.white54),
+                          //     ),
+                          //   ),
+                          // ),
+                          // Positioned(
+                          //   right: 16,
+                          //   top: 0,
+                          //   child: GestureDetector(
+                          //     onTap: () => closeScreen(),
+                          //     child: Container(
+                          //       width: 40,
+                          //       height: 40,
+                          //       color: Colors.transparent,
+                          //       alignment: Alignment.topRight,
+                          //       child: const Icon(
+                          //         CupertinoIcons.clear,
+                          //         color: Colors.white,
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 50),
+                    SizedBox(
+                      width: 230,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Assets.icons.paywallIcon1.image(width: 24),
+                          const SizedBox(width: 6),
+                          const Text(
+                            'Chat without limits',
+                            style: TextStyle(
+                              color: Color(0xFFFBFBFB),
+                              fontSize: 16,
+                              fontFamily: 'Gotham Pro',
+                              fontWeight: FontWeight.w600,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    SizedBox(
+                      width: 230,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Assets.icons.paywallIcon2.image(width: 24),
+                          const SizedBox(width: 6),
+                          const Text(
+                            'More photos & videos',
+                            style: TextStyle(
+                              color: Color(0xFFFBFBFB),
+                              fontSize: 16,
+                              fontFamily: 'Gotham Pro',
+                              fontWeight: FontWeight.w600,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    SizedBox(
+                      width: 230,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Assets.icons.paywallIcon3.image(width: 24),
+                          const SizedBox(width: 6),
+                          const Text(
+                            'Discussion of any topics',
+                            style: TextStyle(
+                              color: Color(0xFFFBFBFB),
+                              fontSize: 16,
+                              fontFamily: 'Gotham Pro',
+                              fontWeight: FontWeight.w600,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 30),
                 Opacity(
                   opacity: 0.70,
                   child: Text(

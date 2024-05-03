@@ -12,41 +12,41 @@ import 'package:apphud/apphud.dart';
 class ApphudPaymentListener implements ApphudListener {
   @override
   Future<void> apphudDidChangeUserID(String userId) async {
-    print('apphudDidChangeUserID: $userId');
+    // print('apphudDidChangeUserID: $userId');
   }
 
   @override
   Future<void> apphudDidFecthProducts(
       List<ApphudProductComposite> products) async {
-    print('apphudDidFecthProducts: $products');
+    // print('apphudDidFecthProducts: $products');
   }
 
   @override
   Future<void> apphudNonRenewingPurchasesUpdated(
     List<ApphudNonRenewingPurchase> purchases,
   ) async {
-    print('apphudNonRenewingPurchasesUpdated: $purchases');
+    // print('apphudNonRenewingPurchasesUpdated: $purchases');
   }
 
   @override
   Future<void> apphudSubscriptionsUpdated(
       List<ApphudSubscriptionWrapper> subscriptions) async {
-    print('apphudSubscriptionsUpdated: $subscriptions');
+    // print('apphudSubscriptionsUpdated: $subscriptions');
   }
 
   @override
   Future<void> paywallsDidFullyLoad(ApphudPaywalls data) async {
-    print('paywallsDidFullyLoad: $data');
+    // print('paywallsDidFullyLoad: $data');
     locator<PaymentProvider>().productsListener(data.paywalls);
   }
 
   @override
   Future<void> placementsDidFullyLoad(List<ApphudPlacement> placements) async {
-    print('apphudNonRenewingPurchasesUpdated: $placements');
+    // print('apphudNonRenewingPurchasesUpdated: $placements');
   }
 
   @override
   Future<void> userDidLoad(ApphudUser user) async {
-    print('userDidLoad: $userDidLoad');
+    // print('userDidLoad: $userDidLoad');
   }
 }

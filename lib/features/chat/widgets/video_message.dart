@@ -1,14 +1,10 @@
-import 'package:ai_friend/app_router.dart';
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 import 'package:ai_friend/domain/firebase/fire_storage.dart';
-import 'package:ai_friend/features/payment/payment_provider.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
 import 'package:ai_friend/locator.dart';
-import 'package:ai_friend/widgets/app_button.dart';
+import 'package:ai_friend/widgets/blur_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pro_animated_blur/pro_animated_blur.dart';
-import 'package:provider/provider.dart';
 import 'package:swipe_image_gallery/swipe_image_gallery.dart';
 import 'package:video_player/video_player.dart';
 
@@ -95,111 +91,71 @@ class _VideoMessageState extends State<VideoMessage>
 
   @override
   Widget build(BuildContext context) {
-    final isHasPremium = context.select((PaymentProvider e) => e.isHasPremium);
+    final size = MediaQuery.of(context).size;
 
     super.build(context);
-    return GestureDetector(
-      onTap: () {
-        if (widget.isPreview!) {
-          // final videos = locator<ChatStorage>().media;
-          // final index = videos
-          //     .indexWhere((e) => e.content.contains(widget.message.content));
-          // final index = videos.indexOf(widget.message);
-          SwipeImageGallery(
-              context: context,
-              initialIndex: 0,
-              transitionDuration: 300,
-              dismissDragDistance: 100,
-              backgroundOpacity: 0.95,
-              children: [
-                Center(
-                  child: VideoMessage(
-                    message: widget.message,
-                    isPreview: false,
-                  ),
-                ),
-              ]
-              // children: videos
-              //     .map((e) => e.isVideo
-              //         ? Center(child: VideoMessage(message: e, isPreview: false))
-              //         : ImageMessage(message: e, isPreview: false))
-              //     .toList(),
-              // onSwipe: (index) {},
-              ).show();
-        } else {
-          _toggleVideoPlayback();
-        }
-      },
-      child: Container(
-        margin: EdgeInsets.only(bottom: widget.isPreview! ? 10 : 0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(widget.isPreview! ? 10 : 0),
-          color: const Color(0xff423556),
-        ),
-        constraints: !widget.isPreview!
-            ? const BoxConstraints(maxWidth: 1000, maxHeight: 1000)
-            : const BoxConstraints(maxWidth: 350, maxHeight: 380),
-        child: _controller?.value.isInitialized ?? false
-            ? AspectRatio(
-                aspectRatio: _controller!.value.aspectRatio,
-                child: ClipRRect(
-                  borderRadius:
-                      BorderRadius.circular(widget.isPreview! ? 10 : 0),
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      VideoPlayer(_controller!),
-                      if (!_controller!.value.isPlaying)
-                        Center(child: Assets.icons.playIcon.svg(width: 30)),
-                      Positioned.fill(
-                        child: IgnorePointer(
-                          ignoring: isHasPremium,
-                          child: ProAnimatedBlur(
-                            blur: isHasPremium ? 0 : 15,
-                            duration: const Duration(milliseconds: 200),
-                            curve: Curves.ease,
-                            child: GestureDetector(
-                                onTap: () =>
-                                    AppRouter.openPaywall(context, false),
-                                child: Container(
-                                  color: Colors.transparent,
-                                  child: Center(
-                                    child: AnimatedOpacity(
-                                      opacity: isHasPremium ? 0 : 1,
-                                      duration:
-                                          const Duration(milliseconds: 200),
-                                      curve: Curves.ease,
-                                      child: SizedBox(
-                                        height: 40,
-                                        width: 120,
-                                        child: AppButton(
-                                          title: 'Unblur',
-                                          icon: Assets.icons.proIcon
-                                              .svg(width: 23),
-                                          onTap: () => AppRouter.openPaywall(
-                                              context, false),
-                                        ),
-                                      ),
-                                    ),
+    return Container(
+      margin: EdgeInsets.only(bottom: widget.isPreview! ? 10 : 0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(widget.isPreview! ? 10 : 0),
+        color: const Color(0xff423556),
+      ),
+      constraints: !widget.isPreview!
+          ? BoxConstraints(maxWidth: size.width, maxHeight: size.height)
+          // ? const BoxConstraints(maxWidth: 1000, maxHeight: 1000)
+          : const BoxConstraints(maxWidth: 350, maxHeight: 380),
+      child: _controller?.value.isInitialized ?? false
+          ? AspectRatio(
+              aspectRatio: _controller!.value.aspectRatio,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(widget.isPreview! ? 10 : 0),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    BlurWidget(
+                      onTap: () {
+                        if (widget.isPreview!) {
+                          SwipeImageGallery(
+                              context: context,
+                              initialIndex: 0,
+                              transitionDuration: 300,
+                              dismissDragDistance: 100,
+                              backgroundOpacity: 0.95,
+                              children: [
+                                Center(
+                                  child: VideoMessage(
+                                    message: widget.message,
+                                    isPreview: false,
                                   ),
-                                )),
-                          ),
+                                ),
+                              ]).show();
+                        } else {
+                          _toggleVideoPlayback();
+                        }
+                      },
+                      showButton: false,
+                      child: VideoPlayer(_controller!),
+                    ),
+                    if (!_controller!.value.isPlaying)
+                      Center(
+                        child: IgnorePointer(
+                          ignoring: true,
+                          child: Assets.icons.playIcon.svg(width: 30),
                         ),
-                      )
-                    ],
-                  ),
-                ),
-              )
-            : const AspectRatio(
-                aspectRatio: 9 / 16,
-                child: Center(
-                  child: CupertinoActivityIndicator(
-                    color: Colors.white,
-                    radius: 18,
-                  ),
+                      ),
+                  ],
                 ),
               ),
-      ),
+            )
+          : const AspectRatio(
+              aspectRatio: 9 / 16,
+              child: Center(
+                child: CupertinoActivityIndicator(
+                  color: Colors.white,
+                  radius: 18,
+                ),
+              ),
+            ),
     );
   }
 }

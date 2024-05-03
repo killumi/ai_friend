@@ -33,6 +33,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.11"
+  ansicolor:
+    dependency: transitive
+    description:
+      name: ansicolor
+      sha256: "8bf17a8ff6ea17499e40a2d2542c2f481cd7615760c6d34065cb22bfd22e6880"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.2"
   apphud:
     dependency: "direct main"
     description:
@@ -563,6 +571,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_native_splash:
+    dependency: "direct main"
+    description:
+      name: flutter_native_splash
+      sha256: edf39bcf4d74aca1eb2c1e43c3e445fd9f494013df7f0da752fefe72020eedc0
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.0"
   flutter_rating_bar:
     dependency: transitive
     description:
@@ -621,14 +637,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.1"
-  hero_animation:
-    dependency: "direct main"
-    description:
-      name: hero_animation
-      sha256: e862b27e3bddea486923922bd436cf52b9a28d1a35a342f150e91367647f3215
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.4"
   hive:
     dependency: "direct main"
     description:
@@ -685,6 +693,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  image:
+    dependency: transitive
+    description:
+      name: image
+      sha256: "4c68bfd5ae83e700b5204c1e74451e7bf3cf750e6843c6e158289cf56bda018e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.1.7"
+  image_gallery_saver:
+    dependency: "direct main"
+    description:
+      name: image_gallery_saver
+      sha256: "0aba74216a4d9b0561510cb968015d56b701ba1bd94aace26aacdd8ae5761816"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.3"
   intl:
     dependency: "direct main"
     description:
@@ -829,6 +853,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  oktoast:
+    dependency: "direct main"
+    description:
+      name: oktoast
+      sha256: f1366c5c793ddfb8f55bc6fc3e45db43c45debf173b765fb4c5ec096cbdeb84a
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.4.0"
   package_config:
     dependency: transitive
     description:

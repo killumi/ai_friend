@@ -261,6 +261,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/avatar.png
   AssetGenImage get avatar => const AssetGenImage('assets/images/avatar.png');
 
+  /// File path: assets/images/blur.jpg
+  AssetGenImage get blur => const AssetGenImage('assets/images/blur.jpg');
+
   /// File path: assets/images/chat_avatar.png
   AssetGenImage get chatAvatar =>
       const AssetGenImage('assets/images/chat_avatar.png');
@@ -276,6 +279,9 @@ class $AssetsImagesGen {
   AssetGenImage get settingsPopup =>
       const AssetGenImage('assets/images/settings_popup.png');
 
+  /// File path: assets/images/splash.jpg
+  AssetGenImage get splash => const AssetGenImage('assets/images/splash.jpg');
+
   /// File path: assets/images/start_screen.png
   AssetGenImage get startScreen =>
       const AssetGenImage('assets/images/start_screen.png');
@@ -288,10 +294,12 @@ class $AssetsImagesGen {
   List<AssetGenImage> get values => [
         aliceBigAvatar,
         avatar,
+        blur,
         chatAvatar,
         paywall,
         settingsAvatar,
         settingsPopup,
+        splash,
         startScreen,
         startScreenBackground
       ];

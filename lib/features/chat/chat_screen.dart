@@ -42,7 +42,7 @@ class _ChatScreenState extends State<ChatScreen> {
     final listKey = chatProvider.chatListKey;
     final scrollController = chatProvider.scrollController;
     final daylyScriptIsEnd =
-        context.select((ChatScriptProvider e) => e.daylyScriptIsEnd);
+        context.select((ChatScriptProvider e) => e.showEndDayUI);
     final needShowPremiumBanner =
         context.select((ChatScriptProvider e) => e.needShowPremiumBanner);
     final isHasPremium = context.select((PaymentProvider e) => e.isHasPremium);

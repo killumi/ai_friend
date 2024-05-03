@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:math' as math;
 import 'dart:typed_data';
+import 'package:ai_friend/domain/firebase/firebase_config.dart';
 import 'package:ai_friend/features/chat/chat_script/chat_script_provider.dart';
 import 'package:ai_friend/features/chat/chat_storage.dart';
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
@@ -19,6 +20,7 @@ class ChatProvider extends ChangeNotifier {
   final ChatStorage _storage;
   final ChatScriptProvider _chatScriptProvider;
   final List<IChatMessage> _messages = [];
+  final firebaseConfig = locator<FirebaseConfig>();
 
   bool isHasFocus = false;
   bool showSendButton = false;
@@ -111,11 +113,10 @@ class ChatProvider extends ChangeNotifier {
     // print('Delayed for $milliseconds milliseconds');
     for (var e in answer) {
       await Future.delayed(Duration(milliseconds: milliseconds));
+      // await Future.delayed(const Duration(milliseconds: 200));
       // await Future.delayed(Duration(milliseconds: 1000));
       e = e.copyWith(content: e.content.replaceUserName());
-      // if (e.isText) {
-      //   sendMessageToGPT(customValue: userMessage.content, isBot: true);
-      // }
+
       saveMessageWithMedia(e);
       _addNewMessage(e);
     }
@@ -132,6 +133,8 @@ class ChatProvider extends ChangeNotifier {
       await _storage.addMessage(e);
       return;
     }
+    if (e.isImage && !firebaseConfig.showMedia ||
+        e.isVideo && !firebaseConfig.showMedia) return;
 
     if (e.type.contains('video')) {
       data = await firebaseProvider.downloadVideo(e.content);
@@ -146,13 +149,15 @@ class ChatProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  int _addNewMessage(IChatMessage message) {
+  void _addNewMessage(IChatMessage message) {
+    if (message.isImage && !firebaseConfig.showMedia ||
+        message.isVideo && !firebaseConfig.showMedia) return;
+
     final index = chatLengt;
     _messages.add(message);
     _chatListKey.currentState?.insertItem(index);
     playIncomingMessageRingtone();
     scrollDown();
-    return _messages.length;
   }
 
   // ================================================

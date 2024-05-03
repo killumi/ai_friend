@@ -105,8 +105,8 @@ class _BotProfileScreenState extends State<BotProfileScreen> {
                                   child: PageView.builder(
                                     itemCount: _imagePaths.length,
                                     controller: _pageController,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
+                                    // physics:
+                                    //     const NeverScrollableScrollPhysics(),
                                     itemBuilder: (context, index) {
                                       return BotProfileImage(
                                         isBlured: index != 0 && !isHasPremium,
@@ -184,7 +184,8 @@ class _BotProfileScreenState extends State<BotProfileScreen> {
                             ),
                             const SizedBox(height: 5),
                             const Text(
-                              "Hi, handsome! I'm your virtual muse, Alice.\nLet's forget about everything and dive into the world of our fiery conversation right now!",
+                              // "Hi, handsome! I'm your virtual muse, Alice.\nLet's forget about everything and dive into the world of our fiery conversation right now!",
+                              "Hi, handsome! I'm your virtual muse, Alice.\nLet's forget about everything and dive into the world of our conversation right now!",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,
