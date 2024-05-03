@@ -1,11 +1,14 @@
+import 'package:ai_friend/app_router.dart';
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 import 'package:ai_friend/domain/firebase/fire_storage.dart';
+import 'package:ai_friend/features/payment/payment_provider.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
 import 'package:ai_friend/locator.dart';
 import 'package:ai_friend/widgets/app_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pro_animated_blur/pro_animated_blur.dart';
+import 'package:provider/provider.dart';
 import 'package:swipe_image_gallery/swipe_image_gallery.dart';
 import 'package:video_player/video_player.dart';
 
@@ -24,7 +27,7 @@ class _VideoMessageState extends State<VideoMessage>
   VideoPlayerController? _controller;
   bool _isPlaying = true;
   final firebaseProvider = locator<FireStorageProvider>();
-  bool _isBlurred = true;
+  // bool _isBlurred = true;
 
   @override
   bool get wantKeepAlive => true;
@@ -32,7 +35,7 @@ class _VideoMessageState extends State<VideoMessage>
   @override
   void initState() {
     super.initState();
-    _isBlurred = widget.isPreview!;
+    // _isBlurred = widget.isPreview!;
     _initVideoController();
   }
 
@@ -42,10 +45,10 @@ class _VideoMessageState extends State<VideoMessage>
     super.dispose();
   }
 
-  void toggleBlur() {
-    _isBlurred = !_isBlurred;
-    setState(() {});
-  }
+  // void toggleBlur() {
+  //   _isBlurred = !_isBlurred;
+  //   setState(() {});
+  // }
 
   Future<void> _initVideoController() async {
     if (widget.message.mediaData != null) {
@@ -92,6 +95,8 @@ class _VideoMessageState extends State<VideoMessage>
 
   @override
   Widget build(BuildContext context) {
+    final isHasPremium = context.select((PaymentProvider e) => e.isHasPremium);
+
     super.build(context);
     return GestureDetector(
       onTap: () {
@@ -148,18 +153,19 @@ class _VideoMessageState extends State<VideoMessage>
                         Center(child: Assets.icons.playIcon.svg(width: 30)),
                       Positioned.fill(
                         child: IgnorePointer(
-                          ignoring: !_isBlurred,
+                          ignoring: isHasPremium,
                           child: ProAnimatedBlur(
-                            blur: _isBlurred ? 15 : 0,
+                            blur: isHasPremium ? 0 : 15,
                             duration: const Duration(milliseconds: 200),
                             curve: Curves.ease,
                             child: GestureDetector(
-                                onTap: () => toggleBlur(),
+                                onTap: () =>
+                                    AppRouter.openPaywall(context, false),
                                 child: Container(
                                   color: Colors.transparent,
                                   child: Center(
                                     child: AnimatedOpacity(
-                                      opacity: _isBlurred ? 1 : 0,
+                                      opacity: isHasPremium ? 0 : 1,
                                       duration:
                                           const Duration(milliseconds: 200),
                                       curve: Curves.ease,
@@ -170,7 +176,8 @@ class _VideoMessageState extends State<VideoMessage>
                                           title: 'Unblur',
                                           icon: Assets.icons.proIcon
                                               .svg(width: 23),
-                                          onTap: () => toggleBlur(),
+                                          onTap: () => AppRouter.openPaywall(
+                                              context, false),
                                         ),
                                       ),
                                     ),

@@ -176,11 +176,11 @@ class OnboardingProvider extends ChangeNotifier {
     final newIndex = _items.length;
     _items.add(message);
     _listKeyOnboarding.currentState!.insertItem(newIndex);
-    if (message.isBot) {
-      await _player.play(
-        AssetSource('new_message.mp3'),
-        mode: PlayerMode.lowLatency,
-      );
-    }
+    // if (message.isBot) {
+    await _player.play(
+      AssetSource('new_message.mp3'),
+      mode: PlayerMode.lowLatency,
+    );
+    // }
   }
 }

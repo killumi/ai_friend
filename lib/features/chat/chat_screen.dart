@@ -7,6 +7,7 @@ import 'package:ai_friend/features/chat/widgets/chat_input.dart';
 import 'package:ai_friend/features/chat/widgets/continue_chat_widget.dart';
 import 'package:ai_friend/features/chat/widgets/message_widget.dart';
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
+import 'package:ai_friend/features/payment/payment_provider.dart';
 import 'package:ai_friend/widgets/screen_wrap.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +43,9 @@ class _ChatScreenState extends State<ChatScreen> {
     final scrollController = chatProvider.scrollController;
     final daylyScriptIsEnd =
         context.select((ChatScriptProvider e) => e.daylyScriptIsEnd);
+    final needShowPremiumBanner =
+        context.select((ChatScriptProvider e) => e.needShowPremiumBanner);
+    final isHasPremium = context.select((PaymentProvider e) => e.isHasPremium);
 
     return ScreenWrap(
       resizeToAvoidBottomInset: true,
@@ -61,9 +65,20 @@ class _ChatScreenState extends State<ChatScreen> {
                         _buildItem(messages[index], animation),
                   ),
                 ),
-                if (!daylyScriptIsEnd) const ChatScriptMessagesBox(),
-                if (!daylyScriptIsEnd) const ChatInput(),
-                if (daylyScriptIsEnd) const ContinueChatWidget(),
+                if (!needShowPremiumBanner && !daylyScriptIsEnd || isHasPremium)
+                  const ChatScriptMessagesBox(),
+                if (!needShowPremiumBanner && !daylyScriptIsEnd || isHasPremium)
+                  const ChatInput(),
+                if (daylyScriptIsEnd && !isHasPremium)
+                  const ContinueChatWidget(
+                    title:
+                        'Alice will be online in 12 hours. You can get a PRO and continue chatting with her right away',
+                  ),
+                if (needShowPremiumBanner && !isHasPremium)
+                  const ContinueChatWidget(
+                    title:
+                        'To keep chatting with Alice and receiving her photos and videos, upgrade to PRO',
+                  ),
               ],
             ),
           ),

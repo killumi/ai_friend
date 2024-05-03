@@ -6,6 +6,7 @@ import 'package:ai_friend/domain/firebase/fire_storage.dart';
 import 'package:ai_friend/domain/firebase/firebase_config.dart';
 import 'package:ai_friend/features/onboarding/onboarding_provider.dart';
 import 'package:ai_friend/features/onboarding/onboarding_storage.dart';
+import 'package:ai_friend/features/payment/payment_provider.dart';
 import 'package:ai_friend/features/profile/birthdate/birthdate_storage.dart';
 import 'package:ai_friend/features/profile/gender/gender_storage.dart';
 import 'package:ai_friend/features/profile/hobby/hobby_provider.dart';
@@ -41,6 +42,7 @@ Future<void> initLocator() async {
 
   locator.registerLazySingleton<NameStorage>(() => NameStorage());
   locator.registerLazySingleton<HobbyStorage>(() => HobbyStorage());
+  locator.registerLazySingleton<PaymentProvider>(() => PaymentProvider());
   locator
       .registerLazySingleton<FireStorageProvider>(() => FireStorageProvider());
   locator.registerLazySingleton<HobbyProvider>(

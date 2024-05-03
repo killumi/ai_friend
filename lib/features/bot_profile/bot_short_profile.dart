@@ -1,11 +1,17 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:ai_friend/app_router.dart';
+import 'package:ai_friend/features/payment/payment_provider.dart';
+import 'package:ai_friend/features/profile/hobby/hobby_helper.dart';
+import 'package:ai_friend/features/profile/hobby/hobby_item.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
+import 'package:ai_friend/gen/fonts.gen.dart';
 import 'package:ai_friend/widgets/app_button.dart';
 import 'package:ai_friend/widgets/app_header.dart';
 import 'package:ai_friend/widgets/screen_wrap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pro_animated_blur/pro_animated_blur.dart';
+import 'package:provider/provider.dart';
 
 class BotShortProfile extends StatefulWidget {
   const BotShortProfile({super.key});
@@ -23,6 +29,16 @@ class _BotShortProfileState extends State<BotShortProfile> {
     Assets.alicePhotos.img2.provider(),
     Assets.alicePhotos.img3.provider(),
     Assets.alicePhotos.img4.provider(),
+  ];
+
+  final List<HOBBY> aliceHobby = [
+    HOBBY.height,
+    HOBBY.music,
+    HOBBY.literature,
+    HOBBY.technology,
+    HOBBY.friendly,
+    HOBBY.artDesign,
+    HOBBY.intellectual,
   ];
 
   @override
@@ -62,6 +78,8 @@ class _BotShortProfileState extends State<BotShortProfile> {
 
   @override
   Widget build(BuildContext context) {
+    final isHasPremium = context.select((PaymentProvider e) => e.isHasPremium);
+
     return ScreenWrap(
       resizeToAvoidBottomInset: true,
       child: Stack(
@@ -90,7 +108,7 @@ class _BotShortProfileState extends State<BotShortProfile> {
                                         const NeverScrollableScrollPhysics(),
                                     itemBuilder: (context, index) {
                                       return SettingsCarouselItem(
-                                        isBlured: index != 0,
+                                        isBlured: index != 0 && !isHasPremium,
                                         data: _imagePaths[index],
                                       );
                                     },
@@ -128,10 +146,67 @@ class _BotShortProfileState extends State<BotShortProfile> {
                                 ),
                               ),
                             ),
+                            Positioned(
+                              bottom: 0,
+                              left: 0,
+                              right: 0,
+                              child: IgnorePointer(
+                                ignoring: true,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        'Alice, 25 y.o.',
+                                        style: TextStyle(
+                                          color: Color(0xFFFBFBFB),
+                                          fontSize: 24,
+                                          fontFamily: FontFamily.gothamPro,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 5),
+                                      const Text(
+                                        "Hi, handsome! I'm your virtual muse, Alice.\nLet's forget about everything and dive into the world of our fiery conversation right now!",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 14,
+                                          fontFamily: FontFamily.sFPro,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 12),
+                                      Wrap(
+                                        alignment: WrapAlignment.start,
+                                        spacing: 4,
+                                        runSpacing: 4,
+                                        children: aliceHobby
+                                            .map(
+                                              (e) => HobbyItem(
+                                                value: e,
+                                                isEditMod: true,
+                                                isSelected: true,
+                                                onChanged: (e) {},
+                                              ),
+                                            )
+                                            .toList(),
+                                      ),
+                                      const SizedBox(height: 8),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                         const SizedBox(height: 40),
-                        AppButton(title: 'Chat Now', onTap: () {}),
+                        AppButton(
+                          title: 'Chat Now',
+                          onTap: () => AppRouter.openPaywall(context, true),
+                        ),
                       ],
                     ),
                   ),
@@ -166,6 +241,11 @@ class SettingsCarouselItem extends StatelessWidget {
           ),
         ),
         Positioned.fill(
+          child: Container(
+            color: Colors.black38,
+          ),
+        ),
+        Positioned.fill(
           child: IgnorePointer(
             ignoring: !isBlured,
             child: ProAnimatedBlur(
@@ -174,21 +254,19 @@ class SettingsCarouselItem extends StatelessWidget {
               curve: Curves.ease,
               child: Container(
                 color: Colors.transparent,
-                child: Center(
-                  child: AnimatedOpacity(
-                    opacity: isBlured ? 1 : 0,
-                    duration: const Duration(milliseconds: 200),
-                    curve: Curves.ease,
-                    child: SizedBox(
-                      height: 40,
-                      width: 120,
-                      child: AppButton(
-                        title: 'Unblur',
-                        icon: Assets.icons.proIcon.svg(width: 23),
-                        onTap: () {
-                          print('object vl');
-                        },
-                      ),
+                padding: const EdgeInsets.only(top: 140),
+                alignment: Alignment.topCenter,
+                child: AnimatedOpacity(
+                  opacity: isBlured ? 1 : 0,
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.ease,
+                  child: SizedBox(
+                    height: 40,
+                    width: 120,
+                    child: AppButton(
+                      title: 'Unblur',
+                      icon: Assets.icons.proIcon.svg(width: 23),
+                      onTap: () => AppRouter.openPaywall(context, false),
                     ),
                   ),
                 ),

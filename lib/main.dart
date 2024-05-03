@@ -1,11 +1,13 @@
 import 'package:ai_friend/domain/helpers/rate_app_helper.dart';
-import 'package:ai_friend/features/bot_profile/bot_short_profile.dart';
 import 'package:ai_friend/features/chat/chat_provider.dart';
 import 'package:ai_friend/features/chat/chat_screen.dart';
 import 'package:ai_friend/features/chat/chat_script/chat_script_provider.dart';
 import 'package:ai_friend/features/chat/chat_script/chat_script_storage.dart';
 import 'package:ai_friend/features/chat/chat_storage.dart';
 import 'package:ai_friend/domain/firebase/firebase_config.dart';
+import 'package:ai_friend/features/payment/payment_listener.dart';
+import 'package:ai_friend/features/payment/payment_provider.dart';
+import 'package:ai_friend/features/payment/payment_screen.dart';
 import 'package:ai_friend/firebase_options.dart';
 import 'package:ai_friend/locator.dart';
 import 'package:ai_friend/features/onboarding/onboarding_provider.dart';
@@ -17,6 +19,7 @@ import 'package:ai_friend/features/profile/hobby/hobby_provider.dart';
 import 'package:ai_friend/features/profile/hobby/hobby_storage.dart';
 import 'package:ai_friend/features/profile/name/name_storage.dart';
 import 'package:ai_friend/features/profile/profile_provider.dart';
+import 'package:apphud/apphud.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -35,6 +38,9 @@ void main() async {
   await GenderStorage.openStorage();
   await HobbyStorage.openStorage();
 
+  await PaymentProvider.startApphud();
+  Apphud.setListener(listener: ApphudPaymentListener());
+  await PaymentProvider.startApphud();
   await locator<FirebaseConfig>().init();
   await locator<ChatScriptProvider>().initScript();
   await locator<ChatProvider>().createThread();
@@ -56,18 +62,23 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => locator<ChatScriptProvider>()),
         ChangeNotifierProvider(create: (_) => locator<ProfileProvider>()),
         ChangeNotifierProvider(create: (_) => locator<HobbyProvider>()),
+        ChangeNotifierProvider(create: (_) => locator<PaymentProvider>()),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'AI Friend',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        // home: introWasShown ? const ChatScreen() : const StartScreen(),
-        // home: const StartScreen(),
-        home: const BotShortProfile(),
-        // home: CircularImageViewer(),
+      child: FutureBuilder(
+        future: locator<PaymentProvider>().updatePremiumStatus(),
+        builder: (context, snapshot) {
+          final isHasPremium = snapshot.data ?? false;
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'AI Friend',
+            home: introWasShown
+                ? isHasPremium
+                    ? const ChatScreen()
+                    : const PaymentScreen()
+                : const StartScreen(),
+            // home: const StartScreen(),
+          );
+        },
       ),
     );
   }

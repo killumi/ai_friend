@@ -4,6 +4,7 @@ import 'package:ai_friend/gen/fonts.gen.dart';
 import 'package:ai_friend/widgets/pulse_button.dart';
 import 'package:ai_friend/widgets/screen_wrap.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
@@ -48,60 +49,72 @@ class StartScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: AnimatedButton(
+                  child: PulseButton(
                     onTap: () => AppRouter.openOnboarding(context),
                     title: 'Start Chat',
                   ),
                 ),
-                const SizedBox(height: 22),
+                const SizedBox(height: 42),
+                const Text(
+                  'By signing up, you agree to our \n',
+                  style: TextStyle(
+                    color: Color(0xFFFBFBFB),
+                    fontSize: 14,
+                    fontFamily: FontFamily.gothamPro,
+                    fontWeight: FontWeight.w400,
+                    height: 0,
+                  ),
+                ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
-                      child: RichText(
-                        textAlign: TextAlign.center,
-                        text: const TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'By signing up, you agree to our \n',
-                              style: TextStyle(
-                                color: Color(0xFFFBFBFB),
-                                fontSize: 14,
-                                fontFamily: FontFamily.gothamPro,
-                                fontWeight: FontWeight.w400,
-                                height: 4,
-                              ),
-                            ),
-                            TextSpan(
-                              text: 'Terms of Service',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                                fontFamily: FontFamily.sFPro,
-                                fontWeight: FontWeight.w500,
-                                decoration: TextDecoration.underline,
-                                // height: 0.12,
-                              ),
-                            ),
-                            TextSpan(
-                              text: ' and ',
-                              style: TextStyle(
-                                color: Color(0xFFFBFBFB),
-                                fontSize: 14,
-                                fontFamily: FontFamily.gothamPro,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            TextSpan(
-                              text: 'Privacy Policy',
-                              style: TextStyle(
-                                color: Color(0xFFFBFBFB),
-                                fontSize: 14,
-                                fontFamily: FontFamily.sFPro,
-                                fontWeight: FontWeight.w400,
-                                decoration: TextDecoration.underline,
-                              ),
-                            ),
-                          ],
+                    GestureDetector(
+                      onTap: () {
+                        launchUrl(
+                          Uri.parse(
+                              'https://doc-hosting.flycricket.io/ai-girlfriend-friendly-chat-terms-of-use/47ace2aa-8536-4d16-9f8c-01af0a7717e2/terms'),
+                        );
+                      },
+                      child: const Text(
+                        'Terms of Service',
+                        style: TextStyle(
+                          color: Color(0xFFFBFBFB),
+                          fontSize: 14,
+                          fontFamily: FontFamily.sFPro,
+                          fontWeight: FontWeight.w400,
+                          decoration: TextDecoration.underline,
+                          decorationColor: Colors.white,
+                          height: 0,
+                        ),
+                      ),
+                    ),
+                    const Text(
+                      ' and ',
+                      style: TextStyle(
+                        color: Color(0xFFFBFBFB),
+                        fontSize: 14,
+                        fontFamily: FontFamily.gothamPro,
+                        fontWeight: FontWeight.w400,
+                        height: 0,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        launchUrl(
+                          Uri.parse(
+                              'https://doc-hosting.flycricket.io/ai-girlfriend-friendly-chat-privacy-policy/98d20278-4947-48cb-9493-09ebeec0e9e7/privacy'),
+                        );
+                      },
+                      child: const Text(
+                        'Privacy Policy',
+                        style: TextStyle(
+                          color: Color(0xFFFBFBFB),
+                          fontSize: 14,
+                          fontFamily: FontFamily.sFPro,
+                          fontWeight: FontWeight.w400,
+                          decoration: TextDecoration.underline,
+                          decorationColor: Colors.white,
+                          height: 0,
                         ),
                       ),
                     ),

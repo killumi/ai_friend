@@ -5,7 +5,7 @@ class RateAppHelper {
   static final RateMyApp rateMyApp = RateMyApp(
     preferencesPrefix: 'rateMyApp_',
     minLaunches: 1,
-    appStoreIdentifier: '',
+    appStoreIdentifier: '6480462813',
     googlePlayIdentifier: '',
   );
 

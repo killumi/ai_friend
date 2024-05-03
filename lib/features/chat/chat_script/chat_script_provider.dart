@@ -3,6 +3,8 @@ import 'package:ai_friend/features/chat/chat_script/chat_script_storage.dart';
 import 'package:ai_friend/domain/entity/i_script_day/i_script_day.dart';
 import 'package:ai_friend/domain/entity/i_script_message_data/i_script_message_data.dart';
 import 'package:ai_friend/domain/firebase/firebase_config.dart';
+import 'package:ai_friend/features/payment/payment_provider.dart';
+import 'package:ai_friend/locator.dart';
 import 'package:flutter/material.dart';
 
 class ChatScriptProvider extends ChangeNotifier {
@@ -22,10 +24,12 @@ class ChatScriptProvider extends ChangeNotifier {
   bool get isShowScriptBox => _isShowScriptBox;
   bool get isShowRollUpBoxButton => dailyScript != null;
 
-  bool get daylyScriptIsEnd =>
-      currentMessageNumber + 1 == dailyScript?.data.length;
+  bool get daylyScriptIsEnd => currentMessageNumber == dailyScript!.data.length;
 
   bool get textfieldAvailable => scriptMessage?.textfieldAvailable ?? false;
+
+  bool get needShowPremiumBanner =>
+      currentDayNumber == 1 && currentMessageNumber == 3;
 
   ChatScriptProvider(this._config, this._storage);
 
@@ -48,14 +52,17 @@ class ChatScriptProvider extends ChangeNotifier {
   Future<void> showNextMessage() async {
     if (daylyScriptIsEnd) {
       log('NEED SHOW PREMIUM SCREEN TO SHOW NEX DAY SCRIPT');
-      await _storage.setCurrentDay(currentDayNumber + 1);
-      dailyScript = await _config.getDailyChatScript(currentDayNumber);
-      notifyListeners();
-      await _storage.setCurrentMessage(0);
-      notifyListeners();
+      // if()
+      showNextDay();
+      // await _storage.setCurrentDay(currentDayNumber + 1);
+      // dailyScript = await _config.getDailyChatScript(currentDayNumber);
+      // notifyListeners();
+      // await _storage.setCurrentMessage(0);
+      // notifyListeners();
       return;
     }
 
+    // if()
     await _storage.setCurrentMessage(currentMessageNumber + 1);
     notifyListeners();
   }

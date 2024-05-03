@@ -85,7 +85,7 @@ class _ProfileHobbyScreenState extends State<ProfileHobbyScreen> {
                             AppRouter.pop(context);
                             return;
                           }
-                          AppRouter.openChat(context);
+                          AppRouter.openAliceShortProfile(context);
                         },
                         isDisabled: selected.isEmpty,
                       );

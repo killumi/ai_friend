@@ -24,6 +24,9 @@ enum HOBBY {
   ecology,
   cars,
   games,
+  intellectual,
+  friendly,
+  height,
 }
 
 extension HobbyHelper on HOBBY {
@@ -71,6 +74,12 @@ extension HobbyHelper on HOBBY {
         return 'Cars';
       case HOBBY.games:
         return 'Games';
+      case HOBBY.intellectual:
+        return 'Intellectual';
+      case HOBBY.friendly:
+        return 'Friendly';
+      case HOBBY.height:
+        return "5’7”";
       default:
         return '';
     }
@@ -139,6 +148,15 @@ extension HobbyHelper on HOBBY {
 
       case HOBBY.games:
         return Assets.coloredIcons.gamesIcon.image(width: 20);
+
+      case HOBBY.height:
+        return Assets.coloredIcons.heightIcon.image(width: 20);
+
+      case HOBBY.intellectual:
+        return Assets.coloredIcons.intellectualIcon.image(width: 20);
+
+      case HOBBY.friendly:
+        return Assets.coloredIcons.friendlyIcon.image(width: 20);
 
       default:
         return Assets.coloredIcons.animalsIcon.image(width: 20);

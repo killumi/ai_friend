@@ -1,7 +1,10 @@
+import 'package:ai_friend/features/bot_profile/bot_profile_screen.dart';
+import 'package:ai_friend/features/bot_profile/bot_short_profile.dart';
 import 'package:ai_friend/features/chat/chat_screen.dart';
 import 'package:ai_friend/features/gallery/gallery_screen.dart';
 import 'package:ai_friend/features/onboarding/onboarding_screen.dart';
 import 'package:ai_friend/features/onboarding/start_screen.dart';
+import 'package:ai_friend/features/payment/payment_screen.dart';
 import 'package:ai_friend/features/profile/hobby/profile_hobby_screen.dart';
 import 'package:ai_friend/features/profile/profile_info_screen.dart';
 import 'package:ai_friend/features/settings/settings_screen.dart';
@@ -11,7 +14,7 @@ import 'package:page_route_animator/page_route_animator.dart';
 class AppRouter {
   static void pop(BuildContext context) => Navigator.pop(context);
 
-  static void openChat(BuildContext context) {
+  static void openChat(BuildContext context, {bool removeRoutes = false}) {
     final route = PageRouteAnimator(
       child: const ChatScreen(),
       routeAnimation: RouteAnimation.rightToLeftWithFade,
@@ -20,12 +23,28 @@ class AppRouter {
       reverseDuration: const Duration(milliseconds: 600),
     );
 
-    Navigator.push(context, route);
+    removeRoutes
+        ? Navigator.of(context).pushAndRemoveUntil(route, (route) => false)
+        : Navigator.push(context, route);
   }
 
   static void openStart(BuildContext context) {
     final route = CupertinoPageRoute(
       builder: (context) => const StartScreen(),
+    );
+    Navigator.push(context, route);
+  }
+
+  static void openAliceShortProfile(BuildContext context) {
+    final route = CupertinoPageRoute(
+      builder: (context) => const BotShortProfile(),
+    );
+    Navigator.push(context, route);
+  }
+
+  static void openAliceProfile(BuildContext context) {
+    final route = CupertinoPageRoute(
+      builder: (context) => const BotProfileScreen(),
     );
     Navigator.push(context, route);
   }
@@ -74,13 +93,6 @@ class AppRouter {
     Navigator.push(context, route);
   }
 
-  static void openPaywall(BuildContext context) {
-    final route = CupertinoPageRoute(
-      builder: (context) => const ChatScreen(),
-    );
-    Navigator.push(context, route);
-  }
-
   static void openGallery(BuildContext context) {
     final route = CupertinoPageRoute(
       builder: (context) => const GalleryScreen(),
@@ -93,5 +105,14 @@ class AppRouter {
       builder: (context) => const SettingsScreen(),
     );
     Navigator.push(context, route);
+  }
+
+  static void openPaywall(BuildContext context, bool removeRoutes) {
+    removeRoutes
+        ? Navigator.of(context).pushAndRemoveUntil(
+            CupertinoPageRoute(builder: (context) => const PaymentScreen()),
+            (route) => false)
+        : Navigator.of(context).push(
+            CupertinoPageRoute(builder: (context) => const PaymentScreen()));
   }
 }

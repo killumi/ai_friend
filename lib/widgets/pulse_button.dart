@@ -3,21 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
-class AnimatedButton extends StatefulWidget {
+class PulseButton extends StatefulWidget {
   final String title;
   final VoidCallback onTap;
 
-  const AnimatedButton({
+  const PulseButton({
     required this.onTap,
     required this.title,
     Key? key,
   }) : super(key: key);
 
   @override
-  State<AnimatedButton> createState() => _AnimatedButtonState();
+  State<PulseButton> createState() => _PulseButtonState();
 }
 
-class _AnimatedButtonState extends State<AnimatedButton> {
+class _PulseButtonState extends State<PulseButton> {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(

@@ -65,6 +65,10 @@ class $AssetsColoredIconsGen {
   AssetGenImage get financeIcon =>
       const AssetGenImage('assets/colored_icons/finance_icon.png');
 
+  /// File path: assets/colored_icons/friendly_icon.png
+  AssetGenImage get friendlyIcon =>
+      const AssetGenImage('assets/colored_icons/friendly_icon.png');
+
   /// File path: assets/colored_icons/gadgets_icon.png
   AssetGenImage get gadgetsIcon =>
       const AssetGenImage('assets/colored_icons/gadgets_icon.png');
@@ -80,6 +84,14 @@ class $AssetsColoredIconsGen {
   /// File path: assets/colored_icons/health_icon.png
   AssetGenImage get healthIcon =>
       const AssetGenImage('assets/colored_icons/health_icon.png');
+
+  /// File path: assets/colored_icons/height_icon.png
+  AssetGenImage get heightIcon =>
+      const AssetGenImage('assets/colored_icons/height_icon.png');
+
+  /// File path: assets/colored_icons/intellectual_icon.png
+  AssetGenImage get intellectualIcon =>
+      const AssetGenImage('assets/colored_icons/intellectual_icon.png');
 
   /// File path: assets/colored_icons/literature_icon.png
   AssetGenImage get literatureIcon =>
@@ -127,10 +139,13 @@ class $AssetsColoredIconsGen {
         ecologyIcon,
         fashionIcon,
         financeIcon,
+        friendlyIcon,
         gadgetsIcon,
         gamesIcon,
         gardeningIcon,
         healthIcon,
+        heightIcon,
+        intellectualIcon,
         literatureIcon,
         moviesIcon,
         musicIcon,
@@ -181,6 +196,18 @@ class $AssetsIconsGen {
   SvgGenImage get messageIcon =>
       const SvgGenImage('assets/icons/message_icon.svg');
 
+  /// File path: assets/icons/paywall_icon_1.png
+  AssetGenImage get paywallIcon1 =>
+      const AssetGenImage('assets/icons/paywall_icon_1.png');
+
+  /// File path: assets/icons/paywall_icon_2.png
+  AssetGenImage get paywallIcon2 =>
+      const AssetGenImage('assets/icons/paywall_icon_2.png');
+
+  /// File path: assets/icons/paywall_icon_3.png
+  AssetGenImage get paywallIcon3 =>
+      const AssetGenImage('assets/icons/paywall_icon_3.png');
+
   /// File path: assets/icons/play_icon.svg
   SvgGenImage get playIcon => const SvgGenImage('assets/icons/play_icon.svg');
 
@@ -202,7 +229,7 @@ class $AssetsIconsGen {
   SvgGenImage get shareIcon => const SvgGenImage('assets/icons/share_icon.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [
+  List<dynamic> get values => [
         arrowDownIcon,
         arrowUpIcon,
         attentionIcon,
@@ -212,6 +239,9 @@ class $AssetsIconsGen {
         lightbulb,
         lipsProfile,
         messageIcon,
+        paywallIcon1,
+        paywallIcon2,
+        paywallIcon3,
         playIcon,
         proIcon,
         profileIcon,
@@ -235,6 +265,9 @@ class $AssetsImagesGen {
   AssetGenImage get chatAvatar =>
       const AssetGenImage('assets/images/chat_avatar.png');
 
+  /// File path: assets/images/paywall.png
+  AssetGenImage get paywall => const AssetGenImage('assets/images/paywall.png');
+
   /// File path: assets/images/settings_avatar.png
   AssetGenImage get settingsAvatar =>
       const AssetGenImage('assets/images/settings_avatar.png');
@@ -256,6 +289,7 @@ class $AssetsImagesGen {
         aliceBigAvatar,
         avatar,
         chatAvatar,
+        paywall,
         settingsAvatar,
         settingsPopup,
         startScreen,

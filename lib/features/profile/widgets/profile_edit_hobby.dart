@@ -56,8 +56,8 @@ class ProfileEditHobby extends StatelessWidget {
 
             return Wrap(
               alignment: WrapAlignment.start,
-              spacing: 10,
-              runSpacing: 10,
+              spacing: 4,
+              runSpacing: 4,
               children: selected
                   .map(
                     (e) => HobbyItem(

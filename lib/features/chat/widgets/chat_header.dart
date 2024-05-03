@@ -1,8 +1,12 @@
 import 'package:ai_friend/app_router.dart';
+import 'package:ai_friend/features/chat/chat_script/chat_script_provider.dart';
+import 'package:ai_friend/features/payment/payment_provider.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
 import 'package:ai_friend/gen/fonts.gen.dart';
+import 'package:ai_friend/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class ChatHeader extends StatefulWidget {
   const ChatHeader({super.key});
@@ -15,6 +19,8 @@ class _ChatHeaderState extends State<ChatHeader> {
   bool isShowOptions = false;
   @override
   Widget build(BuildContext context) {
+    final isHasPremium = context.select((PaymentProvider e) => e.isHasPremium);
+
     return Align(
       alignment: Alignment.topCenter,
       child: Container(
@@ -56,6 +62,12 @@ class _ChatHeaderState extends State<ChatHeader> {
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
+                      // locator<PaymentProvider>().setFreePremium();
+                      // locator<ChatScriptProvider>().showPrevMessage();
+                      print(
+                          '${locator<ChatScriptProvider>().currentDayNumber}');
+                      print(
+                          '${locator<ChatScriptProvider>().currentMessageNumber}');
                       setState(() {
                         isShowOptions = !isShowOptions;
                       });
@@ -89,37 +101,43 @@ class _ChatHeaderState extends State<ChatHeader> {
                 SizedBox(
                   width: 96,
                   height: 40,
-                  child: GestureDetector(
-                    onTap: () => print('asd'),
-                    child: Container(
-                      clipBehavior: Clip.antiAlias,
-                      decoration: ShapeDecoration(
-                        gradient: const LinearGradient(
-                          begin: Alignment(-0.71, 0.71),
-                          end: Alignment(0.71, -0.71),
-                          colors: [Color(0xFFBB3DA0), Color(0xFFA762EA)],
+                  child: Opacity(
+                    opacity: isHasPremium ? 0 : 1,
+                    child: GestureDetector(
+                      onTap: () {
+                        if (isHasPremium) return;
+                        AppRouter.openPaywall(context, false);
+                      },
+                      child: Container(
+                        clipBehavior: Clip.antiAlias,
+                        decoration: ShapeDecoration(
+                          gradient: const LinearGradient(
+                            begin: Alignment(-0.71, 0.71),
+                            end: Alignment(0.71, -0.71),
+                            colors: [Color(0xFFBB3DA0), Color(0xFFA762EA)],
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
                         ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Assets.icons.proIcon.svg(),
+                            const SizedBox(width: 6),
+                            const Text(
+                              'PRO',
+                              style: TextStyle(
+                                color: Color(0xFFFBFBFB),
+                                fontSize: 16,
+                                fontFamily: FontFamily.gothamPro,
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                              ),
+                            )
+                          ],
                         ),
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Assets.icons.proIcon.svg(),
-                          const SizedBox(width: 6),
-                          const Text(
-                            'PRO',
-                            style: TextStyle(
-                              color: Color(0xFFFBFBFB),
-                              fontSize: 16,
-                              fontFamily: FontFamily.gothamPro,
-                              fontWeight: FontWeight.w600,
-                              height: 0,
-                            ),
-                          )
-                        ],
                       ),
                     ),
                   ),
@@ -135,7 +153,7 @@ class _ChatHeaderState extends State<ChatHeader> {
                   children: [
                     const SizedBox(height: 20),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () => AppRouter.openAliceProfile(context),
                       child: _buildOption(
                         Assets.icons.lipsProfile.svg(),
                         'Alice’s Profile',

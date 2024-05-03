@@ -1,8 +1,11 @@
+import 'package:ai_friend/app_router.dart';
 import 'package:ai_friend/features/chat/chat_provider.dart';
+import 'package:ai_friend/features/payment/payment_provider.dart';
 import 'package:ai_friend/features/profile/name/name_helper.dart';
 import 'package:ai_friend/features/chat/chat_script/chat_script_provider.dart';
 import 'package:ai_friend/domain/entity/i_script_message/i_script_message.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
+import 'package:ai_friend/locator.dart';
 import 'package:bounce/bounce.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -94,25 +97,32 @@ class ChatScriptMessage extends StatelessWidget {
     final scriptProvider = context.read<ChatScriptProvider>();
     final chatProvider = context.read<ChatProvider>();
 
-    if (data.action!.isNotEmpty) {
-      switch (data.action) {
-        case 'no_send_pay_go_next_day':
-          showSnack(context,
-              'Это сообщение с кастомным экшеном "no_send_pay_go_next_day" - оно никуда не отправляется - нужно для платной перемотки сценария на следующий день. Пока что переключение на следующий день не ограничиваю для удобного тестирования');
-          await scriptProvider.showNextMessage();
-          return;
-        case 'no_send_pay_unlock_textfield':
-          showSnack(context,
-              'Это сообщение с кастомным экшеном "no_send_pay_unlock_textfield" - оно никуда не отправляется - нужно чтобы редиректнуть на пейвол и платно разблокировать текстовое поле для общения с флиртующим ботом потому что у нас закончилс сценарий');
-          // scriptProvider.unlock(true);
-          scriptProvider.restart();
-          return;
-        default:
-          return;
-      }
+    // if (data.action!.isNotEmpty) {
+    //   switch (data.action) {
+    //     case 'no_send_pay_go_next_day':
+    //       showSnack(context,
+    //           'Это сообщение с кастомным экшеном "no_send_pay_go_next_day" - оно никуда не отправляется - нужно для платной перемотки сценария на следующий день. Пока что переключение на следующий день не ограничиваю для удобного тестирования');
+    //       await scriptProvider.showNextMessage();
+    //       return;
+    //     case 'no_send_pay_unlock_textfield':
+    //       showSnack(context,
+    //           'Это сообщение с кастомным экшеном "no_send_pay_unlock_textfield" - оно никуда не отправляется - нужно чтобы редиректнуть на пейвол и платно разблокировать текстовое поле для общения с флиртующим ботом потому что у нас закончилс сценарий');
+    //       // scriptProvider.unlock(true);
+    //       scriptProvider.restart();
+    //       return;
+    //     default:
+    //       return;
+    //   }
+    // }
+
+    if (data.isPremium && !locator<PaymentProvider>().isHasPremium) {
+      AppRouter.openPaywall(context, false);
+      return;
     }
 
-    await chatProvider.sendMessageGetAnswer(data);
+    if (data.answer!.isNotEmpty) {
+      await chatProvider.sendMessageGetAnswer(data);
+    }
     await scriptProvider.showNextMessage();
   }
 }
