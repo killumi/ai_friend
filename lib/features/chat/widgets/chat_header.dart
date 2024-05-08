@@ -1,7 +1,9 @@
 import 'package:ai_friend/app_router.dart';
+import 'package:ai_friend/domain/firebase/firebase_config.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
 import 'package:ai_friend/gen/fonts.gen.dart';
+import 'package:ai_friend/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +17,8 @@ class ChatHeader extends StatefulWidget {
 
 class _ChatHeaderState extends State<ChatHeader> {
   bool isShowOptions = false;
+  bool get showMedia => locator<FirebaseConfig>().showMedia;
+
   @override
   Widget build(BuildContext context) {
     final isHasPremium = context.select((PaymentProvider e) => e.isHasPremium);
@@ -135,7 +139,11 @@ class _ChatHeaderState extends State<ChatHeader> {
             AnimatedContainer(
               duration: const Duration(milliseconds: 500),
               curve: Curves.ease,
-              height: isShowOptions ? 105 : 0,
+              height: isShowOptions
+                  ? showMedia
+                      ? 105
+                      : 60
+                  : 0,
               child: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -150,17 +158,18 @@ class _ChatHeaderState extends State<ChatHeader> {
                         'Alice’s Profile',
                       ),
                     ),
-                    const SizedBox(height: 12),
-                    GestureDetector(
-                      onTap: () {
-                        AppRouter.openGallery(context);
-                        toggleOpenMenu();
-                      },
-                      child: _buildOption(
-                        Assets.icons.galleryIcon.svg(),
-                        'View Gallery',
+                    if (showMedia) const SizedBox(height: 12),
+                    if (showMedia)
+                      GestureDetector(
+                        onTap: () {
+                          AppRouter.openGallery(context);
+                          toggleOpenMenu();
+                        },
+                        child: _buildOption(
+                          Assets.icons.galleryIcon.svg(),
+                          'View Gallery',
+                        ),
                       ),
-                    ),
                   ],
                 ),
               ),

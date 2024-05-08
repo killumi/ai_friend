@@ -1,4 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
+import 'package:ai_friend/domain/firebase/firebase_config.dart';
 import 'package:ai_friend/features/chat/chat_provider.dart';
 import 'package:ai_friend/features/chat/chat_script/chat_script_provider.dart';
 import 'package:ai_friend/features/chat/chat_script/widgets/chat_script_messages_box.dart';
@@ -8,24 +9,38 @@ import 'package:ai_friend/features/chat/widgets/continue_chat_widget.dart';
 import 'package:ai_friend/features/chat/widgets/message_widget.dart';
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
+import 'package:ai_friend/locator.dart';
 import 'package:ai_friend/widgets/screen_wrap.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
-class ChatScreen extends StatefulWidget {
+class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
 
   @override
-  State<ChatScreen> createState() => _ChatScreenState();
+  Widget build(BuildContext context) {
+    return const ChatScreenView();
+  }
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class ChatScreenView extends StatefulWidget {
+  const ChatScreenView({super.key});
+
+  @override
+  State<ChatScreenView> createState() => _ChatScreenViewState();
+}
+
+class _ChatScreenViewState extends State<ChatScreenView> {
+  bool get showMedia => locator<FirebaseConfig>().showMedia;
+
   @override
   void initState() {
     super.initState();
+    context.read<ChatProvider>().chatListKey = GlobalKey<AnimatedListState>();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await Future.delayed(const Duration(seconds: 1));
       await context.read<ChatProvider>().initChat().then((value) async {
         await Future.delayed(const Duration(seconds: 1));
         context.read<ChatScriptProvider>().initScript();
@@ -75,9 +90,10 @@ class _ChatScreenState extends State<ChatScreen> {
                         'Alice will be online in 12 hours. You can get a PRO and continue chatting with her right away',
                   ),
                 if (needShowPremiumBanner && !isHasPremium)
-                  const ContinueChatWidget(
-                    title:
-                        'To keep chatting with Alice and receiving her photos and videos, upgrade to PRO',
+                  ContinueChatWidget(
+                    title: !showMedia
+                        ? 'To continue chatting with Alice, upgrade to PRO'
+                        : 'To keep chatting with Alice and receiving her photos and videos, upgrade to PRO',
                   ),
               ],
             ),

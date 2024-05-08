@@ -1,9 +1,11 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:ai_friend/app_router.dart';
+import 'package:ai_friend/domain/firebase/firebase_config.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
 import 'package:ai_friend/gen/fonts.gen.dart';
+import 'package:ai_friend/locator.dart';
 import 'package:ai_friend/widgets/pulse_button.dart';
 import 'package:ai_friend/widgets/screen_wrap.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,6 +22,8 @@ class PaymentScreen extends StatefulWidget {
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
+  bool get showMedia => locator<FirebaseConfig>().showMedia;
+
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<PaymentProvider>();
@@ -169,26 +173,27 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 6),
-                    SizedBox(
-                      width: 230,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Assets.icons.paywallIcon2.image(width: 24),
-                          const SizedBox(width: 6),
-                          const Text(
-                            'More photos & videos',
-                            style: TextStyle(
-                              color: Color(0xFFFBFBFB),
-                              fontSize: 16,
-                              fontFamily: 'Gotham Pro',
-                              fontWeight: FontWeight.w600,
-                            ),
-                          )
-                        ],
+                    if (showMedia) const SizedBox(height: 6),
+                    if (showMedia)
+                      SizedBox(
+                        width: 230,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Assets.icons.paywallIcon2.image(width: 24),
+                            const SizedBox(width: 6),
+                            const Text(
+                              'More photos & videos',
+                              style: TextStyle(
+                                color: Color(0xFFFBFBFB),
+                                fontSize: 16,
+                                fontFamily: 'Gotham Pro',
+                                fontWeight: FontWeight.w600,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
                     const SizedBox(height: 6),
                     SizedBox(
                       width: 230,

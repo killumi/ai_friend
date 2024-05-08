@@ -18,6 +18,12 @@ class AppRouter {
   static void pop(BuildContext context) => Navigator.pop(context);
 
   static void openChat(BuildContext context, {bool removeRoutes = false}) {
+    // removeRoutes
+    //     ? Navigator.of(context).pushAndRemoveUntil(
+    //         CupertinoPageRoute(builder: (context) => const ChatScreen()),
+    //         (route) => false)
+    //     : Navigator.of(context)
+    //         .push(CupertinoPageRoute(builder: (context) => const ChatScreen()));
     final route = PageRouteAnimator(
       child: const ChatScreen(),
       routeAnimation: RouteAnimation.rightToLeftWithFade,

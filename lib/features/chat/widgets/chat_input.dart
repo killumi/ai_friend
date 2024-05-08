@@ -34,8 +34,8 @@ class _ChatInputState extends State<ChatInput> {
         context.select((ChatScriptProvider e) => e.isShowScriptBox);
     final textfieldAvailable =
         context.select((ChatScriptProvider e) => e.textfieldAvailable);
-    final currentScriptMessageData =
-        context.select((ChatScriptProvider e) => e.scriptMessage);
+    // final currentScriptMessageData =
+    //     context.select((ChatScriptProvider e) => e.scriptMessage);
     final isShowRollUpBoxButton =
         context.select((ChatScriptProvider e) => e.isShowRollUpBoxButton);
     final isHasFocus = context.select((ChatProvider e) => e.isHasFocus);
@@ -98,18 +98,18 @@ class _ChatInputState extends State<ChatInput> {
                             curve: Curves.ease,
                             child: Bounce(
                               onTap: () async {
-                                if (textfieldAvailable) {
-                                  await chatProvider.sendMessageGetAnswer(
-                                    null,
-                                    messageData: currentScriptMessageData,
-                                  );
-                                  chatProvider.node.unfocus();
-                                  scriptProvider.showScriptBox(true);
+                                // if (textfieldAvailable) {
+                                // await chatProvider.sendMessageGetAnswer(
+                                //   null,
+                                //   messageData: currentScriptMessageData,
+                                // );
+                                // chatProvider.node.unfocus();
+                                // scriptProvider.showScriptBox(true);
 
-                                  await scriptProvider.showNextMessage();
-                                } else {
-                                  chatProvider.sendMessageToGPT();
-                                }
+                                // await scriptProvider.showNextMessage();
+                                // } else {
+                                // }
+                                chatProvider.sendMessageToGPT();
                               },
                               tilt: false,
                               scaleFactor: 0.89,

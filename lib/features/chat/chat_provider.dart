@@ -28,7 +28,9 @@ class ChatProvider extends ChangeNotifier {
   final _scrollController = ScrollController();
   final _textController = TextEditingController();
   final _node = FocusNode();
-  final _chatListKey = GlobalKey<AnimatedListState>(debugLabel: '2');
+  // final _chatListKey = GlobalKey<AnimatedListState>(debugLabel: '2');
+  late GlobalKey<AnimatedListState> chatListKey;
+
   final _player = AudioPlayer();
   static const apiKey = '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';
   static const assistantId = 'asst_iUmxsDS4Eq39LdPTGKjWQPHC';
@@ -37,7 +39,8 @@ class ChatProvider extends ChangeNotifier {
   ScrollController get scrollController => _scrollController;
   TextEditingController get textController => _textController;
   FocusNode get node => _node;
-  GlobalKey<AnimatedListState> get chatListKey => _chatListKey;
+
+  // GlobalKey<AnimatedListState> get chatListKey => _chatListKey;
 
   int get chatLengt => _messages.length;
 
@@ -76,8 +79,10 @@ class ChatProvider extends ChangeNotifier {
 
   Future<void> initMessages() async {
     if (_storage.messages.isNotEmpty) {
+      // print('_storage.messages: ${_storage.messages}');
       _messages.addAll(_storage.messages);
     }
+    notifyListeners();
   }
 
   // ================================================
@@ -155,7 +160,8 @@ class ChatProvider extends ChangeNotifier {
 
     final index = chatLengt;
     _messages.add(message);
-    _chatListKey.currentState?.insertItem(index);
+    chatListKey.currentState?.insertItem(index);
+    // _chatListKey.currentState?.insertItem(index);
     playIncomingMessageRingtone();
     scrollDown();
   }
