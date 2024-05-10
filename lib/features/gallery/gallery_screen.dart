@@ -132,5 +132,6 @@ class _GalleryScreenState extends State<GalleryScreen> {
     );
   }
 
-  Widget _buildAppbar() => AppHeader(title: 'Gallery', showBackButton: true);
+  Widget _buildAppbar() =>
+      const AppHeader(title: 'Gallery', showBackButton: true);
 }

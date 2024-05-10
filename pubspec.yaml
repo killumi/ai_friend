@@ -104,8 +104,11 @@ flutter_gen:
     flare_flutter: false
 
 flutter_native_splash:
-  background_image: "assets/images/splash.jpg"
+  background_image: "assets/images/splash_bg.jpg"
+  image: "assets/images/splash_icon.png"
   branding_mode: center
+  color: "#22133A"
+  fullscreen: true
   ios: true
   android: false
   web: false

@@ -1,7 +1,9 @@
 import 'package:ai_friend/app_router.dart';
 // import 'package:ai_friend/features/payment/payment_provider.dart';
+// import 'package:ai_friend/features/payment/payment_provider.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
 import 'package:ai_friend/gen/fonts.gen.dart';
+// import 'package:ai_friend/locator.dart';
 // import 'package:ai_friend/locator.dart';
 import 'package:ai_friend/widgets/app_button.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,8 @@ class ContinueChatWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isSmal = MediaQuery.of(context).size.height < 750;
+
     return Column(
       children: [
         Padding(
@@ -39,6 +43,7 @@ class ContinueChatWidget extends StatelessWidget {
             },
           ),
         ),
+        if (isSmal) const SizedBox(height: 20),
       ],
     );
   }

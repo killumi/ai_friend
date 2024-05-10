@@ -37,8 +37,10 @@
 			<string>UIInterfaceOrientationPortrait</string>
 		</array>
 		<key>UIStatusBarHidden</key>
-		<false/>
+		<true/>
 		<key>NSPhotoLibraryUsageDescription</key>
 		<string>Please allow access to Gallery to be able to save photos</string>
+		<key>UIViewControllerBasedStatusBarAppearance</key>
+		<false/>
 	</dict>
 </plist>

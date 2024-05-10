@@ -285,7 +285,7 @@ class ChatProvider extends ChangeNotifier {
       scrollDown(needDelayed: false);
       _chatScriptProvider.showScriptBox(false);
     }
-    log('isHasFocus: $isHasFocus');
+    // log('isHasFocus: $isHasFocus');
   }
 
   void onChangeTextValue(String value) {

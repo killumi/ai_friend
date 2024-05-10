@@ -51,6 +51,8 @@ class _GalleryImagePageViewState extends State<GalleryImagePageView> {
   @override
   Widget build(BuildContext context) {
     final isHasPremium = context.select((PaymentProvider e) => e.isHasPremium);
+    final isSmal = MediaQuery.of(context).size.height < 750;
+
     return ScreenWrap(
       child: SafeArea(
         top: false,
@@ -58,7 +60,7 @@ class _GalleryImagePageViewState extends State<GalleryImagePageView> {
           children: [
             Column(
               children: [
-                buildHeader(isHasPremium),
+                buildHeader(isHasPremium, isSmal),
                 Expanded(
                   child: PageView.builder(
                     itemCount: widget.images.length,
@@ -91,9 +93,9 @@ class _GalleryImagePageViewState extends State<GalleryImagePageView> {
     );
   }
 
-  Widget buildHeader(bool isHasPremium) => Container(
+  Widget buildHeader(bool isSmal, bool isHasPremium) => Container(
         width: double.infinity,
-        height: 120,
+        height: isSmal ? 90 : 120,
         alignment: Alignment.bottomCenter,
         decoration: const ShapeDecoration(
           color: Color(0xFF170C22),

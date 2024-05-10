@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:hive/hive.dart';
 
 class GenderStorage {
@@ -8,7 +7,6 @@ class GenderStorage {
 
   static Future<void> openStorage() async {
     if (!Hive.isBoxOpen(storageName)) {
-      log('OPEN GenderStorage');
       await Hive.openBox<String>(storageName);
     }
   }

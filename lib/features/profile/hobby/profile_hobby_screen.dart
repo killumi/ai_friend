@@ -35,6 +35,7 @@ class _ProfileHobbyScreenState extends State<ProfileHobbyScreen> {
   Widget build(BuildContext context) {
     final hobbyProvider = context.read<HobbyProvider>();
     final hobbies = context.select((HobbyProvider e) => e.hobby);
+    final isSmal = MediaQuery.of(context).size.height < 750;
 
     return ScreenWrap(
       resizeToAvoidBottomInset: true,
@@ -93,7 +94,7 @@ class _ProfileHobbyScreenState extends State<ProfileHobbyScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
+              isSmal ? const SizedBox(height: 20) : const SizedBox(height: 10),
             ],
           ),
         ],

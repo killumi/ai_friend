@@ -29,6 +29,7 @@ class _ProfileInfoScreenState extends State<ProfileInfoScreen> {
   Widget build(BuildContext context) {
     final profileProvider = context.read<ProfileProvider>();
     final isDisabled = context.select((ProfileProvider e) => e.isDisabled);
+    final isSmal = MediaQuery.of(context).size.height < 750;
 
     return ScreenWrap(
       resizeToAvoidBottomInset: true,
@@ -73,7 +74,7 @@ class _ProfileInfoScreenState extends State<ProfileInfoScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
+              isSmal ? const SizedBox(height: 20) : const SizedBox(height: 20),
             ],
           ),
         ],

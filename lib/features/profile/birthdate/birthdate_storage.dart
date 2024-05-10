@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:hive/hive.dart';
 
 class BirthDateStorage {
@@ -14,7 +13,6 @@ class BirthDateStorage {
 
   static Future<void> openStorage() async {
     if (!Hive.isBoxOpen(storageName)) {
-      log('OPEN BirthDateStorage');
       await Hive.openBox<DateTime>(storageName);
     }
   }

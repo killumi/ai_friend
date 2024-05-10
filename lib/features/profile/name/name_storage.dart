@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:hive/hive.dart';
 
 class NameStorage {
@@ -8,7 +7,6 @@ class NameStorage {
 
   static Future<void> openStorage() async {
     if (!Hive.isBoxOpen(storageName)) {
-      log('OPEN NameStorage');
       await Hive.openBox<String>(storageName);
     }
   }

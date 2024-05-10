@@ -3,6 +3,7 @@ import 'package:ai_friend/gen/assets.gen.dart';
 import 'package:ai_friend/gen/fonts.gen.dart';
 import 'package:ai_friend/widgets/pulse_button.dart';
 import 'package:ai_friend/widgets/screen_wrap.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -11,23 +12,42 @@ class StartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isSmal = MediaQuery.of(context).size.height < 750;
+    // print('isSmal: $isSmal');
+    // print('isSmal: ${MediaQuery.of(context).size.height}');
+
     return ScreenWrap(
       child: SafeArea(
         child: Stack(
+          fit: StackFit.expand,
           alignment: Alignment.center,
           children: [
-            Container(
-              margin: const EdgeInsets.only(bottom: 100),
-              child: Assets.images.startScreen.image(width: double.infinity),
-            ),
+            isSmal
+                ? Positioned(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      alignment: Alignment.topCenter,
+                      margin: const EdgeInsets.only(bottom: 100),
+                      child:
+                          Assets.images.startScreen.image(fit: BoxFit.fitWidth),
+                    ),
+                  )
+                : Container(
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(bottom: 100),
+                    child:
+                        Assets.images.startScreen.image(width: double.infinity),
+                  ),
             Column(
               children: [
-                const SizedBox(height: 47),
-                const Text(
+                SizedBox(height: isSmal ? 10 : 47),
+                Text(
                   'AI Girlfriend:\nFriendly Chat',
                   style: TextStyle(
-                    color: Color(0xFFFBFBFB),
-                    fontSize: 32,
+                    color: const Color(0xFFFBFBFB),
+                    fontSize: isSmal ? 27 : 32,
                     fontFamily: 'Gotham Pro',
                     fontWeight: FontWeight.w900,
                     height: 0,
@@ -54,7 +74,7 @@ class StartScreen extends StatelessWidget {
                     title: 'Start Chat',
                   ),
                 ),
-                const SizedBox(height: 42),
+                SizedBox(height: isSmal ? 30 : 42),
                 const Text(
                   'By signing up, you agree to our \n',
                   style: TextStyle(

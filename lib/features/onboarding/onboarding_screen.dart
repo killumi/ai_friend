@@ -1,10 +1,11 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:ai_friend/app_router.dart';
-import 'package:ai_friend/gen/fonts.gen.dart';
+// import 'package:ai_friend/gen/fonts.gen.dart';
 import 'package:ai_friend/features/onboarding/onboarding_provider.dart';
 import 'package:ai_friend/features/onboarding/widgets/onboarding_message_item.dart';
 import 'package:ai_friend/widgets/app_button.dart';
+import 'package:ai_friend/widgets/app_header.dart';
 import 'package:ai_friend/widgets/screen_wrap.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +40,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     final isSecondStep = provider.isSecondStep;
     final isFourthStep = provider.isFourthStep;
     final isLastStep = provider.isLastStep;
+    final isSmal = MediaQuery.of(context).size.height < 750;
 
     return ScreenWrap(
       child: Stack(
@@ -56,9 +58,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           AnimatedPositioned(
             curve: Curves.ease,
             duration: const Duration(milliseconds: 500),
-            bottom: isSecondStep ? 50 : -70,
-            left: 0,
-            right: 0,
+            bottom: isSecondStep
+                ? isSmal
+                    ? 20
+                    : 50
+                : -70,
+            left: 16,
+            right: 16,
             child: AnimatedOpacity(
               opacity: isSecondStep ? 1 : 0,
               curve: Curves.ease,
@@ -75,9 +81,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           AnimatedPositioned(
             curve: Curves.ease,
             duration: const Duration(milliseconds: 500),
-            bottom: isFourthStep ? 50 : -70,
-            left: 0,
-            right: 0,
+            bottom: isFourthStep
+                ? isSmal
+                    ? 20
+                    : 50
+                : -70,
+            left: 16,
+            right: 16,
             child: AnimatedOpacity(
               opacity: isFourthStep ? 1 : 0,
               curve: Curves.ease,
@@ -94,9 +104,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           AnimatedPositioned(
             curve: Curves.ease,
             duration: const Duration(milliseconds: 300),
-            bottom: isLastStep ? 50 : -100,
-            left: 0,
-            right: 0,
+            bottom: isLastStep
+                ? isSmal
+                    ? 20
+                    : 50
+                : -100,
+            left: 16,
+            right: 16,
             child: AnimatedOpacity(
               opacity: isLastStep ? 1 : 0,
               curve: Curves.ease,
@@ -116,33 +130,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-  Widget _buildAppbar() => Container(
-        width: double.infinity,
-        padding: const EdgeInsets.only(top: 10, bottom: 20),
-        decoration: const ShapeDecoration(
-          color: Color(0xFF170C22),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(40),
-              bottomRight: Radius.circular(40),
-            ),
-          ),
-        ),
-        child: const SafeArea(
-          bottom: false,
-          child: Text(
-            'AI Girlfriend: Friendly Chat',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Color(0xFFFBFBFB),
-              fontSize: 20,
-              fontFamily: FontFamily.gothamPro,
-              fontWeight: FontWeight.w600,
-              height: 0,
-            ),
-          ),
-        ),
+  Widget _buildAppbar() => const AppHeader(
+        title: 'AI Girlfriend: Friendly Chat',
+        showBackButton: false,
       );
+
   Widget _buildItem(OnboardingMessage message, Animation<double> animation) {
     final slideTween = Tween<Offset>(
       begin: const Offset(0, 1),

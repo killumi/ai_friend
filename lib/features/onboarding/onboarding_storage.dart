@@ -1,4 +1,4 @@
-import 'dart:developer';
+// import 'dart:developer';
 import 'package:hive/hive.dart';
 
 class OnboardingStorage {
@@ -8,7 +8,6 @@ class OnboardingStorage {
 
   static Future<void> openStorage() async {
     if (!Hive.isBoxOpen(storageName)) {
-      log('OPEN TUTORIAL BOX');
       await Hive.openBox<bool>(storageName);
     }
   }

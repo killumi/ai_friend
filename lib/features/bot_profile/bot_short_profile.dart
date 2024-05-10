@@ -79,6 +79,7 @@ class _BotShortProfileState extends State<BotShortProfile> {
   @override
   Widget build(BuildContext context) {
     final isHasPremium = context.select((PaymentProvider e) => e.isHasPremium);
+    final isSmal = MediaQuery.of(context).size.height < 750;
 
     return ScreenWrap(
       resizeToAvoidBottomInset: true,
@@ -203,7 +204,7 @@ class _BotShortProfileState extends State<BotShortProfile> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 40),
+                        SizedBox(height: isSmal ? 13 : 40),
                         AppButton(
                           title: 'Chat Now',
                           onTap: () => AppRouter.openPaywall(context, true),

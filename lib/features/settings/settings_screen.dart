@@ -138,7 +138,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       SettingsItem(
                         title: 'Share the app',
                         icon: Assets.icons.shareIcon.svg(),
-                        onTap: () => Share.share('text'),
+                        onTap: () async => await Share.share(
+                            'https://apps.apple.com/app/id6480462813'),
                       ),
                       SettingsItem(
                         title: 'Give feedback',

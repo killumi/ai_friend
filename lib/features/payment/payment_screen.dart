@@ -10,7 +10,6 @@ import 'package:ai_friend/widgets/pulse_button.dart';
 import 'package:ai_friend/widgets/screen_wrap.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -28,51 +27,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
   Widget build(BuildContext context) {
     final provider = context.watch<PaymentProvider>();
     final price = provider.getPrice();
+    final isSmal = MediaQuery.of(context).size.height < 750;
 
     return Stack(
       children: [
         ScreenWrap(
           child: SafeArea(
-            // top: false,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        GestureDetector(
-                          onTap: () async {
-                            final result = await provider.restore();
-                            if (!result) return;
-                            AppRouter.openChat(context, removeRoutes: true);
-                          },
-                          child: const Text(
-                            'Restore Purchase',
-                            style:
-                                TextStyle(fontSize: 14, color: Colors.white54),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () => closeScreen(),
-                          child: Container(
-                            width: 40,
-                            height: 40,
-                            color: Colors.transparent,
-                            alignment: Alignment.center,
-                            child: const Icon(
-                              CupertinoIcons.clear,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
                 Column(
                   children: [
                     Align(
@@ -83,14 +46,16 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         clipBehavior: Clip.none,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 33),
+                            padding: const EdgeInsets.symmetric(horizontal: 30),
                             child: AspectRatio(
-                              aspectRatio: 1 / 1.2,
+                              aspectRatio: isSmal ? 1 / 1 : 1 / 1.2,
                               child: Container(
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                     image: Assets.images.paywall.provider(),
-                                    fit: BoxFit.cover,
+                                    fit: isSmal
+                                        ? BoxFit.contain
+                                        : BoxFit.fitWidth,
                                   ),
                                 ),
                               ),
@@ -117,39 +82,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               ),
                             ),
                           ),
-                          // Positioned(
-                          //   left: 16,
-                          //   top: 0,
-                          //   child: GestureDetector(
-                          //     onTap: () async {
-                          //       final result = await provider.restore();
-                          //       if (!result) return;
-                          //       AppRouter.openChat(context, removeRoutes: true);
-                          //     },
-                          //     child: const Text(
-                          //       'Restore Purchase',
-                          //       style: TextStyle(
-                          //           fontSize: 14, color: Colors.white54),
-                          //     ),
-                          //   ),
-                          // ),
-                          // Positioned(
-                          //   right: 16,
-                          //   top: 0,
-                          //   child: GestureDetector(
-                          //     onTap: () => closeScreen(),
-                          //     child: Container(
-                          //       width: 40,
-                          //       height: 40,
-                          //       color: Colors.transparent,
-                          //       alignment: Alignment.topRight,
-                          //       child: const Icon(
-                          //         CupertinoIcons.clear,
-                          //         color: Colors.white,
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
                         ],
                       ),
                     ),
@@ -276,7 +208,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           fontWeight: FontWeight.w400,
                           decoration: TextDecoration.underline,
                           decorationColor: Colors.white,
-                          height: 0,
                         ),
                       ),
                     ),
@@ -297,7 +228,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           fontWeight: FontWeight.w400,
                           decoration: TextDecoration.underline,
                           decorationColor: Colors.white,
-                          height: 0,
                         ),
                       ),
                     ),
@@ -305,6 +235,47 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 ),
                 const SizedBox(height: 12),
               ],
+            ),
+          ),
+        ),
+        Positioned(
+          left: 0,
+          right: 0,
+          top: isSmal ? 20 : 45,
+          child: Material(
+            color: Colors.transparent,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: () async {
+                      final result = await provider.restore();
+                      if (!result) return;
+                      AppRouter.openChat(context, removeRoutes: true);
+                    },
+                    child: const Text(
+                      'Restore Purchase',
+                      style: TextStyle(fontSize: 14, color: Colors.white54),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () => closeScreen(),
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      color: Colors.transparent,
+                      alignment: Alignment.center,
+                      child: const Icon(
+                        CupertinoIcons.clear,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

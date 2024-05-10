@@ -18,9 +18,11 @@ class AppHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isSmal = MediaQuery.of(context).size.height < 750;
+
     return Container(
       width: double.infinity,
-      height: 120,
+      height: isSmal ? 80 : 120,
       alignment: Alignment.bottomCenter,
       decoration: const ShapeDecoration(
         color: Color(0xFF170C22),
@@ -39,7 +41,7 @@ class AppHeader extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: 72,
+                height: isSmal ? 60 : 72,
                 child: Center(
                   child: Text(
                     title,
@@ -56,23 +58,24 @@ class AppHeader extends StatelessWidget {
               ),
             ],
           ),
-          Positioned(
-            left: 16,
-            child: GestureDetector(
-              onTap: () => AppRouter.pop(context),
-              child: Container(
-                width: 28,
-                height: 28,
-                decoration: const ShapeDecoration(
-                  color: Color(0xFF443C4E),
-                  shape: OvalBorder(),
-                ),
-                child: Center(
-                  child: Assets.icons.leftChevron.svg(),
+          if (showBackButton)
+            Positioned(
+              left: 16,
+              child: GestureDetector(
+                onTap: () => AppRouter.pop(context),
+                child: Container(
+                  width: 28,
+                  height: 28,
+                  decoration: const ShapeDecoration(
+                    color: Color(0xFF443C4E),
+                    shape: OvalBorder(),
+                  ),
+                  child: Center(
+                    child: Assets.icons.leftChevron.svg(),
+                  ),
                 ),
               ),
             ),
-          ),
         ],
       ),
     );

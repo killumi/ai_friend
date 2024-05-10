@@ -22,6 +22,7 @@ class _ChatHeaderState extends State<ChatHeader> {
   @override
   Widget build(BuildContext context) {
     final isHasPremium = context.select((PaymentProvider e) => e.isHasPremium);
+    final isSmal = MediaQuery.of(context).size.height < 750;
 
     return Align(
       alignment: Alignment.topCenter,
@@ -41,7 +42,7 @@ class _ChatHeaderState extends State<ChatHeader> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            const SizedBox(height: 47),
+            isSmal ? const SizedBox(height: 5) : const SizedBox(height: 47),
             Row(
               children: [
                 SizedBox(
