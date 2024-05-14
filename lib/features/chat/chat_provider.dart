@@ -28,19 +28,17 @@ class ChatProvider extends ChangeNotifier {
   final _scrollController = ScrollController();
   final _textController = TextEditingController();
   final _node = FocusNode();
-  // final _chatListKey = GlobalKey<AnimatedListState>(debugLabel: '2');
   late GlobalKey<AnimatedListState> chatListKey;
 
   final _player = AudioPlayer();
-  static const apiKey = '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';
-  static const assistantId = 'asst_iUmxsDS4Eq39LdPTGKjWQPHC';
+
+  String get apiKey => firebaseConfig.gptKey;
+  String get assistantId => firebaseConfig.gptBotId;
 
   List<IChatMessage> get messages => _messages;
   ScrollController get scrollController => _scrollController;
   TextEditingController get textController => _textController;
   FocusNode get node => _node;
-
-  // GlobalKey<AnimatedListState> get chatListKey => _chatListKey;
 
   int get chatLengt => _messages.length;
 
@@ -48,16 +46,20 @@ class ChatProvider extends ChangeNotifier {
   late String runId;
   late String status;
 
-  final openAI = OpenAI.instance.build(
-    token: apiKey,
-    baseOption: HttpSetup(
-      receiveTimeout: const Duration(seconds: 10),
-      connectTimeout: const Duration(seconds: 10),
-    ),
-    enableLog: true,
-  );
+  late OpenAI openAI;
 
   ChatProvider(this._storage, this._chatScriptProvider);
+
+  void initOpenAI() {
+    openAI = OpenAI.instance.build(
+      token: apiKey,
+      baseOption: HttpSetup(
+        receiveTimeout: const Duration(seconds: 10),
+        connectTimeout: const Duration(seconds: 10),
+      ),
+      enableLog: true,
+    );
+  }
 
   Future<void> initChat() async {
     final startMessage = IChatMessage(
@@ -79,7 +81,6 @@ class ChatProvider extends ChangeNotifier {
 
   Future<void> initMessages() async {
     if (_storage.messages.isNotEmpty) {
-      // print('_storage.messages: ${_storage.messages}');
       _messages.addAll(_storage.messages);
     }
     notifyListeners();

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:ai_friend/app_router.dart';
-import 'package:ai_friend/features/profile/birthdate/birthdate_widget.dart';
+// import 'package:ai_friend/features/profile/birthdate/birthdate_widget.dart';
 import 'package:ai_friend/features/profile/gender/gender_widget.dart';
 import 'package:ai_friend/features/profile/name/name_input.dart';
 import 'package:ai_friend/features/profile/profile_provider.dart';
@@ -48,8 +48,8 @@ class _ProfileInfoScreenState extends State<ProfileInfoScreen> {
                       const NameInput(),
                       const SizedBox(height: 28),
                       const GenderWidget(),
-                      const SizedBox(height: 28),
-                      const BirthDateWidget(),
+                      // const SizedBox(height: 28),
+                      // const BirthDateWidget(),
                       if (widget.isEditMod!) const ProfileEditHobby(),
                       const SizedBox(height: 50),
                     ],

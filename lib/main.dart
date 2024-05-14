@@ -38,11 +38,11 @@ void main() async {
   await NameStorage.openStorage();
   await GenderStorage.openStorage();
   await HobbyStorage.openStorage();
-
   await PaymentProvider.startApphud();
   Apphud.setListener(listener: ApphudPaymentListener());
   await PaymentProvider.startApphud();
   await locator<FirebaseConfig>().init();
+  locator<ChatProvider>().initOpenAI();
   await locator<ChatScriptProvider>().initScript();
   await locator<ChatProvider>().createThread();
   await locator<ChatProvider>().initMessages();
@@ -78,7 +78,6 @@ class MyApp extends StatelessWidget {
                       ? const ChatScreen()
                       : const PaymentScreen()
                   : const StartScreen(),
-              // home: const StartScreen(),
             );
           },
         ),
