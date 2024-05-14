@@ -8,7 +8,7 @@ import 'package:ai_friend/widgets/blur_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
-import 'package:flutter/widgets.dart';
+// import 'package:flutter/widgets.dart';
 import 'package:video_player/video_player.dart';
 
 class GalleryVideoItem extends StatefulWidget {

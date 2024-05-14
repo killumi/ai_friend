@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
-import 'dart:developer';
+// import 'dart:developer';
 import 'dart:math' as math;
 import 'dart:typed_data';
 import 'package:ai_friend/domain/firebase/firebase_config.dart';
@@ -231,7 +231,7 @@ class ChatProvider extends ChangeNotifier {
       status = retrived.status;
       runId = retrived.id;
       threadId = retrived.threadId;
-      print('status: $status');
+      // print('status: $status');
     }
 
     final messages = await openAI.threads.messages.listMessage(
@@ -240,7 +240,7 @@ class ChatProvider extends ChangeNotifier {
 
     final lastMessageInThred = messages.data[0].content[0].text?.value;
     // log('=======================');
-    log('LAST MESSAGE: $lastMessageInThred');
+    // log('LAST MESSAGE: $lastMessageInThred');
     return lastMessageInThred;
   }
 

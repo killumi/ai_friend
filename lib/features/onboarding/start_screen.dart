@@ -3,7 +3,7 @@ import 'package:ai_friend/gen/assets.gen.dart';
 import 'package:ai_friend/gen/fonts.gen.dart';
 import 'package:ai_friend/widgets/pulse_button.dart';
 import 'package:ai_friend/widgets/screen_wrap.dart';
-import 'package:flutter/cupertino.dart';
+// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
