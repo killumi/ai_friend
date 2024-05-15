@@ -38,7 +38,6 @@ class _ChatScreenViewState extends State<ChatScreenView> {
   @override
   void initState() {
     super.initState();
-    context.read<ChatProvider>().chatListKey = GlobalKey<AnimatedListState>();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(seconds: 1));
       await context.read<ChatProvider>().initChat().then((value) async {

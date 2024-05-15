@@ -1,6 +1,7 @@
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 import 'package:ai_friend/features/bot_profile/bot_profile_screen.dart';
 import 'package:ai_friend/features/bot_profile/bot_short_profile.dart';
+import 'package:ai_friend/features/chat/chat_provider.dart';
 import 'package:ai_friend/features/chat/chat_screen.dart';
 import 'package:ai_friend/features/gallery/gallery_image/gallery_image_pageview.dart';
 import 'package:ai_friend/features/gallery/gallery_screen.dart';
@@ -13,11 +14,14 @@ import 'package:ai_friend/features/profile/profile_info_screen.dart';
 import 'package:ai_friend/features/settings/settings_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:page_route_animator/page_route_animator.dart';
+import 'package:provider/provider.dart';
 
 class AppRouter {
   static void pop(BuildContext context) => Navigator.pop(context);
 
   static void openChat(BuildContext context, {bool removeRoutes = false}) {
+    context.read<ChatProvider>().chatListKey = GlobalKey<AnimatedListState>();
+
     // removeRoutes
     //     ? Navigator.of(context).pushAndRemoveUntil(
     //         CupertinoPageRoute(builder: (context) => const ChatScreen()),

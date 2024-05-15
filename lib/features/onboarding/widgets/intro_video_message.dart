@@ -35,32 +35,61 @@ class _IntroVideoMessageState extends State<IntroVideoMessage>
 
   Future<void> _initVideoController() async {
     _controller = VideoPlayerController.asset(widget.message.videoAsset!);
-
-    await _controller!.initialize().then((_) {
-      _controller!.play();
-      setState(() {});
-      _controller!.addListener(() {
+    await _controller!.initialize().then(
+      (_) async {
+        if (mounted) {
+          await _controller!.play();
+          setState(() {});
+        }
+      },
+    );
+    _controller!.addListener(
+      () {
         if (!_controller!.value.isPlaying) {
           if (mounted) {
-            setState(() {
-              _isPlaying = false;
-            });
+            _isPlaying = false;
+            setState(() {});
           }
         }
-      });
-    });
+      },
+    );
+    // await _controller!.initialize().then((_) {
+    //   _controller!.play();
+    //   setState(() {});
+    //   _controller!.addListener(() {
+    //     if (!_controller!.value.isPlaying) {
+    //       if (mounted) {
+    //         setState(() {
+    //           _isPlaying = false;
+    //         });
+    //       }
+    //     }
+    //   });
+    // });
   }
 
-  void _toggleVideoPlayback() {
-    setState(() {
-      _isPlaying = !_isPlaying;
+  // void _toggleVideoPlayback() {
+  //   setState(() {
+  //     _isPlaying = !_isPlaying;
 
-      if (_isPlaying) {
-        _controller!.play();
-      } else {
-        _controller!.pause();
-      }
-    });
+  //     if (_isPlaying) {
+  //       _controller!.play();
+  //     } else {
+  //       _controller!.pause();
+  //     }
+  //   });
+  // }
+
+  Future<void> _toggleVideoPlayback() async {
+    if (_isPlaying) {
+      await _controller!.pause();
+      _isPlaying = false;
+    } else {
+      await _controller!.play();
+      _isPlaying = true;
+    }
+
+    setState(() {});
   }
 
   @override

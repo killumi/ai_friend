@@ -2,6 +2,7 @@
 
 import 'package:ai_friend/app_router.dart';
 import 'package:ai_friend/domain/firebase/firebase_config.dart';
+import 'package:ai_friend/features/chat/chat_provider.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
 import 'package:ai_friend/gen/fonts.gen.dart';
@@ -305,6 +306,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
   Future<void> subscribe() async {
     final result = await context.read<PaymentProvider>().subscribe();
     if (!result) return;
+    // context.read<PaymentProvider>().setFreePremium();
+    context.read<ChatProvider>().chatListKey = GlobalKey<AnimatedListState>();
+    await Future.delayed(const Duration(milliseconds: 200));
     AppRouter.openChat(context, removeRoutes: true);
   }
 
