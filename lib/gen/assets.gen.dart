@@ -279,8 +279,13 @@ class $AssetsImagesGen {
   AssetGenImage get settingsPopup =>
       const AssetGenImage('assets/images/settings_popup.png');
 
-  /// File path: assets/images/splash.jpg
-  AssetGenImage get splash => const AssetGenImage('assets/images/splash.jpg');
+  /// File path: assets/images/splash_bg.jpg
+  AssetGenImage get splashBg =>
+      const AssetGenImage('assets/images/splash_bg.jpg');
+
+  /// File path: assets/images/splash_icon.png
+  AssetGenImage get splashIcon =>
+      const AssetGenImage('assets/images/splash_icon.png');
 
   /// File path: assets/images/start_screen.png
   AssetGenImage get startScreen =>
@@ -299,7 +304,8 @@ class $AssetsImagesGen {
         paywall,
         settingsAvatar,
         settingsPopup,
-        splash,
+        splashBg,
+        splashIcon,
         startScreen,
         startScreenBackground
       ];

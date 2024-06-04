@@ -1,12 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:ai_friend/app_router.dart';
 import 'package:ai_friend/domain/firebase/fire_storage.dart';
+import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
+import 'package:ai_friend/features/gallery/gallery_header.dart';
 import 'package:ai_friend/features/gallery/gallery_video/gallery_video_page.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
-import 'package:ai_friend/gen/assets.gen.dart';
-import 'package:ai_friend/gen/fonts.gen.dart';
 import 'package:ai_friend/locator.dart';
-import 'package:ai_friend/widgets/gallery_save_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 import 'package:ai_friend/widgets/screen_wrap.dart';
@@ -72,7 +71,7 @@ class _GalleryVideoPageViewState extends State<GalleryVideoPageView> {
   @override
   Widget build(BuildContext context) {
     final isHasPremium = context.select((PaymentProvider e) => e.isHasPremium);
-    final isSmal = MediaQuery.of(context).size.height < 750;
+    // final isSmal = MediaQuery.of(context).size.height < 750;
 
     return ScreenWrap(
       child: SafeArea(
@@ -81,7 +80,37 @@ class _GalleryVideoPageViewState extends State<GalleryVideoPageView> {
           children: [
             Column(
               children: [
-                buildHeader(isSmal, isHasPremium),
+                GalleryHeader(
+                  currentIndex: _currentIndex,
+                  totalLength: widget.videos.length,
+                  onSave: () async {
+                    FirebaseAnaliticsService.logOnSaveV();
+                    if (widget.videos[_currentIndex.toInt()].mediaData ==
+                        null) {
+                      return;
+                    }
+                    if (!isHasPremium) {
+                      AppRouter.openPaywall(context, false);
+                      return;
+                    }
+                    final bytes =
+                        widget.videos[_currentIndex.toInt()].mediaData!;
+                    final name = widget.videos[_currentIndex.toInt()].content;
+
+                    final file = await locator<FireStorageProvider>()
+                        .getMediaFile(bytes, name, 'mp4');
+
+                    await ImageGallerySaver.saveFile(file.path, name: name);
+                    showToast(
+                      'Video was saved',
+                      textPadding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      position: ToastPosition.center,
+                      duration: const Duration(seconds: 3),
+                      animationCurve: Curves.ease,
+                    );
+                  },
+                ),
                 Expanded(
                   child: PageView.builder(
                     itemCount: widget.videos.length,
@@ -112,93 +141,4 @@ class _GalleryVideoPageViewState extends State<GalleryVideoPageView> {
       ),
     );
   }
-
-  Widget buildHeader(bool isSmal, bool isHasPremium) => Container(
-        width: double.infinity,
-        height: isSmal ? 90 : 120,
-        alignment: Alignment.bottomCenter,
-        decoration: const ShapeDecoration(
-          color: Color(0xFF170C22),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(40),
-              bottomRight: Radius.circular(40),
-            ),
-          ),
-        ),
-        child: Stack(
-          clipBehavior: Clip.none,
-          alignment: Alignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 72,
-                  child: Center(
-                    child: Text(
-                      '${_currentIndex.toInt() + 1} of ${widget.videos.length}',
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: Color(0xFFFBFBFB),
-                        fontSize: 20,
-                        fontFamily: FontFamily.gothamPro,
-                        fontWeight: FontWeight.w600,
-                        height: 0,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Positioned(
-              left: 16,
-              child: GestureDetector(
-                onTap: () => AppRouter.pop(context),
-                child: Container(
-                  width: 28,
-                  height: 28,
-                  decoration: const ShapeDecoration(
-                    color: Color(0xFF443C4E),
-                    shape: OvalBorder(),
-                  ),
-                  child: Center(
-                    child: Assets.icons.leftChevron.svg(),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              right: 16,
-              child: GallerySaveButton(
-                onTap: () async {
-                  if (widget.videos[_currentIndex.toInt()].mediaData == null) {
-                    return;
-                  }
-                  if (!isHasPremium) {
-                    AppRouter.openPaywall(context, false);
-                    return;
-                  }
-                  final bytes = widget.videos[_currentIndex.toInt()].mediaData!;
-                  final name = widget.videos[_currentIndex.toInt()].content;
-
-                  final file = await locator<FireStorageProvider>()
-                      .getMediaFile(bytes, name, 'mp4');
-
-                  await ImageGallerySaver.saveFile(file.path, name: name);
-
-                  showToast(
-                    'Video was saved',
-                    textPadding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
-                    position: ToastPosition.center,
-                    duration: const Duration(seconds: 3),
-                    animationCurve: Curves.ease,
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      );
 }

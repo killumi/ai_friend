@@ -1,5 +1,6 @@
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 import 'package:ai_friend/domain/firebase/fire_storage.dart';
+import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
 import 'package:ai_friend/locator.dart';
 import 'package:ai_friend/widgets/blur_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -70,7 +71,7 @@ class _ImageMessageState extends State<ImageMessage>
 
     super.build(context);
     return Container(
-      margin: EdgeInsets.only(bottom: isPreview ? 10 : 0),
+      // margin: EdgeInsets.only(bottom: isPreview ? 10 : 0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(isPreview ? 10 : 0),
         color: isPreview ? const Color(0xff423556) : Colors.transparent,
@@ -88,29 +89,17 @@ class _ImageMessageState extends State<ImageMessage>
                         GestureDetector(
                           onTap: () {
                             if (!isPreview) return;
-                            // final images = locator<ChatStorage>().media;
-                            // final index = images.indexOf(message);
-                            // final index = images.indexWhere((e) =>
-                            //     e.content.contains(widget.message.content));
+                            FirebaseAnaliticsService.logOnTapToMessageI();
                             SwipeImageGallery(
                               context: context,
                               initialIndex: 0,
                               transitionDuration: 300,
                               dismissDragDistance: 100,
                               backgroundOpacity: 0.95,
-
                               children: [
                                 ImageMessage(
                                     message: widget.message, isPreview: false)
                               ],
-                              //  images
-                              //     .map((e) => e.isImage
-                              //         ? ImageMessage(message: e, isPreview: false)
-                              //         : Center(
-                              //             child: VideoMessage(
-                              //                 message: e, isPreview: false)))
-                              // .toList(),
-                              // onSwipe: (index) {},
                             ).show();
                           },
                           child: widget.message.mediaData != null

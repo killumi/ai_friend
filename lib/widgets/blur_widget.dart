@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ai_friend/app_router.dart';
@@ -44,7 +45,10 @@ class BlurWidget extends StatelessWidget {
               Positioned.fill(
                 child: GestureDetector(
                   onTap: onTapBlur == null
-                      ? () => AppRouter.openPaywall(context, false)
+                      ? () {
+                          FirebaseAnaliticsService.logOnTapToMessageV();
+                          AppRouter.openPaywall(context, false);
+                        }
                       : () => onTapBlur!(),
                   child: Opacity(
                     opacity: 0.88,
@@ -60,7 +64,10 @@ class BlurWidget extends StatelessWidget {
                   title: 'Unblur',
                   icon: Assets.icons.proIcon.svg(width: 23),
                   onTap: onTapBlur == null
-                      ? () => AppRouter.openPaywall(context, false)
+                      ? () {
+                          FirebaseAnaliticsService.logOnTapToMessageI();
+                          AppRouter.openPaywall(context, false);
+                        }
                       : () => onTapBlur!(),
                 ),
               ),

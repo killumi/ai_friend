@@ -42,5 +42,25 @@
 		<string>Please allow access to Gallery to be able to save photos</string>
 		<key>UIViewControllerBasedStatusBarAppearance</key>
 		<false/>
+		<!-- FACEBOOK -->
+		<key>CFBundleURLTypes</key>
+		<array>
+		<dict>
+		<key>CFBundleURLSchemes</key>
+		<array>
+			<string>fb1110324780060059</string>
+		</array>
+		</dict>
+		</array>
+		<key>FacebookAppID</key>
+		<string>1110324780060059</string>
+		<key>FacebookDisplayName</key>
+		<string>Ai Girlfriend</string>
+		<key>FacebookAdvertiserIDCollectionEnabled</key>
+		<true/>
+		<key>FacebookAutoLogAppEventsEnabled</key>
+		<true/>
+		<key>FacebookClientToken</key>
+		<string>bff552c6e07c7b1e28c89a36ec13e8fb</string>
 	</dict>
 </plist>

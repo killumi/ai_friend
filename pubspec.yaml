@@ -26,7 +26,7 @@ dependencies:
   # firebase
   firebase_core: ^2.27.2
   firebase_storage: ^11.6.11
-  firebase_analytics: ^10.9.0
+  firebase_analytics: ^10.10.7
   firebase_messaging: ^14.7.21
   firebase_remote_config: ^4.3.4
   # video
@@ -56,6 +56,9 @@ dependencies:
   apphud: ^2.5.0
   flutter_native_splash: ^2.3.8
   oktoast: ^3.4.0
+  # facebook_app_events: ^0.19.2
+  singular_flutter_sdk: ^1.4.0
+  onesignal_flutter: ^5.2.0
 
 dev_dependencies:
   flutter_test:

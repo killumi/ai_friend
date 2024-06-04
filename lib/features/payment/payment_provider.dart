@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
 import 'package:apphud/apphud.dart';
 import 'package:apphud/models/apphud_models/apphud_error.dart';
 import 'package:apphud/models/apphud_models/apphud_paywall.dart';
@@ -47,9 +48,12 @@ class PaymentProvider with ChangeNotifier {
       await Apphud.purchase(product: _products.first);
       await updatePremiumStatus();
       showLoading(false);
+      if (_isHasPremium) {
+        FirebaseAnaliticsService.logOnSuccessPayment();
+      }
       return _isHasPremium;
     } catch (e) {
-      print(e);
+      FirebaseAnaliticsService.logOnPaymentClose();
       showLoading(false);
       return _isHasPremium;
     }

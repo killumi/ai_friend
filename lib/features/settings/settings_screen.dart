@@ -2,6 +2,7 @@
 import 'package:ai_friend/app_router.dart';
 import 'package:ai_friend/domain/helpers/rate_app_helper.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
+import 'package:ai_friend/locator.dart';
 import 'package:bounce/bounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -93,6 +94,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                             Expanded(
                               child: GestureDetector(
+                                onLongPress: () {
+                                  locator<PaymentProvider>().setFreePremium();
+                                },
                                 onTap: () =>
                                     AppRouter.openPaywall(context, false),
                                 child: Container(

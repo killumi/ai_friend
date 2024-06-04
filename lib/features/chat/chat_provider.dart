@@ -1,9 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
-// import 'dart:developer';
 import 'dart:math' as math;
-import 'dart:typed_data';
+import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
 import 'package:ai_friend/domain/firebase/firebase_config.dart';
+import 'package:ai_friend/domain/helpers/rate_app_helper.dart';
 import 'package:ai_friend/features/chat/chat_script/chat_script_provider.dart';
 import 'package:ai_friend/features/chat/chat_storage.dart';
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
@@ -12,9 +12,12 @@ import 'package:ai_friend/domain/entity/i_script_message_data/i_script_message_d
 import 'package:ai_friend/domain/firebase/fire_storage.dart';
 import 'package:ai_friend/locator.dart';
 import 'package:ai_friend/features/profile/name/name_helper.dart';
+import 'package:ai_friend/main.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:oktoast/oktoast.dart';
 
 class ChatProvider extends ChangeNotifier {
   final ChatStorage _storage;
@@ -106,7 +109,10 @@ class ChatProvider extends ChangeNotifier {
     _addNewMessage(userMessage);
     _textController.clear();
     // sendMessageToGPT(customValue: userMessage.content, isBot: false);
-    await _storage.addMessage(userMessage);
+    // await _storage.addMessage(userMessage);
+    await saveMessageToBox(userMessage);
+    FirebaseAnaliticsService.logOnSendScriptMessage(messages.length);
+
     await Future.delayed(const Duration(milliseconds: 1000));
     final answer = message?.answer ?? messageData?.answer;
     if (answer == null || answer.isEmpty) {
@@ -123,8 +129,10 @@ class ChatProvider extends ChangeNotifier {
       // await Future.delayed(Duration(milliseconds: 1000));
       e = e.copyWith(content: e.content.replaceUserName());
 
-      saveMessageWithMedia(e);
+      // saveMessageWithMedia(e);
+      await saveMessageToBox(e);
       _addNewMessage(e);
+      saveMessageWithMedia(e);
     }
     await Future.delayed(const Duration(seconds: 1));
     showLoader(false);
@@ -133,16 +141,18 @@ class ChatProvider extends ChangeNotifier {
 
   Future<void> saveMessageWithMedia(IChatMessage e) async {
     final firebaseProvider = locator<FireStorageProvider>();
+    final rateAppStorage = locator<RateAppStorage>();
+
     Uint8List? data;
 
-    if (e.type.contains('text')) {
-      await _storage.addMessage(e);
-      return;
-    }
     if (e.isImage && !firebaseConfig.showMedia ||
         e.isVideo && !firebaseConfig.showMedia) return;
 
     if (e.type.contains('video')) {
+      if (rateAppStorage.show) {
+        RateAppHelper.showDialog(navigatorKey.currentContext!);
+        await rateAppStorage.hide();
+      }
       data = await firebaseProvider.downloadVideo(e.content);
     }
 
@@ -150,9 +160,13 @@ class ChatProvider extends ChangeNotifier {
       data = await firebaseProvider.downloadImage(e.content);
     }
 
-    final message = e.copyWith(mediaData: data);
-    await _storage.addMessage(message);
+    e.mediaData = data;
+    await e.save();
     notifyListeners();
+  }
+
+  Future<void> saveMessageToBox(IChatMessage message) async {
+    await _storage.addMessage(message);
   }
 
   void _addNewMessage(IChatMessage message) {
@@ -162,9 +176,15 @@ class ChatProvider extends ChangeNotifier {
     final index = chatLengt;
     _messages.add(message);
     chatListKey.currentState?.insertItem(index);
-    // _chatListKey.currentState?.insertItem(index);
     playIncomingMessageRingtone();
     scrollDown();
+  }
+
+  Future<void> toggleLikeMessage(IChatMessage message) async {
+    HapticFeedback.mediumImpact();
+    message.isLiked = message.isLiked == null ? true : !message.isLiked!;
+    await message.save();
+    notifyListeners();
   }
 
   // ================================================
@@ -177,8 +197,10 @@ class ChatProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> sendMessageToGPT(
-      {String? customValue, bool isBot = false}) async {
+  Future<void> sendMessageToGPT({
+    String? customValue,
+    bool isBot = false,
+  }) async {
     final text = _textController.text.trim();
     // check text & custom val
     if (text.isEmpty && customValue == null) {
@@ -186,33 +208,48 @@ class ChatProvider extends ChangeNotifier {
       notifyListeners();
       return;
     }
+    showLoader(true);
     // create message
     final message = _createMessage(customValue ?? text, isBot: isBot);
+    await saveMessageToBox(message);
     // create message in thread
     _textController.clear();
     showSendButton = false;
-    showLoader(true);
     await _createMessageInThread(message.content, false);
     if (customValue == null) {
       // add user message to ui
       _addNewMessage(message);
+      FirebaseAnaliticsService.logOnSendUserMessage(messages.length);
       // start run
       final incomingText = await _startBotRun();
       if (incomingText == null) return;
       final incomingMessage = _createMessage(incomingText, isBot: true);
       _addNewMessage(incomingMessage);
+      saveMessageToBox(incomingMessage);
       showLoader(false);
     }
   }
 
   Future<void> _createMessageInThread(String value, bool isBot) async {
-    await openAI.threads.messages.createMessage(
-      threadId: threadId,
-      request: CreateMessage(
-        role: isBot ? 'assistant' : 'user',
-        content: value,
-      ),
-    );
+    try {
+      await openAI.threads.messages.createMessage(
+        threadId: threadId,
+        request: CreateMessage(
+          role: isBot ? 'assistant' : 'user',
+          content: value,
+        ),
+      );
+    } catch (e) {
+      showLoader(false);
+      showToast(
+        'Something went wrong',
+        textPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        position: ToastPosition.center,
+        duration: const Duration(seconds: 3),
+        backgroundColor: Colors.red,
+        animationCurve: Curves.ease,
+      );
+    }
   }
 
   Future<String?> _startBotRun() async {

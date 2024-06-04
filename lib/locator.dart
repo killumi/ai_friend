@@ -1,3 +1,4 @@
+import 'package:ai_friend/domain/helpers/rate_app_helper.dart';
 import 'package:ai_friend/features/chat/chat_provider.dart';
 import 'package:ai_friend/features/chat/chat_script/chat_script_provider.dart';
 import 'package:ai_friend/features/chat/chat_script/chat_script_storage.dart';
@@ -40,6 +41,7 @@ Future<void> initLocator() async {
     ),
   );
 
+  locator.registerLazySingleton<RateAppStorage>(() => RateAppStorage());
   locator.registerLazySingleton<NameStorage>(() => NameStorage());
   locator.registerLazySingleton<HobbyStorage>(() => HobbyStorage());
   locator.registerLazySingleton<PaymentProvider>(() => PaymentProvider());

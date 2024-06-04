@@ -306,7 +306,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
   Future<void> subscribe() async {
     final result = await context.read<PaymentProvider>().subscribe();
     if (!result) return;
-    // context.read<PaymentProvider>().setFreePremium();
     context.read<ChatProvider>().chatListKey = GlobalKey<AnimatedListState>();
     await Future.delayed(const Duration(milliseconds: 200));
     AppRouter.openChat(context, removeRoutes: true);

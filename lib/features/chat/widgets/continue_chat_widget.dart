@@ -1,10 +1,7 @@
 import 'package:ai_friend/app_router.dart';
-// import 'package:ai_friend/features/payment/payment_provider.dart';
-// import 'package:ai_friend/features/payment/payment_provider.dart';
+import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
 import 'package:ai_friend/gen/fonts.gen.dart';
-// import 'package:ai_friend/locator.dart';
-// import 'package:ai_friend/locator.dart';
 import 'package:ai_friend/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 
@@ -39,6 +36,7 @@ class ContinueChatWidget extends StatelessWidget {
             icon: Assets.icons.proIcon.svg(width: 23),
             onTap: () {
               // locator<PaymentProvider>().setFreePremium();
+              FirebaseAnaliticsService.logOnTapContinueChatingButton();
               AppRouter.openPaywall(context, false);
             },
           ),

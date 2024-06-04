@@ -1,5 +1,6 @@
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 import 'package:ai_friend/domain/firebase/fire_storage.dart';
+import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
 import 'package:ai_friend/locator.dart';
 import 'package:ai_friend/widgets/blur_widget.dart';
@@ -95,7 +96,6 @@ class _VideoMessageState extends State<VideoMessage>
 
     super.build(context);
     return Container(
-      margin: EdgeInsets.only(bottom: widget.isPreview! ? 10 : 0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(widget.isPreview! ? 10 : 0),
         color: const Color(0xff423556),
@@ -115,6 +115,7 @@ class _VideoMessageState extends State<VideoMessage>
                     BlurWidget(
                       onTap: () {
                         if (widget.isPreview!) {
+                          FirebaseAnaliticsService.logOnTapToMessageV();
                           SwipeImageGallery(
                               context: context,
                               initialIndex: 0,

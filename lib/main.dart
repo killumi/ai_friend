@@ -1,4 +1,7 @@
+import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
 import 'package:ai_friend/domain/helpers/rate_app_helper.dart';
+import 'package:ai_friend/domain/push_notifications.dart';
+import 'package:ai_friend/domain/singular_analitics.dart';
 import 'package:ai_friend/features/chat/chat_provider.dart';
 import 'package:ai_friend/features/chat/chat_screen.dart';
 import 'package:ai_friend/features/chat/chat_script/chat_script_provider.dart';
@@ -20,17 +23,24 @@ import 'package:ai_friend/features/profile/hobby/hobby_storage.dart';
 import 'package:ai_friend/features/profile/name/name_storage.dart';
 import 'package:ai_friend/features/profile/profile_provider.dart';
 import 'package:apphud/apphud.dart';
+// import 'package:facebook_app_events/facebook_app_events.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // final facebookSDK = FacebookAppEvents();
+  // await facebookSDK.setAdvertiserTracking(enabled: true);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await initLocator();
+  Apphud.setListener(listener: ApphudPaymentListener());
   await Hive.initFlutter();
+  await PaymentProvider.startApphud();
   await ChatScriptStorage.openStorage();
   await ChatStorage.openStorage();
   await OnboardingStorage.openStorage();
@@ -38,16 +48,20 @@ void main() async {
   await NameStorage.openStorage();
   await GenderStorage.openStorage();
   await HobbyStorage.openStorage();
-  await PaymentProvider.startApphud();
-  Apphud.setListener(listener: ApphudPaymentListener());
-  await PaymentProvider.startApphud();
+  await RateAppStorage.openStorage();
+  // Apphud.setListener(listener: ApphudPaymentListener());
+  // await PaymentProvider.startApphud();
   await locator<FirebaseConfig>().init();
   locator<ChatProvider>().initOpenAI();
   await locator<ChatScriptProvider>().initScript();
   await locator<ChatProvider>().createThread();
   await locator<ChatProvider>().initMessages();
   await locator<ProfileProvider>().init();
+  await SingularAnalitics.init();
+  await FirebaseAnaliticsService.init();
   await RateAppHelper.initPlagin();
+  await PushNotificationService.initFirebaseMessaging();
+  await PushNotificationService.initOneSignal();
   runApp(const MyApp());
 }
 
@@ -73,6 +87,7 @@ class MyApp extends StatelessWidget {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
               title: 'AI Girlfriend',
+              navigatorKey: navigatorKey,
               home: introWasShown
                   ? isHasPremium
                       ? const ChatScreen()

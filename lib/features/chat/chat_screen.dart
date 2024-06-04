@@ -79,6 +79,8 @@ class _ChatScreenViewState extends State<ChatScreenView> {
                         _buildItem(messages[index], animation),
                   ),
                 ),
+                //   const ChatScriptMessagesBox(),
+                // if (!needShowPremiumBanner || isHasPremium)
                 if (!needShowPremiumBanner && !daylyScriptIsEnd || isHasPremium)
                   const ChatScriptMessagesBox(),
                 if (!needShowPremiumBanner && !daylyScriptIsEnd || isHasPremium)

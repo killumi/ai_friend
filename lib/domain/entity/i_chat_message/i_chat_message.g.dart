@@ -23,13 +23,14 @@ class IChatMessageAdapter extends TypeAdapter<IChatMessage> {
       content: fields[3] as String,
       isPremiumContent: fields[4] as bool,
       mediaData: fields[5] as Uint8List?,
+      isLiked: fields[6] as bool?,
     );
   }
 
   @override
   void write(BinaryWriter writer, IChatMessage obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.date)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class IChatMessageAdapter extends TypeAdapter<IChatMessage> {
       ..writeByte(4)
       ..write(obj.isPremiumContent)
       ..writeByte(5)
-      ..write(obj.mediaData);
+      ..write(obj.mediaData)
+      ..writeByte(6)
+      ..write(obj.isLiked);
   }
 
   @override

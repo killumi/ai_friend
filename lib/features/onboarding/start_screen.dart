@@ -1,9 +1,9 @@
 import 'package:ai_friend/app_router.dart';
+import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
 import 'package:ai_friend/gen/fonts.gen.dart';
 import 'package:ai_friend/widgets/pulse_button.dart';
 import 'package:ai_friend/widgets/screen_wrap.dart';
-// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -13,8 +13,6 @@ class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isSmal = MediaQuery.of(context).size.height < 750;
-    // print('isSmal: $isSmal');
-    // print('isSmal: ${MediaQuery.of(context).size.height}');
 
     return ScreenWrap(
       child: SafeArea(
@@ -70,7 +68,10 @@ class StartScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: PulseButton(
-                    onTap: () => AppRouter.openOnboarding(context),
+                    onTap: () {
+                      FirebaseAnaliticsService.logOnOpenOnboarding();
+                      AppRouter.openOnboarding(context);
+                    },
                     title: 'Start Chat',
                   ),
                 ),

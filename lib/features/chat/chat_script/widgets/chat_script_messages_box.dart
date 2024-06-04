@@ -17,9 +17,9 @@ class ChatScriptMessagesBox extends StatelessWidget {
     final showAllBox = provider.isShowScriptBox;
     final isLoading = context.select((ChatProvider e) => e.isLoading);
 
-    final runAnimation = showAllBox || isLoading;
+    final runAnimation = isLoading || showAllBox;
 
-    return provider.dailyScript == null
+    return provider.dailyScript == null && !isLoading
         ? const SizedBox(height: 1)
         : Stack(
             children: [
@@ -98,29 +98,32 @@ class ChatScriptMessagesBox extends StatelessWidget {
                                         ),
                                       ),
                                 const SizedBox(height: 12),
-                                AnimatedSize(
-                                  duration: const Duration(milliseconds: 500),
-                                  curve: Curves.ease,
-                                  child: Text(
-                                    provider.scriptMessage!.description
-                                        .replaceUserName(),
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      color: Color(0xFFFBFBFB),
-                                      fontSize: 14,
-                                      fontFamily: FontFamily.gothamPro,
-                                      fontWeight: FontWeight.w600,
+                                if (provider.dailyScript != null)
+                                  AnimatedSize(
+                                    duration: const Duration(milliseconds: 500),
+                                    curve: Curves.ease,
+                                    child: Text(
+                                      provider.scriptMessage!.description
+                                          .replaceUserName(),
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        color: Color(0xFFFBFBFB),
+                                        fontSize: 14,
+                                        fontFamily: FontFamily.gothamPro,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Column(
-                                  children: [
-                                    const SizedBox(height: 20),
-                                    ...provider.scriptMessage!.messages
-                                        .map((e) => ChatScriptMessage(data: e))
-                                        .toList(),
-                                  ],
-                                ),
+                                if (provider.dailyScript != null)
+                                  Column(
+                                    children: [
+                                      const SizedBox(height: 20),
+                                      ...provider.scriptMessage!.messages
+                                          .map(
+                                              (e) => ChatScriptMessage(data: e))
+                                          .toList(),
+                                    ],
+                                  ),
                               ],
                             ),
                           ),

@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'package:ai_friend/app_router.dart';
-// import 'package:ai_friend/gen/fonts.gen.dart';
+import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
 import 'package:ai_friend/features/onboarding/onboarding_provider.dart';
 import 'package:ai_friend/features/onboarding/widgets/onboarding_message_item.dart';
 import 'package:ai_friend/widgets/app_button.dart';
@@ -73,7 +72,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 title: 'Yes',
                 onTap: () async {
                   await provider.nextStep();
-                  // setState(() {});
                 },
               ),
             ),
@@ -96,7 +94,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 title: 'Sounds Good!',
                 onTap: () async {
                   await provider.nextStep();
-                  // setState(() {});
                 },
               ),
             ),
@@ -119,6 +116,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 title: 'All Right',
                 onTap: () async {
                   await provider.nextStep();
+                  FirebaseAnaliticsService.logOnLeaveOnboarding();
+                  FirebaseAnaliticsService
+                      .logOnOpenProfileScreenAfterOnboarding();
                   AppRouter.openProfile(context);
                 },
               ),

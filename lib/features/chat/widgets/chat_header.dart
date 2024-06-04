@@ -1,4 +1,5 @@
 import 'package:ai_friend/app_router.dart';
+import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
 import 'package:ai_friend/domain/firebase/firebase_config.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
@@ -151,6 +152,7 @@ class _ChatHeaderState extends State<ChatHeader> {
                     const SizedBox(height: 20),
                     GestureDetector(
                       onTap: () {
+                        FirebaseAnaliticsService.logOnOpenProfileScreen();
                         AppRouter.openAliceProfile(context);
                         toggleOpenMenu();
                       },
@@ -163,6 +165,7 @@ class _ChatHeaderState extends State<ChatHeader> {
                     if (showMedia)
                       GestureDetector(
                         onTap: () {
+                          FirebaseAnaliticsService.logOnOpenGallery();
                           AppRouter.openGallery(context);
                           toggleOpenMenu();
                         },

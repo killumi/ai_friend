@@ -41,6 +41,8 @@ class _ChatInputState extends State<ChatInput> {
     final isHasFocus = context.select((ChatProvider e) => e.isHasFocus);
     final isHasPremium = context.select((PaymentProvider e) => e.isHasPremium);
     final showSendButton = context.select((ChatProvider e) => e.showSendButton);
+    // final scriptIsEnded =
+    // context.select((ChatScriptProvider e) => e.dailyScript) == null;
 
     return GestureDetector(
       onVerticalDragEnd: (r) {

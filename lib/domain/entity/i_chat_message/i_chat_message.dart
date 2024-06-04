@@ -25,7 +25,10 @@ class IChatMessage extends HiveObject {
   final bool isPremiumContent;
 
   @HiveField(5)
-  final Uint8List? mediaData;
+  Uint8List? mediaData;
+
+  @HiveField(6)
+  bool? isLiked;
 
   bool get isVideo => type.contains('video');
   bool get isImage => type.contains('image');
@@ -38,6 +41,7 @@ class IChatMessage extends HiveObject {
     required this.content,
     required this.isPremiumContent,
     this.mediaData,
+    this.isLiked,
   });
 
   IChatMessage copyWith({
@@ -47,6 +51,7 @@ class IChatMessage extends HiveObject {
     String? content,
     bool? isPremiumContent,
     Uint8List? mediaData,
+    bool? isLiked,
   }) {
     return IChatMessage(
       date: date ?? this.date,
@@ -55,6 +60,7 @@ class IChatMessage extends HiveObject {
       content: content ?? this.content,
       isPremiumContent: isPremiumContent ?? this.isPremiumContent,
       mediaData: mediaData ?? this.mediaData,
+      isLiked: isLiked ?? this.isLiked,
     );
   }
 
@@ -66,6 +72,7 @@ class IChatMessage extends HiveObject {
       'content': content,
       'isPremiumContent': isPremiumContent,
       'mediaData': mediaData,
+      'isLiked': isLiked,
     };
   }
 
@@ -79,6 +86,7 @@ class IChatMessage extends HiveObject {
       content: map['content'] as String,
       isPremiumContent: map['isPremiumContent'] as bool,
       mediaData: map['mediaData'] != null ? map['data'] as Uint8List : null,
+      isLiked: map['isLiked'] != null ? map['isLiked'] as bool : false,
     );
   }
 
@@ -89,7 +97,7 @@ class IChatMessage extends HiveObject {
 
   @override
   String toString() {
-    return 'IChatMessage(date: $date, isBot: $isBot, type: $type, content: $content, isPremiumContent: $isPremiumContent, mediaData: $mediaData)';
+    return 'IChatMessage(date: $date, isBot: $isBot, type: $type, content: $content, isPremiumContent: $isPremiumContent, mediaData: $mediaData, isLiked: $isLiked)';
   }
 
   @override
@@ -101,7 +109,8 @@ class IChatMessage extends HiveObject {
         other.type == type &&
         other.content == content &&
         other.isPremiumContent == isPremiumContent &&
-        other.mediaData == mediaData;
+        other.mediaData == mediaData &&
+        other.isLiked == isLiked;
   }
 
   @override
@@ -111,7 +120,8 @@ class IChatMessage extends HiveObject {
         type.hashCode ^
         content.hashCode ^
         isPremiumContent.hashCode ^
-        mediaData.hashCode;
+        mediaData.hashCode ^
+        isLiked.hashCode;
   }
 }
 
