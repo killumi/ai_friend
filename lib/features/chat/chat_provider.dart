@@ -125,8 +125,6 @@ class ChatProvider extends ChangeNotifier {
     // print('Delayed for $milliseconds milliseconds');
     for (var e in answer) {
       await Future.delayed(Duration(milliseconds: milliseconds));
-      // await Future.delayed(const Duration(milliseconds: 200));
-      // await Future.delayed(Duration(milliseconds: 1000));
       e = e.copyWith(content: e.content.replaceUserName());
 
       // saveMessageWithMedia(e);

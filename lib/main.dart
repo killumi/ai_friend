@@ -86,7 +86,7 @@ class MyApp extends StatelessWidget {
             final isHasPremium = snapshot.data ?? false;
             return MaterialApp(
               debugShowCheckedModeBanner: false,
-              title: 'AI Girlfriend',
+              title: 'Lovevo',
               navigatorKey: navigatorKey,
               home: introWasShown
                   ? isHasPremium

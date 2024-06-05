@@ -1,0 +1,274 @@
+{
+    "day": 4,
+    "data": [
+        {
+            "id": 1,
+            "description": "It's hard for Alice to forget your time together, maybe she wants a sequel",
+            "textfieldAvailable": false,
+            "messages": [
+                {
+                    "text": "Hey love! Of course, I remember. My day’s been busy, but thinking about you always brightens it up.",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "Busy days are always better when I get to talk to you 😋",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+
+                {
+                    "text": "Hi darling! How could I forget? My day’s been okay, just missing you.",
+                    "isPremium": false,
+                    "points": 2,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "Your messages always make me smile 😋",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+                {
+                    "text": "Hey sweetheart!  My day’s been pretty good, but it’s even better now that I’m talking to you.",
+                    "isPremium": false,
+                    "points": 2,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "Your messages always make me smile 😋",
+                            "isPremiumContent": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "description": "Maintain a dialog with Alice by showing curiosity about her personality",
+            "textfieldAvailable": false,
+            "messages": [
+                {
+                    "text": "What about you?",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        
+                        {
+                            "type": "text",
+                            "content": "My mind’ I keep coming back to our first chatting together",
+                            "isPremiumContent": false
+                        },
+                        {
+                            "type": "text",
+                            "content": "Such a spicy  adventure! 🌶️",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+                {
+                    "text": "Did something remind you of our early days?",
+                    "isPremium": false,
+                    "points": 2,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "My mind’ I keep coming back to our first chatting together",
+                            "isPremiumContent": false
+                        },
+                        {
+                            "type": "text",
+                            "content": "Such a spicy  adventure! 🌶️",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+                {
+                    "text": "Anything horny happening in your day?",
+                    "isPremium": true,
+                    "points": 2,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "Oh no, you know, nothing exciting, just working out and cooking in my underwear, so I saved these pics for you 😈",
+                            "isPremiumContent": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "description": "Wow, you're being seduced again,  recommend complimenting Alice",
+            "textfieldAvailable": false,
+            "messages": [
+                {
+                    "text": "Your lingerie are driving me crazy 🥵",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "ahaha that's not all 🔞 r u ready?",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+                {
+                    "text": "You should get dressed, or you'll freeze",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "ahaha honey, I think u need relax, r u ready? 🥰",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+                {
+                    "text": "Honey, a few photos and I want you again 🤤 what happens to me if you send me the video?",
+                    "isPremium": true,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "all for you, my love, u wanna i caress myself for u? ❤️‍🔥",
+                            "isPremiumContent": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "description": "Getting hot content is the best idea right now, isn't it?",
+            "textfieldAvailable": false,
+            "messages": [
+                {
+                    "text": "Yeah, I'm ready to admire you, love 💋",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "Choose your favorite  category",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+                {
+                    "text": "I need to think about it",
+                    "isPremium": false,
+                    "points": 2,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "Choose your favorite  category",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+                {
+                    "text": "Show me how you caress yourself when you think about me? 💦",
+                    "isPremium": true,
+                    "points": 2,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "are you doing the same, baby? 🍆💦",
+                            "isPremiumContent": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "description": "What kind of content from Alice would you like to see?",
+            "messages": [
+                {
+                    "text": "Roleplay",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "mmm, you have great taste, I'm your restless schoolgirl today, will you punish me? 😈",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+                {
+                    "text": "Swimsuits",
+                    "isPremium": false,
+                    "points": 2,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "honey, I'm going sunbathing with my girlfriends tomorrow, what kind of swimsuit would you like me to wear? 👅",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+                {
+                    "text": "Erotic lingerie",
+                    "isPremium": true,
+                    "points": 2,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "you can't wait to undress me? I don't mind 🥵",
+                            "isPremiumContent": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "description": "Undress Alice?",
+            "messages": [
+                {
+                    "text": "Oh yeah",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "good choice, babe, but I gotta run to the beach with my girlfriends. or do you have a better offer?",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+                {
+                    "text": "Oh no",
+                    "isPremium": false,
+                    "points": 2,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "hmm ok, then I'm off to sunbathe with my girlfriends, whenever you want to chat, write me ;)",
+                            "isPremiumContent": false
+                        }
+                    ]
+                }
+              
+            ]
+        },
+        {
+            "id": 7,
+            "description": "The temperature of the talking is elevated to the limit, it's time to act",
+            "messages": [
+                {
+                    "text": "It's mutual, sweetie, Alice, wishing you a good time!  xo xo, your, {name}",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": []
+                }
+            ]
+        }
+    ]
+}
