@@ -42,6 +42,8 @@
 		<string>Please allow access to Gallery to be able to save photos</string>
 		<key>UIViewControllerBasedStatusBarAppearance</key>
 		<false/>
+		<key>NSUserTrackingUsageDescription</key>
+		<string>This identifier will be used to deliver personalized ads to you.</string>
 		<!-- FACEBOOK -->
 		<key>CFBundleURLTypes</key>
 		<array>

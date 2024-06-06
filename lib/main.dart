@@ -2,6 +2,7 @@ import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
 import 'package:ai_friend/domain/helpers/rate_app_helper.dart';
 import 'package:ai_friend/domain/push_notifications.dart';
 import 'package:ai_friend/domain/singular_analitics.dart';
+import 'package:ai_friend/domain/tracking_helper.dart';
 import 'package:ai_friend/features/chat/chat_provider.dart';
 import 'package:ai_friend/features/chat/chat_screen.dart';
 import 'package:ai_friend/features/chat/chat_script/chat_script_provider.dart';
@@ -39,6 +40,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await initLocator();
   Apphud.setListener(listener: ApphudPaymentListener());
+  TrackingHelper.requestTrackingAuthorization();
   await Hive.initFlutter();
   await PaymentProvider.startApphud();
   await ChatScriptStorage.openStorage();

@@ -1,4 +1,6 @@
 PODS:
+  - app_tracking_transparency (0.0.1):
+    - Flutter
   - apphud (2.5.0):
     - ApphudSDK (= 3.3.6)
     - Flutter
@@ -255,6 +257,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - app_tracking_transparency (from `.symlinks/plugins/app_tracking_transparency/ios`)
   - apphud (from `.symlinks/plugins/apphud/ios`)
   - audioplayers_darwin (from `.symlinks/plugins/audioplayers_darwin/ios`)
   - FacebookSDK
@@ -308,6 +311,8 @@ SPEC REPOS:
     - Singular-SDK
 
 EXTERNAL SOURCES:
+  app_tracking_transparency:
+    :path: ".symlinks/plugins/app_tracking_transparency/ios"
   apphud:
     :path: ".symlinks/plugins/apphud/ios"
   audioplayers_darwin:
@@ -348,6 +353,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/wakelock/ios"
 
 SPEC CHECKSUMS:
+  app_tracking_transparency: e169b653478da7bb15a6c61209015378ca73e375
   apphud: f73e5c64e8a4cc5caab6094d895f0d09cc306611
   ApphudSDK: 4ca6980914b877cbb1b32d8c4360123e0a68b7f0
   audioplayers_darwin: 877d9a4d06331c5c374595e46e16453ac7eafa40
