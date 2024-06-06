@@ -56,7 +56,10 @@ void main() async {
   await locator<FirebaseConfig>().init();
   locator<ChatProvider>().initOpenAI();
   await locator<ChatScriptProvider>().initScript();
-  await locator<ChatProvider>().createThread();
+  final name = locator<NameStorage>().name;
+  if (name.isNotEmpty) {
+    await locator<ChatProvider>().createThread();
+  }
   await locator<ChatProvider>().initMessages();
   await locator<ProfileProvider>().init();
   await SingularAnalitics.init();

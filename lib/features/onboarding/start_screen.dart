@@ -50,10 +50,11 @@ class StartScreen extends StatelessWidget {
                     fontWeight: FontWeight.w900,
                     height: 0,
                   ),
+                  textAlign: TextAlign.center,
                 ),
                 const Spacer(),
                 const Text(
-                  'The Lovevo who\nis always here for you',
+                  'The AI Girlfriend who\nis always here for you',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color(0xFFFBFBFB),

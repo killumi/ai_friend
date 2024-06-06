@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:ai_friend/features/chat/chat_provider.dart';
 import 'package:ai_friend/features/profile/widgets/profile_edit_hobby.dart';
+import 'package:ai_friend/locator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -68,6 +70,7 @@ class _ProfileInfoScreenState extends State<ProfileInfoScreen> {
                         AppRouter.pop(context);
                         return;
                       }
+                      locator<ChatProvider>().createThread();
                       AppRouter.openHobby(context);
                     },
                     isDisabled: isDisabled,
