@@ -42,7 +42,7 @@ class StartScreen extends StatelessWidget {
               children: [
                 SizedBox(height: isSmal ? 10 : 47),
                 Text(
-                  'AI Girlfriend:\nFriendly Chat',
+                  'Lovevo:\nVirtual AI Friend',
                   style: TextStyle(
                     color: const Color(0xFFFBFBFB),
                     fontSize: isSmal ? 27 : 32,
@@ -53,7 +53,7 @@ class StartScreen extends StatelessWidget {
                 ),
                 const Spacer(),
                 const Text(
-                  'The AI Girlfriend who\nis always here for you',
+                  'The Lovevo who\nis always here for you',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color(0xFFFBFBFB),

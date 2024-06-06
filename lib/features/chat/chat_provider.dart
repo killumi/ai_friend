@@ -10,6 +10,7 @@ import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 import 'package:ai_friend/domain/entity/i_script_message/i_script_message.dart';
 import 'package:ai_friend/domain/entity/i_script_message_data/i_script_message_data.dart';
 import 'package:ai_friend/domain/firebase/fire_storage.dart';
+import 'package:ai_friend/features/profile/name/name_storage.dart';
 import 'package:ai_friend/locator.dart';
 import 'package:ai_friend/features/profile/name/name_helper.dart';
 import 'package:ai_friend/main.dart';
@@ -190,7 +191,15 @@ class ChatProvider extends ChangeNotifier {
   // ================================================
 
   Future<void> createThread() async {
-    final thread = await openAI.threads.createThread(request: ThreadRequest());
+    final storage = locator<NameStorage>();
+    final name = storage.name;
+    final message = {"role": "user", "content": "My name is $name!"};
+    final metadata = {'username': name};
+
+    final thread = await openAI.threads.createThread(
+      request: ThreadRequest(messages: [message], metadata: metadata),
+    );
+
     threadId = thread.id;
     notifyListeners();
   }

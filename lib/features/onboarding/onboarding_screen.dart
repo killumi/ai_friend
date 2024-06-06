@@ -131,7 +131,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget _buildAppbar() => const AppHeader(
-        title: 'AI Girlfriend: Friendly Chat',
+        title: 'Lovevo:Virtual AI Friend',
         showBackButton: false,
       );
 

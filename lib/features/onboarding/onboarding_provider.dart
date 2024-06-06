@@ -78,7 +78,7 @@ class OnboardingProvider extends ChangeNotifier {
   // ==========================
   Future<void> _step1() async {
     final message = OnboardingMessage(
-      text: 'Hello, darling.\nWelcome to AI Girlfriend. Do you want to chat?',
+      text: 'Hello, darling.\nWelcome to Lovevo. Do you want to chat?',
       isBot: true,
     );
     final videoMessage = OnboardingMessage(
