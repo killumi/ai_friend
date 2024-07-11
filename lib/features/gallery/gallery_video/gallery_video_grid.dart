@@ -31,7 +31,8 @@ class GalleryVideoGrid extends StatelessWidget {
             aspectRatio: 1,
             child: GalleryVideoItem(
                 index: index,
-                data: videos[index].mediaData!,
+                // data: videos[index].mediaData!,
+                message: videos[index],
                 name: videos[index].content,
                 videos: videos),
           ),

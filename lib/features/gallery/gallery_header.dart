@@ -76,10 +76,10 @@ class GalleryHeader extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-            right: 16,
-            child: GallerySaveButton(onTap: onSave),
-          ),
+          // Positioned(
+          //   right: 16,
+          //   child: GallerySaveButton(onTap: onSave),
+          // ),
         ],
       ),
     );

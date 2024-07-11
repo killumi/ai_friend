@@ -1,12 +1,14 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:ai_friend/app_router.dart';
+import 'package:ai_friend/domain/firebase/fire_storage.dart';
 import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
 import 'package:ai_friend/features/gallery/gallery_header.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
+import 'package:ai_friend/locator.dart';
 import 'package:ai_friend/widgets/blur_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 import 'package:ai_friend/widgets/screen_wrap.dart';
+import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +30,8 @@ class GalleryImagePageView extends StatefulWidget {
 class _GalleryImagePageViewState extends State<GalleryImagePageView> {
   late PageController _pageController;
   double _currentIndex = 0;
+  final firebaseProvider = locator<FireStorageProvider>();
+  final Map<int, String> _imageUrls = {};
 
   @override
   void initState() {
@@ -39,6 +43,17 @@ class _GalleryImagePageViewState extends State<GalleryImagePageView> {
         _currentIndex = _pageController.page ?? 0;
       });
     });
+    _preloadImages();
+  }
+
+  Future<void> _preloadImages() async {
+    for (int i = 0; i < widget.images.length; i++) {
+      if (!_imageUrls.containsKey(i)) {
+        final url = await firebaseProvider.getMediaUrl(widget.images[i]);
+        _imageUrls[i] = url;
+        setState(() {}); // Обновление состояния для перерисовки виджета
+      }
+    }
   }
 
   @override
@@ -92,19 +107,50 @@ class _GalleryImagePageViewState extends State<GalleryImagePageView> {
                   child: PageView.builder(
                     itemCount: widget.images.length,
                     controller: _pageController,
-                    onPageChanged: (e) {
-                      setState(() {});
-                    },
                     itemBuilder: (context, index) {
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Expanded(
                             child: Center(
-                              child: BlurWidget(
-                                child: Image.memory(
-                                    widget.images[index].mediaData!),
-                              ),
+                              child: _imageUrls.containsKey(index)
+                                  ? BlurWidget(
+                                      child: Image.network(
+                                        _imageUrls[index]!,
+                                        fit: BoxFit.cover,
+                                        loadingBuilder: (BuildContext context,
+                                            Widget child,
+                                            ImageChunkEvent? loadingProgress) {
+                                          if (loadingProgress == null) {
+                                            return child;
+                                          }
+                                          return Center(
+                                            child: CircularProgressIndicator(
+                                              value: loadingProgress
+                                                          .expectedTotalBytes !=
+                                                      null
+                                                  ? loadingProgress
+                                                          .cumulativeBytesLoaded /
+                                                      loadingProgress
+                                                          .expectedTotalBytes!
+                                                  : null,
+                                            ),
+                                          );
+                                        },
+                                        errorBuilder: (BuildContext context,
+                                            Object error,
+                                            StackTrace? stackTrace) {
+                                          print('Failed to load image: $error');
+                                          return const Center(
+                                            child: Text('Failed to load image'),
+                                          );
+                                        },
+                                      ),
+                                    )
+                                  : const CupertinoActivityIndicator(
+                                      color: Colors.white,
+                                      radius: 18,
+                                    ),
                             ),
                           ),
                         ],
@@ -113,7 +159,7 @@ class _GalleryImagePageViewState extends State<GalleryImagePageView> {
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

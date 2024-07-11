@@ -6,6 +6,8 @@ import 'package:ai_friend/features/onboarding/widgets/onboarding_message_item.da
 import 'package:ai_friend/widgets/app_button.dart';
 import 'package:ai_friend/widgets/app_header.dart';
 import 'package:ai_friend/widgets/screen_wrap.dart';
+import 'package:animated_list_plus/animated_list_plus.dart';
+import 'package:animated_list_plus/transitions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -19,6 +21,7 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
+  // final GlobalKey<AnimatedListState> _listKey = GlobalKey();
   Future<void> initOnboarding() async {
     await context.read<OnboardingProvider>().nextStep();
   }
@@ -33,7 +36,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     final provider = context.watch<OnboardingProvider>();
     final messages = provider.messages;
-    final listKey = provider.listKey;
+    // final listKey = provider.listKey;
     final scrollController = provider.scrollController;
 
     final isSecondStep = provider.isSecondStep;
@@ -42,90 +45,88 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     final isSmal = MediaQuery.of(context).size.height < 750;
 
     return ScreenWrap(
-      child: Stack(
-        children: [
-          SafeArea(
-            child: AnimatedList(
+      child: SafeArea(
+        child: Stack(
+          children: [
+            ListView.builder(
               controller: scrollController,
               padding: const EdgeInsets.all(16).copyWith(top: 100, bottom: 100),
-              key: listKey,
-              initialItemCount: messages.length,
-              itemBuilder: (context, index, animation) =>
-                  _buildItem(messages[index], animation),
+              itemCount: messages.length,
+              itemBuilder: (context, index) => _buildItem(messages[index]),
             ),
-          ),
-          AnimatedPositioned(
-            curve: Curves.ease,
-            duration: const Duration(milliseconds: 500),
-            bottom: isSecondStep
-                ? isSmal
-                    ? 20
-                    : 50
-                : -70,
-            left: 16,
-            right: 16,
-            child: AnimatedOpacity(
-              opacity: isSecondStep ? 1 : 0,
+            AnimatedPositioned(
               curve: Curves.ease,
-              duration: const Duration(milliseconds: 900),
-              child: AppButton(
-                title: 'Yes',
-                onTap: () async {
-                  await provider.nextStep();
-                },
+              duration: const Duration(milliseconds: 500),
+              bottom: isSecondStep
+                  ? isSmal
+                      ? 20
+                      : 50
+                  : -70,
+              left: 16,
+              right: 16,
+              child: AnimatedOpacity(
+                opacity: isSecondStep ? 1 : 0,
+                curve: Curves.ease,
+                duration: const Duration(milliseconds: 900),
+                child: AppButton(
+                  title: 'Yes',
+                  onTap: () async {
+                    await provider.nextStep();
+                  },
+                ),
               ),
             ),
-          ),
-          AnimatedPositioned(
-            curve: Curves.ease,
-            duration: const Duration(milliseconds: 500),
-            bottom: isFourthStep
-                ? isSmal
-                    ? 20
-                    : 50
-                : -70,
-            left: 16,
-            right: 16,
-            child: AnimatedOpacity(
-              opacity: isFourthStep ? 1 : 0,
+            AnimatedPositioned(
               curve: Curves.ease,
-              duration: const Duration(milliseconds: 900),
-              child: AppButton(
-                title: 'Sounds Good!',
-                onTap: () async {
-                  await provider.nextStep();
-                },
+              duration: const Duration(milliseconds: 500),
+              bottom: isFourthStep
+                  ? isSmal
+                      ? 20
+                      : 50
+                  : -70,
+              left: 16,
+              right: 16,
+              child: AnimatedOpacity(
+                opacity: isFourthStep ? 1 : 0,
+                curve: Curves.ease,
+                duration: const Duration(milliseconds: 900),
+                child: AppButton(
+                  title: 'Sounds Good!',
+                  onTap: () async {
+                    await provider.nextStep();
+                  },
+                ),
               ),
             ),
-          ),
-          AnimatedPositioned(
-            curve: Curves.ease,
-            duration: const Duration(milliseconds: 300),
-            bottom: isLastStep
-                ? isSmal
-                    ? 20
-                    : 50
-                : -100,
-            left: 16,
-            right: 16,
-            child: AnimatedOpacity(
-              opacity: isLastStep ? 1 : 0,
+            AnimatedPositioned(
               curve: Curves.ease,
               duration: const Duration(milliseconds: 300),
-              child: AppButton(
-                title: 'All Right',
-                onTap: () async {
-                  await provider.nextStep();
-                  FirebaseAnaliticsService.logOnLeaveOnboarding();
-                  FirebaseAnaliticsService
-                      .logOnOpenProfileScreenAfterOnboarding();
-                  AppRouter.openProfile(context);
-                },
+              bottom: isLastStep
+                  ? isSmal
+                      ? 20
+                      : 50
+                  : -100,
+              left: 16,
+              right: 16,
+              child: AnimatedOpacity(
+                opacity: isLastStep ? 1 : 0,
+                curve: Curves.ease,
+                duration: const Duration(milliseconds: 300),
+                child: AppButton(
+                  title: 'All Right',
+                  onTap: () async {
+                    await provider.nextStep();
+                    FirebaseAnaliticsService.logOnLeaveOnboarding();
+                    FirebaseAnaliticsService
+                        .logOnOpenProfileScreenAfterOnboarding();
+                    AppRouter.openProfile(context);
+                  },
+                ),
               ),
             ),
-          ),
-          _buildAppbar(),
-        ],
+            _buildAppbar(),
+          ],
+        ),
       ),
     );
   }
@@ -135,18 +136,22 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         showBackButton: false,
       );
 
-  Widget _buildItem(OnboardingMessage message, Animation<double> animation) {
-    final slideTween = Tween<Offset>(
-      begin: const Offset(0, 1),
-      end: Offset.zero,
-    );
+  // Widget _buildItem(OnboardingMessage message, Animation<double> animation) {
+  // final slideTween = Tween<Offset>(
+  //   begin: const Offset(0, 1),
+  //   end: Offset.zero,
+  // );
 
-    return SlideTransition(
-      position: animation.drive(slideTween),
-      child: FadeTransition(
-        opacity: animation,
-        child: OnboardingMessageItem(message: message),
-      ),
-    );
+  // return SlideTransition(
+  //   position: animation.drive(slideTween),
+  //   child: FadeTransition(
+  //     opacity: animation,
+  //     child: OnboardingMessageItem(message: message),
+  //   ),
+  // );
+  // }
+
+  Widget _buildItem(OnboardingMessage message) {
+    return OnboardingMessageItem(message: message);
   }
 }

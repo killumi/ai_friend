@@ -17,24 +17,15 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for android - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return android;
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -52,6 +43,24 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyCjJ2EKxrSTfbJ6g8qOMW1Myyim4JjkcM0',
+    appId: '1:764870781383:web:a41ed62cad7f58ab23d1e2',
+    messagingSenderId: '764870781383',
+    projectId: 'aifriend-aebb3',
+    authDomain: 'aifriend-aebb3.firebaseapp.com',
+    storageBucket: 'aifriend-aebb3.appspot.com',
+    measurementId: 'G-67SZ1D5DG5',
+  );
+
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyCgOCXhXK73Yr9TVJ_7lI-EzRPnSilgCbQ',
+    appId: '1:764870781383:android:abb75e9dc97e8edf23d1e2',
+    messagingSenderId: '764870781383',
+    projectId: 'aifriend-aebb3',
+    storageBucket: 'aifriend-aebb3.appspot.com',
+  );
+
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCU072T-v4xjGiriF6ornZCXo5TlBKU5RU',
     appId: '1:764870781383:ios:fc52d4629fc0f51623d1e2',
@@ -59,5 +68,14 @@ class DefaultFirebaseOptions {
     projectId: 'aifriend-aebb3',
     storageBucket: 'aifriend-aebb3.appspot.com',
     iosBundleId: 'aifriend',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyCU072T-v4xjGiriF6ornZCXo5TlBKU5RU',
+    appId: '1:764870781383:ios:d52691fce7f3a78023d1e2',
+    messagingSenderId: '764870781383',
+    projectId: 'aifriend-aebb3',
+    storageBucket: 'aifriend-aebb3.appspot.com',
+    iosBundleId: 'com.example.aiFriend.RunnerTests',
   );
 }

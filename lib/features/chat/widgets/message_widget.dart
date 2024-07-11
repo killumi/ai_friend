@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
+
 import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,27 +25,47 @@ class _MessageWidgetState extends State<MessageWidget> {
   @override
   Widget build(BuildContext context) {
     final chatProvider = context.watch<ChatProvider>();
-    return GestureDetector(
-      onDoubleTap: () async {
-        FirebaseAnaliticsService.logOnLikeMessage();
-        await chatProvider.toggleLikeMessage(message);
-      },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: message.isBot!
-                ? MainAxisAlignment.start
-                : MainAxisAlignment.end,
-            children: [
-              _buildMessage(),
-            ],
-          ),
-          if (message.isImage || message.isVideo)
-            MessageLikeWidget(message: message),
-          const SizedBox(height: 8),
-        ],
-      ),
+    // return GestureDetector(
+    //   onDoubleTap: () async {
+    //     FirebaseAnaliticsService.logOnLikeMessage();
+    //     await chatProvider.toggleLikeMessage(message);
+    //   },
+    //   onTap: () {
+    //     log('INIT WEB VIDEO:');
+    //     print('INIT WEB VIDEO:');
+    //   },
+    //   child: Column(
+    //     crossAxisAlignment: CrossAxisAlignment.start,
+    //     children: [
+    //       Row(
+    //         mainAxisAlignment: message.isBot!
+    //             ? MainAxisAlignment.start
+    //             : MainAxisAlignment.end,
+    //         children: [
+    //           _buildMessage(),
+    //         ],
+    //       ),
+    //       if (message.isImage || message.isVideo)
+    //         MessageLikeWidget(message: message),
+    //       const SizedBox(height: 8),
+    //     ],
+    //   ),
+    // );
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment:
+              message.isBot! ? MainAxisAlignment.start : MainAxisAlignment.end,
+          children: [
+            _buildMessage(),
+          ],
+        ),
+        if (message.isImage || message.isVideo)
+          MessageLikeWidget(message: message),
+        const SizedBox(height: 8),
+      ],
     );
   }
 

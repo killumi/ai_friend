@@ -24,13 +24,13 @@ class OnboardingProvider extends ChangeNotifier {
 
   OnboardingProvider(this._storage);
 
-  final _listKeyOnboarding = GlobalKey<AnimatedListState>(debugLabel: '1');
+  // final _listKeyOnboarding = GlobalKey<AnimatedListState>(debugLabel: '1');
   final _player = AudioPlayer();
   final _scrollController = ScrollController();
   final List<OnboardingMessage> _items = [];
 
   List<OnboardingMessage> get messages => _items;
-  GlobalKey<AnimatedListState> get listKey => _listKeyOnboarding;
+  // GlobalKey<AnimatedListState> get listKey => _listKeyOnboarding;
   ScrollController get scrollController => _scrollController;
 
   OnboardingStep? get currentStep => _currentStep;
@@ -174,14 +174,15 @@ class OnboardingProvider extends ChangeNotifier {
 
   Future<void> _addMessage(OnboardingMessage message) async {
     if (message.isBot) await Future.delayed(const Duration(milliseconds: 1200));
-    final newIndex = _items.length;
+    // final newIndex = _items.length;
     _items.add(message);
-    _listKeyOnboarding.currentState!.insertItem(newIndex);
+    notifyListeners();
+    // _listKeyOnboarding.currentState!.insertItem(newIndex);
     // if (message.isBot) {
-    await _player.play(
-      AssetSource('new_message.mp3'),
-      mode: PlayerMode.lowLatency,
-    );
+    //   await _player.play(
+    //     AssetSource('new_message.mp3'),
+    //     mode: PlayerMode.lowLatency,
+    //   );
     // }
   }
 }

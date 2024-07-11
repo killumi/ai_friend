@@ -207,7 +207,7 @@ class _BotShortProfileState extends State<BotShortProfile> {
                         SizedBox(height: isSmal ? 13 : 40),
                         AppButton(
                           title: 'Chat Now',
-                          onTap: () => AppRouter.openPaywall(context, true),
+                          onTap: () => AppRouter.openChat(context),
                         ),
                       ],
                     ),

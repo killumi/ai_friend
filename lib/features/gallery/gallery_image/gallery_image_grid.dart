@@ -12,9 +12,6 @@ class GalleryImageGrid extends StatelessWidget {
     required this.images,
   }) : super(key: key);
 
-  Color randomColor() =>
-      Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
-
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
@@ -28,7 +25,7 @@ class GalleryImageGrid extends StatelessWidget {
         ),
         delegate: SliverChildBuilderDelegate(
           (BuildContext context, int index) => GalleryImageItem(
-              index: index, data: images[index].mediaData!, images: images),
+              index: index, message: images[index], images: images),
           childCount: images.length,
         ),
       ),

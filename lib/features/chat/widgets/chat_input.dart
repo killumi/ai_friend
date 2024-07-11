@@ -51,8 +51,8 @@ class _ChatInputState extends State<ChatInput> {
         }
       },
       child: AnimatedContainer(
-        padding: EdgeInsets.only(
-            top: 10, left: 16, right: 16, bottom: isHasFocus ? 16 : 0),
+        padding:
+            const EdgeInsets.only(top: 10, left: 16, right: 16, bottom: 16),
         duration: const Duration(milliseconds: 240),
         child: Row(
           children: [

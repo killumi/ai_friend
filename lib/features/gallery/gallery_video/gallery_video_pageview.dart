@@ -125,8 +125,9 @@ class _GalleryVideoPageViewState extends State<GalleryVideoPageView> {
                           Expanded(
                             child: GalleryVideoPage(
                               key: PageStorageKey(widget.videos[index].content),
-                              data: widget.videos[index].mediaData!,
+                              // data: widget.videos[index].mediaData!,
                               name: widget.videos[index].content,
+                              message: widget.videos[index],
                             ),
                           ),
                         ],

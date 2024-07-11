@@ -33,27 +33,44 @@ class ChatScreenView extends StatefulWidget {
 }
 
 class _ChatScreenViewState extends State<ChatScreenView> {
+  final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
   bool get showMedia => locator<FirebaseConfig>().showMedia;
+  // final listKey = GlobalKey<AnimatedListState>();
 
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   context.read<ChatProvider>().chatListKey = GlobalKey<AnimatedListState>();
+  //   WidgetsBinding.instance.addPostFrameCallback((_) async {
+  //     await Future.delayed(const Duration(seconds: 1));
+  //     await context.read<ChatProvider>().initChat().then((value) async {
+  //       await Future.delayed(const Duration(seconds: 1));
+  //       context.read<ChatScriptProvider>().initScript();
+  //       context.read<ChatScriptProvider>().showScriptBox(true);
+  //       context.read<ChatProvider>().scrollDown();
+  //     });
+  //   });
+  // }
   @override
   void initState() {
     super.initState();
+    // Устанавливаем ключ для AnimatedList синхронно
+    context.read<ChatProvider>().chatListKey = _listKey;
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await context.read<ChatProvider>().initChat();
       await Future.delayed(const Duration(seconds: 1));
-      await context.read<ChatProvider>().initChat().then((value) async {
-        await Future.delayed(const Duration(seconds: 1));
-        context.read<ChatScriptProvider>().initScript();
-        context.read<ChatScriptProvider>().showScriptBox(true);
-        context.read<ChatProvider>().scrollDown();
-      });
+      await context.read<ChatScriptProvider>().initScript();
+      context.read<ChatScriptProvider>().showScriptBox(true);
+      await Future.delayed(const Duration(seconds: 1));
+      context.read<ChatProvider>().scrollDown();
     });
   }
 
   @override
   Widget build(BuildContext context) {
     final chatProvider = context.watch<ChatProvider>();
+    // final listKey = chatProvider.chatListKey;
     final messages = chatProvider.messages;
-    final listKey = chatProvider.chatListKey;
     final scrollController = chatProvider.scrollController;
     final daylyScriptIsEnd =
         context.select((ChatScriptProvider e) => e.showEndDayUI);
@@ -73,7 +90,7 @@ class _ChatScreenViewState extends State<ChatScreenView> {
                     controller: scrollController,
                     padding:
                         const EdgeInsets.all(16).copyWith(top: 100, bottom: 25),
-                    key: listKey,
+                    key: _listKey,
                     initialItemCount: messages.length,
                     itemBuilder: (context, index, animation) =>
                         _buildItem(messages[index], animation),

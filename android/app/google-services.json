@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "764870781383",
+    "project_id": "aifriend-aebb3",
+    "storage_bucket": "aifriend-aebb3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:764870781383:android:abb75e9dc97e8edf23d1e2",
+        "android_client_info": {
+          "package_name": "com.example.ai_friend"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgOCXhXK73Yr9TVJ_7lI-EzRPnSilgCbQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

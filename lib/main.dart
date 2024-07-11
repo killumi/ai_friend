@@ -9,6 +9,7 @@ import 'package:ai_friend/features/chat/chat_script/chat_script_provider.dart';
 import 'package:ai_friend/features/chat/chat_script/chat_script_storage.dart';
 import 'package:ai_friend/features/chat/chat_storage.dart';
 import 'package:ai_friend/domain/firebase/firebase_config.dart';
+import 'package:ai_friend/features/onboarding/onboarding_screen.dart';
 import 'package:ai_friend/features/payment/payment_listener.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
 import 'package:ai_friend/features/payment/payment_screen.dart';
@@ -39,10 +40,11 @@ void main() async {
   // await facebookSDK.setAdvertiserTracking(enabled: true);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await initLocator();
-  Apphud.setListener(listener: ApphudPaymentListener());
-  TrackingHelper.requestTrackingAuthorization();
+  await locator<FirebaseConfig>().init();
+  // Apphud.setListener(listener: ApphudPaymentListener());
+  // TrackingHelper.requestTrackingAuthorization();
   await Hive.initFlutter();
-  await PaymentProvider.startApphud();
+  // await PaymentProvider.startApphud();
   await ChatScriptStorage.openStorage();
   await ChatStorage.openStorage();
   await OnboardingStorage.openStorage();
@@ -50,10 +52,9 @@ void main() async {
   await NameStorage.openStorage();
   await GenderStorage.openStorage();
   await HobbyStorage.openStorage();
-  await RateAppStorage.openStorage();
+  // await RateAppStorage.openStorage();
   // Apphud.setListener(listener: ApphudPaymentListener());
   // await PaymentProvider.startApphud();
-  await locator<FirebaseConfig>().init();
   locator<ChatProvider>().initOpenAI();
   await locator<ChatScriptProvider>().initScript();
   final name = locator<NameStorage>().name;
@@ -62,11 +63,11 @@ void main() async {
   }
   await locator<ChatProvider>().initMessages();
   await locator<ProfileProvider>().init();
-  await SingularAnalitics.init();
-  await FirebaseAnaliticsService.init();
-  await RateAppHelper.initPlagin();
-  await PushNotificationService.initFirebaseMessaging();
-  await PushNotificationService.initOneSignal();
+  // await SingularAnalitics.init();
+  // await FirebaseAnaliticsService.init();
+  // await RateAppHelper.initPlagin();
+  // await PushNotificationService.initFirebaseMessaging();
+  // await PushNotificationService.initOneSignal();
   runApp(const MyApp());
 }
 
@@ -85,23 +86,41 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => locator<HobbyProvider>()),
           ChangeNotifierProvider(create: (_) => locator<PaymentProvider>()),
         ],
-        child: FutureBuilder(
-          future: locator<PaymentProvider>().updatePremiumStatus(),
-          builder: (context, snapshot) {
-            final isHasPremium = snapshot.data ?? false;
-            return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: 'Lovevo',
-              navigatorKey: navigatorKey,
-              home: introWasShown
-                  ? isHasPremium
-                      ? const ChatScreen()
-                      : const PaymentScreen()
-                  : const StartScreen(),
-            );
-          },
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Lovevo',
+          navigatorKey: navigatorKey,
+          home: introWasShown ? const ChatScreen() : const OnboardingScreen(),
         ),
       ),
     );
   }
 }
+
+// void main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await Firebase.initializeApp(
+//     options: DefaultFirebaseOptions.currentPlatform,
+//   );
+//   runApp(const MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       title: 'Lovevo',
+//       navigatorKey: navigatorKey,
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: Text('Flutter Demo Home Page'),
+//         ),
+//         body: Center(
+//           child: Text('Hello, world!'),
+//         ),
+//       ),
+//     );
+//   }
+// }

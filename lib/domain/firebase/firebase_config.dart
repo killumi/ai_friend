@@ -13,9 +13,9 @@ class FirebaseConfig {
 
   Future<void> init() async {
     await config.fetchAndActivate();
-    config.onConfigUpdated.listen((event) async {
-      await config.fetch();
-    });
+    // config.onConfigUpdated.listen((event) async {
+    //   await config.fetch();
+    // });
   }
 
   Future<IScriptDay?> getDailyChatScript(int dayNumber) async {

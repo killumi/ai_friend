@@ -20,7 +20,7 @@ class AppRouter {
   static void pop(BuildContext context) => Navigator.pop(context);
 
   static void openChat(BuildContext context, {bool removeRoutes = false}) {
-    context.read<ChatProvider>().chatListKey = GlobalKey<AnimatedListState>();
+    // context.read<ChatProvider>().chatListKey = GlobalKey<AnimatedListState>();
 
     // removeRoutes
     //     ? Navigator.of(context).pushAndRemoveUntil(
@@ -149,11 +149,11 @@ class AppRouter {
   }
 
   static void openPaywall(BuildContext context, bool removeRoutes) {
-    removeRoutes
-        ? Navigator.of(context).pushAndRemoveUntil(
-            CupertinoPageRoute(builder: (context) => const PaymentScreen()),
-            (route) => false)
-        : Navigator.of(context).push(
-            CupertinoPageRoute(builder: (context) => const PaymentScreen()));
+    // removeRoutes
+    //     ? Navigator.of(context).pushAndRemoveUntil(
+    //         CupertinoPageRoute(builder: (context) => const PaymentScreen()),
+    //         (route) => false)
+    //     : Navigator.of(context).push(
+    //         CupertinoPageRoute(builder: (context) => const PaymentScreen()));
   }
 }
