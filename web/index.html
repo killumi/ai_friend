@@ -16,21 +16,21 @@
   <script src="flutter.js" defer></script>
   <script>
     // The value below is injected by flutter build, do not touch.
-    var flutter_service_worker_version = '{{flutter_service_worker_version}}';
+    var serviceWorkerVersion = null;
   </script>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
         // Check if the service worker is supported and register it.
-        navigator.serviceWorker.register('flutter_service_worker.js?v=' + flutter_service_worker_version);
+        navigator.serviceWorker.register('flutter_service_worker.js?v=' + serviceWorkerVersion);
       });
     }
   </script>
   <script>
     window.addEventListener('load', function (ev) {
-      _flutter.loader.load({
+      _flutter.loader.loadEntrypoint({
         serviceWorker: {
-          serviceWorkerVersion: flutter_service_worker_version,
+          serviceWorkerVersion: serviceWorkerVersion,
         }
       }).then(function (engineInitializer) {
         return engineInitializer.initializeEngine();
