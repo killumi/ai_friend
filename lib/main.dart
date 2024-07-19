@@ -22,6 +22,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
+import 'package:telegram_web_app/telegram_web_app.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
@@ -29,6 +30,24 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // final facebookSDK = FacebookAppEvents();
   // await facebookSDK.setAdvertiserTracking(enabled: true);
+  try {
+    if (TelegramWebApp.instance.isSupported) {
+      await TelegramWebApp.instance.ready();
+      Future.delayed(
+          const Duration(seconds: 1), TelegramWebApp.instance.expand);
+    }
+  } catch (e) {
+    print("Error happened in Flutter while loading Telegram $e");
+    // add delay for 'Telegram seldom not loading' bug
+    await Future.delayed(const Duration(milliseconds: 200));
+    main();
+    return;
+  }
+
+  FlutterError.onError = (details) {
+    print("Flutter error happened: $details");
+  };
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await initLocator();
   await locator<FirebaseConfig>().init();
