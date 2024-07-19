@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:ai_friend/features/onboarding/onboarding_storage.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
-import 'package:audioplayers/audioplayers.dart';
+// import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 
 enum OnboardingStep { first, second, third, fourth, fifth, end }
@@ -25,7 +25,7 @@ class OnboardingProvider extends ChangeNotifier {
   OnboardingProvider(this._storage);
 
   // final _listKeyOnboarding = GlobalKey<AnimatedListState>(debugLabel: '1');
-  final _player = AudioPlayer();
+  // final _player = AudioPlayer();
   final _scrollController = ScrollController();
   final List<OnboardingMessage> _items = [];
 

@@ -10,7 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 import 'package:ai_friend/widgets/screen_wrap.dart';
 import 'package:flutter/services.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
+// import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 
@@ -93,14 +93,14 @@ class _GalleryVideoPageViewState extends State<GalleryVideoPageView> {
                       AppRouter.openPaywall(context, false);
                       return;
                     }
-                    final bytes =
-                        widget.videos[_currentIndex.toInt()].mediaData!;
-                    final name = widget.videos[_currentIndex.toInt()].content;
+                    // final bytes =
+                    //     widget.videos[_currentIndex.toInt()].mediaData!;
+                    // final name = widget.videos[_currentIndex.toInt()].content;
 
-                    final file = await locator<FireStorageProvider>()
-                        .getMediaFile(bytes, name, 'mp4');
+                    // final file = await locator<FireStorageProvider>()
+                    //     .getMediaFile(bytes, name, 'mp4');
 
-                    await ImageGallerySaver.saveFile(file.path, name: name);
+                    // await ImageGallerySaver.saveFile(file.path, name: name);
                     showToast(
                       'Video was saved',
                       textPadding: const EdgeInsets.symmetric(

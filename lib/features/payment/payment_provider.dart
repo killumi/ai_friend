@@ -1,15 +1,15 @@
 import 'dart:developer';
 import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
-import 'package:apphud/apphud.dart';
-import 'package:apphud/models/apphud_models/apphud_error.dart';
-import 'package:apphud/models/apphud_models/apphud_paywall.dart';
-import 'package:apphud/models/apphud_models/apphud_product.dart';
+// import 'package:apphud/apphud.dart';
+// import 'package:apphud/models/apphud_models/apphud_error.dart';
+// import 'package:apphud/models/apphud_models/apphud_paywall.dart';
+// import 'package:apphud/models/apphud_models/apphud_product.dart';
 import 'package:flutter/material.dart';
 
 class PaymentProvider with ChangeNotifier {
   bool loading = false;
-  ApphudPaywall? _paywall;
-  List<ApphudProduct> _products = [];
+  // ApphudPaywall? _paywall;
+  // List<ApphudProduct> _products = [];
   Map<String, dynamic> jsonData = {};
 
   bool _isHasPremium = true;

@@ -9,7 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 import 'package:ai_friend/widgets/screen_wrap.dart';
 import 'package:flutter/material.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
+// import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 
@@ -88,10 +88,10 @@ class _GalleryImagePageViewState extends State<GalleryImagePageView> {
                       return;
                     }
 
-                    await ImageGallerySaver.saveImage(
-                      widget.images[_currentIndex.toInt()].mediaData!,
-                      quality: 100,
-                    );
+                    // await ImageGallerySaver.saveImage(
+                    //   widget.images[_currentIndex.toInt()].mediaData!,
+                    //   quality: 100,
+                    // );
 
                     showToast(
                       'Image was saved',

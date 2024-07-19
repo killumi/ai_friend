@@ -1,8 +1,3 @@
-import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
-import 'package:ai_friend/domain/helpers/rate_app_helper.dart';
-import 'package:ai_friend/domain/push_notifications.dart';
-import 'package:ai_friend/domain/singular_analitics.dart';
-import 'package:ai_friend/domain/tracking_helper.dart';
 import 'package:ai_friend/features/chat/chat_provider.dart';
 import 'package:ai_friend/features/chat/chat_screen.dart';
 import 'package:ai_friend/features/chat/chat_script/chat_script_provider.dart';
@@ -10,23 +5,19 @@ import 'package:ai_friend/features/chat/chat_script/chat_script_storage.dart';
 import 'package:ai_friend/features/chat/chat_storage.dart';
 import 'package:ai_friend/domain/firebase/firebase_config.dart';
 import 'package:ai_friend/features/onboarding/onboarding_screen.dart';
-import 'package:ai_friend/features/payment/payment_listener.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
-import 'package:ai_friend/features/payment/payment_screen.dart';
 import 'package:ai_friend/firebase_options.dart';
 import 'package:ai_friend/locator.dart';
 import 'package:ai_friend/features/onboarding/onboarding_provider.dart';
 import 'package:ai_friend/features/onboarding/onboarding_storage.dart';
-import 'package:ai_friend/features/onboarding/start_screen.dart';
 import 'package:ai_friend/features/profile/birthdate/birthdate_storage.dart';
 import 'package:ai_friend/features/profile/gender/gender_storage.dart';
 import 'package:ai_friend/features/profile/hobby/hobby_provider.dart';
 import 'package:ai_friend/features/profile/hobby/hobby_storage.dart';
 import 'package:ai_friend/features/profile/name/name_storage.dart';
 import 'package:ai_friend/features/profile/profile_provider.dart';
-import 'package:apphud/apphud.dart';
-// import 'package:facebook_app_events/facebook_app_events.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:oktoast/oktoast.dart';
@@ -86,9 +77,14 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => locator<HobbyProvider>()),
           ChangeNotifierProvider(create: (_) => locator<PaymentProvider>()),
         ],
-        child: MaterialApp(
+        child: CupertinoApp(
           debugShowCheckedModeBanner: false,
           title: 'Lovevo',
+          localizationsDelegates: const [
+            DefaultMaterialLocalizations.delegate,
+            DefaultCupertinoLocalizations.delegate,
+            DefaultWidgetsLocalizations.delegate,
+          ],
           navigatorKey: navigatorKey,
           home: introWasShown ? const ChatScreen() : const OnboardingScreen(),
         ),
@@ -96,31 +92,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// void main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await Firebase.initializeApp(
-//     options: DefaultFirebaseOptions.currentPlatform,
-//   );
-//   runApp(const MyApp());
-// }
-
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       title: 'Lovevo',
-//       navigatorKey: navigatorKey,
-//       home: Scaffold(
-//         appBar: AppBar(
-//           title: Text('Flutter Demo Home Page'),
-//         ),
-//         body: Center(
-//           child: Text('Hello, world!'),
-//         ),
-//       ),
-//     );
-//   }
-// }

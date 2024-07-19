@@ -1,20 +1,20 @@
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 import 'package:ai_friend/features/bot_profile/bot_profile_screen.dart';
 import 'package:ai_friend/features/bot_profile/bot_short_profile.dart';
-import 'package:ai_friend/features/chat/chat_provider.dart';
+// import 'package:ai_friend/features/chat/chat_provider.dart';
 import 'package:ai_friend/features/chat/chat_screen.dart';
 import 'package:ai_friend/features/gallery/gallery_image/gallery_image_pageview.dart';
 import 'package:ai_friend/features/gallery/gallery_screen.dart';
 import 'package:ai_friend/features/gallery/gallery_video/gallery_video_pageview.dart';
 import 'package:ai_friend/features/onboarding/onboarding_screen.dart';
 import 'package:ai_friend/features/onboarding/start_screen.dart';
-import 'package:ai_friend/features/payment/payment_screen.dart';
+// import 'package:ai_friend/features/payment/payment_screen.dart';
 import 'package:ai_friend/features/profile/hobby/profile_hobby_screen.dart';
 import 'package:ai_friend/features/profile/profile_info_screen.dart';
 import 'package:ai_friend/features/settings/settings_screen.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:page_route_animator/page_route_animator.dart';
-import 'package:provider/provider.dart';
+// import 'package:page_route_animator/page_route_animator.dart';
+// import 'package:provider/provider.dart';
 
 class AppRouter {
   static void pop(BuildContext context) => Navigator.pop(context);
@@ -28,13 +28,17 @@ class AppRouter {
     //         (route) => false)
     //     : Navigator.of(context)
     //         .push(CupertinoPageRoute(builder: (context) => const ChatScreen()));
-    final route = PageRouteAnimator(
-      child: const ChatScreen(),
-      routeAnimation: RouteAnimation.rightToLeftWithFade,
-      curve: Curves.ease,
-      duration: const Duration(milliseconds: 600),
-      reverseDuration: const Duration(milliseconds: 600),
+    final route = CupertinoPageRoute(
+      builder: (context) => const ChatScreen(),
     );
+
+    // PageRouteAnimator(
+    //   child: const ChatScreen(),
+    //   routeAnimation: RouteAnimation.rightToLeftWithFade,
+    //   curve: Curves.ease,
+    //   duration: const Duration(milliseconds: 600),
+    //   reverseDuration: const Duration(milliseconds: 600),
+    // );
 
     removeRoutes
         ? Navigator.of(context).pushAndRemoveUntil(route, (route) => false)
@@ -63,13 +67,17 @@ class AppRouter {
   }
 
   static void openOnboarding(BuildContext context) {
-    final route = PageRouteAnimator(
-      child: const OnboardingScreen(),
-      routeAnimation: RouteAnimation.bottomToTopWithFade,
-      curve: Curves.ease,
-      duration: const Duration(milliseconds: 420),
-      reverseDuration: const Duration(milliseconds: 420),
+    final route = CupertinoPageRoute(
+      builder: (context) => const OnboardingScreen(),
     );
+
+    // final route = PageRouteAnimator(
+    //   child: const OnboardingScreen(),
+    //   routeAnimation: RouteAnimation.bottomToTopWithFade,
+    //   curve: Curves.ease,
+    //   duration: const Duration(milliseconds: 420),
+    //   reverseDuration: const Duration(milliseconds: 420),
+    // );
     // final route = CupertinoPageRoute(
     //   builder: (context) => const OnboardingScreen(),
     // );

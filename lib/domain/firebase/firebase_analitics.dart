@@ -1,5 +1,5 @@
-import 'package:apphud/apphud.dart';
-import 'package:apphud/models/apphud_models/apphud_attribution_provider.dart';
+// import 'package:apphud/apphud.dart';
+// import 'package:apphud/models/apphud_models/apphud_attribution_provider.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 
 class FirebaseAnaliticsService {
@@ -8,15 +8,15 @@ class FirebaseAnaliticsService {
   static FirebaseAnalytics instance = FirebaseAnalytics.instance;
 
   static Future<void> init() async {
-    final apphudId = await Apphud.userID();
-    final appInstanceId = await instance.appInstanceId;
-    await instance.setUserId(id: apphudId);
+    // final apphudId = await Apphud.userID();
+    // final appInstanceId = await instance.appInstanceId;
+    // await instance.setUserId(id: apphudId);
 
-    Apphud.addAttribution(
-      data: {},
-      provider: ApphudAttributionProvider.firebase,
-      identifier: appInstanceId,
-    );
+    // Apphud.addAttribution(
+    //   data: {},
+    //   provider: ApphudAttributionProvider.firebase,
+    //   identifier: appInstanceId,
+    // );
 
     await instance.logAppOpen();
   }

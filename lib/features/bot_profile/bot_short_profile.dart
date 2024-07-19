@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:ui';
 import 'package:ai_friend/app_router.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
 import 'package:ai_friend/features/profile/hobby/hobby_helper.dart';
@@ -10,7 +11,6 @@ import 'package:ai_friend/widgets/app_header.dart';
 import 'package:ai_friend/widgets/screen_wrap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pro_animated_blur/pro_animated_blur.dart';
 import 'package:provider/provider.dart';
 
 class BotShortProfile extends StatefulWidget {
@@ -250,10 +250,14 @@ class SettingsCarouselItem extends StatelessWidget {
         Positioned.fill(
           child: IgnorePointer(
             ignoring: !isBlured,
-            child: ProAnimatedBlur(
-              blur: isBlured ? 15 : 0,
-              duration: const Duration(milliseconds: 200),
-              curve: Curves.ease,
+            child: BackdropFilter(
+              filter: ImageFilter.blur(
+                sigmaX: isBlured ? 15 : 0,
+                sigmaY: isBlured ? 15 : 0,
+              ),
+              // blur: isBlured ? 15 : 0,
+              // duration: const Duration(milliseconds: 200),
+              // curve: Curves.ease,
               child: Container(
                 color: Colors.transparent,
                 padding: const EdgeInsets.only(top: 140),

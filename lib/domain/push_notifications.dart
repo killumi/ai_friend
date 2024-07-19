@@ -1,6 +1,6 @@
-import 'package:apphud/apphud.dart';
+// import 'package:apphud/apphud.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
+// import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 class PushNotificationService {
   static final FirebaseMessaging instance = FirebaseMessaging.instance;
@@ -25,9 +25,9 @@ class PushNotificationService {
   }
 
   static Future<void> initOneSignal() async {
-    const appId = "d2fbc13d-e3aa-4e16-8174-1368f91d3b40";
-    OneSignal.initialize(appId);
-    final userId = await Apphud.userID();
-    await OneSignal.login(userId);
+    // const appId = "d2fbc13d-e3aa-4e16-8174-1368f91d3b40";
+    // OneSignal.initialize(appId);
+    // final userId = await Apphud.userID();
+    // await OneSignal.login(userId);
   }
 }

@@ -6,8 +6,8 @@ import 'package:ai_friend/features/onboarding/widgets/onboarding_message_item.da
 import 'package:ai_friend/widgets/app_button.dart';
 import 'package:ai_friend/widgets/app_header.dart';
 import 'package:ai_friend/widgets/screen_wrap.dart';
-import 'package:animated_list_plus/animated_list_plus.dart';
-import 'package:animated_list_plus/transitions.dart';
+// import 'package:animated_list_plus/animated_list_plus.dart';
+// import 'package:animated_list_plus/transitions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

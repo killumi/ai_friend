@@ -364,7 +364,7 @@ import 'package:ai_friend/domain/entity/i_script_message_data/i_script_message_d
 import 'package:ai_friend/features/profile/name/name_helper.dart';
 import 'package:ai_friend/features/profile/name/name_storage.dart';
 import 'package:ai_friend/locator.dart';
-import 'package:audioplayers/audioplayers.dart';
+// import 'package:audioplayers/audioplayers.dart';
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -384,7 +384,7 @@ class ChatProvider extends ChangeNotifier {
   final _scrollController = ScrollController();
   final _textController = TextEditingController();
   final _node = FocusNode();
-  final _player = AudioPlayer();
+  // final _player = AudioPlayer();
 
   String get apiKey => firebaseConfig.gptKey;
   String get assistantId => firebaseConfig.gptBotId;
@@ -689,10 +689,10 @@ class ChatProvider extends ChangeNotifier {
   }
 
   Future<void> playIncomingMessageRingtone() async {
-    await _player.play(
-      AssetSource('new_message.mp3'),
-      mode: PlayerMode.lowLatency,
-    );
+    // await _player.play(
+    //   AssetSource('new_message.mp3'),
+    //   mode: PlayerMode.lowLatency,
+    // );
   }
 
   void onChangeFocusListener() {
