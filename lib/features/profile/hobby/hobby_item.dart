@@ -1,5 +1,5 @@
 // import 'package:ai_enhancer/gen/assets.gen.dart';
-import 'package:ai_friend/app_router.dart';
+import 'package:ai_friend/domain/services/app_router.dart';
 import 'package:ai_friend/gen/fonts.gen.dart';
 import 'package:ai_friend/features/profile/hobby/hobby_helper.dart';
 import 'package:bounce/bounce.dart';

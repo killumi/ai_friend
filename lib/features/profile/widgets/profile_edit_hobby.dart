@@ -1,4 +1,4 @@
-import 'package:ai_friend/app_router.dart';
+import 'package:ai_friend/domain/services/app_router.dart';
 import 'package:ai_friend/features/profile/hobby/hobby_helper.dart';
 import 'package:ai_friend/features/profile/hobby/hobby_item.dart';
 import 'package:ai_friend/features/profile/hobby/hobby_storage.dart';

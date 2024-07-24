@@ -4,7 +4,7 @@ import 'package:ai_friend/domain/entity/i_script_day/i_script_day.dart';
 import 'package:ai_friend/domain/entity/i_script_message_data/i_script_message_data.dart';
 import 'package:ai_friend/domain/firebase/firebase_config.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
-import 'package:ai_friend/locator.dart';
+import 'package:ai_friend/domain/services/locator.dart';
 import 'package:flutter/material.dart';
 
 class ChatScriptProvider extends ChangeNotifier {

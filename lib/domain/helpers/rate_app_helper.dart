@@ -10,7 +10,7 @@ class RateAppHelper {
     googlePlayIdentifier: '',
   );
 
-  static Future<void> initPlagin() async {
+  static Future<void> init() async {
     await rateMyApp.init();
   }
 

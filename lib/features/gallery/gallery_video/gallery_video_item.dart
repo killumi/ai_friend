@@ -1,9 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:typed_data';
-import 'package:ai_friend/app_router.dart';
+import 'package:ai_friend/domain/services/app_router.dart';
 import 'package:ai_friend/domain/firebase/fire_storage.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
-import 'package:ai_friend/locator.dart';
+import 'package:ai_friend/domain/services/locator.dart';
 import 'package:ai_friend/widgets/blur_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +31,7 @@ class GalleryVideoItem extends StatefulWidget {
 
 class _GalleryVideoItemState extends State<GalleryVideoItem> {
   VideoPlayerController? _controller;
-  final firebaseProvider = locator<FireStorageProvider>();
+  final firebaseProvider = locator<FireStorage>();
 
   @override
   void initState() {

@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:ai_friend/app_router.dart';
+import 'package:ai_friend/domain/services/app_router.dart';
 import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
 import 'package:ai_friend/features/gallery/gallery_header.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';

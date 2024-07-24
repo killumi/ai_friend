@@ -11,7 +11,7 @@ import 'package:ai_friend/domain/entity/i_script_message/i_script_message.dart';
 import 'package:ai_friend/domain/entity/i_script_message_data/i_script_message_data.dart';
 import 'package:ai_friend/domain/firebase/fire_storage.dart';
 import 'package:ai_friend/features/profile/name/name_storage.dart';
-import 'package:ai_friend/locator.dart';
+import 'package:ai_friend/domain/services/locator.dart';
 import 'package:ai_friend/features/profile/name/name_helper.dart';
 import 'package:ai_friend/main.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -139,7 +139,7 @@ class ChatProvider extends ChangeNotifier {
   }
 
   Future<void> saveMessageWithMedia(IChatMessage e) async {
-    final firebaseProvider = locator<FireStorageProvider>();
+    final firebaseProvider = locator<FireStorage>();
     final rateAppStorage = locator<RateAppStorage>();
 
     Uint8List? data;

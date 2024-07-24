@@ -7,7 +7,7 @@ import 'package:ai_friend/widgets/screen_wrap.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:ai_friend/features/chat/chat_storage.dart';
-import 'package:ai_friend/locator.dart';
+import 'package:ai_friend/domain/services/locator.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class GalleryScreen extends StatefulWidget {

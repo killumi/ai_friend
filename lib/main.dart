@@ -1,8 +1,13 @@
+import 'dart:async';
+
+import 'package:ai_friend/domain/firebase/fire_auth.dart';
 import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
+import 'package:ai_friend/domain/firebase/fire_db.dart';
 import 'package:ai_friend/domain/helpers/rate_app_helper.dart';
-import 'package:ai_friend/domain/push_notifications.dart';
-import 'package:ai_friend/domain/singular_analitics.dart';
-import 'package:ai_friend/domain/tracking_helper.dart';
+import 'package:ai_friend/domain/services/push_notifications.dart';
+import 'package:ai_friend/domain/analitics/singular_analitics.dart';
+import 'package:ai_friend/domain/helpers/tracking_helper.dart';
+import 'package:ai_friend/domain/storages/assistant_storage.dart';
 import 'package:ai_friend/features/chat/chat_provider.dart';
 import 'package:ai_friend/features/chat/chat_screen.dart';
 import 'package:ai_friend/features/chat/chat_script/chat_script_provider.dart';
@@ -13,7 +18,7 @@ import 'package:ai_friend/features/payment/payment_listener.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
 import 'package:ai_friend/features/payment/payment_screen.dart';
 import 'package:ai_friend/firebase_options.dart';
-import 'package:ai_friend/locator.dart';
+import 'package:ai_friend/domain/services/locator.dart';
 import 'package:ai_friend/features/onboarding/onboarding_provider.dart';
 import 'package:ai_friend/features/onboarding/onboarding_storage.dart';
 import 'package:ai_friend/features/onboarding/start_screen.dart';
@@ -24,25 +29,33 @@ import 'package:ai_friend/features/profile/hobby/hobby_storage.dart';
 import 'package:ai_friend/features/profile/name/name_storage.dart';
 import 'package:ai_friend/features/profile/profile_provider.dart';
 import 'package:apphud/apphud.dart';
-// import 'package:facebook_app_events/facebook_app_events.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // final facebookSDK = FacebookAppEvents();
-  // await facebookSDK.setAdvertiserTracking(enabled: true);
+  // FIREBASE INIT
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // FIREBASE AUTH
+  await Auth.signInAnonymously();
+  // INIT LOCATOR
   await initLocator();
-  Apphud.setListener(listener: ApphudPaymentListener());
-  TrackingHelper.requestTrackingAuthorization();
-  await Hive.initFlutter();
+  // INIT FIREBASE CONFIG
+  await locator<FirebaseConfig>().init();
+  // PAYMENT
   await PaymentProvider.startApphud();
+  Apphud.setListener(listener: ApphudPaymentListener());
+  // TRACKING
+  TrackingHelper.requestTrackingAuthorization();
+  // INIT HIVE
+  await Hive.initFlutter();
+  // STORAGES
   await ChatScriptStorage.openStorage();
   await ChatStorage.openStorage();
   await OnboardingStorage.openStorage();
@@ -51,28 +64,58 @@ void main() async {
   await GenderStorage.openStorage();
   await HobbyStorage.openStorage();
   await RateAppStorage.openStorage();
-  // Apphud.setListener(listener: ApphudPaymentListener());
-  // await PaymentProvider.startApphud();
-  await locator<FirebaseConfig>().init();
+  await AssistantStorage.openStorage();
+  // LOAD ASSISTANT PROFILES
+  await locator<FireDatabase>().getAssistants();
+  // INIT GPT
   locator<ChatProvider>().initOpenAI();
-  await locator<ChatScriptProvider>().initScript();
-  final name = locator<NameStorage>().name;
-  if (name.isNotEmpty) {
-    await locator<ChatProvider>().createThread();
-  }
-  await locator<ChatProvider>().initMessages();
-  await locator<ProfileProvider>().init();
+
+  // await locator<ChatScriptProvider>().initScript();
+  // final name = locator<NameStorage>().name;
+  // if (name.isNotEmpty) {
+  //   await locator<ChatProvider>().createThread();
+  // }
+  // await locator<ChatProvider>().initMessages();
+  // await locator<ProfileProvider>().init();
+
+  // ANALITICS INIT
   await SingularAnalitics.init();
   await FirebaseAnaliticsService.init();
-  await RateAppHelper.initPlagin();
+  // RATE APP INIT
+  await RateAppHelper.init();
+  // PUSH NOTIFICATIONS
   await PushNotificationService.initFirebaseMessaging();
   await PushNotificationService.initOneSignal();
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  bool get introWasShown => locator<OnboardingStorage>().wasShown;
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late StreamSubscription<List<ConnectivityResult>> connectSubscription;
+  bool get introWasShown => locator<OnboardingStorage>().wasShown;
+
+  @override
+  void initState() {
+    connectSubscription = Connectivity()
+        .onConnectivityChanged
+        .listen((List<ConnectivityResult> result) {
+      print('$result');
+    });
+    super.initState();
+  }
+
+  @override
+  dispose() {
+    connectSubscription.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return OKToast(

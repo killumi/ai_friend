@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:ai_friend/domain/firebase/fire_storage.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
-import 'package:ai_friend/locator.dart';
+import 'package:ai_friend/domain/services/locator.dart';
 import 'package:ai_friend/widgets/blur_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +25,7 @@ class GalleryVideoPage extends StatefulWidget {
 
 class _GalleryVideoPageState extends State<GalleryVideoPage> {
   VideoPlayerController? _controller;
-  final firebaseProvider = locator<FireStorageProvider>();
+  final firebaseProvider = locator<FireStorage>();
   bool isPlaying = true;
 
   @override

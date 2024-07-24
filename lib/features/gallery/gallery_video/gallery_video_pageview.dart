@@ -1,11 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:ai_friend/app_router.dart';
+import 'package:ai_friend/domain/services/app_router.dart';
 import 'package:ai_friend/domain/firebase/fire_storage.dart';
 import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
 import 'package:ai_friend/features/gallery/gallery_header.dart';
 import 'package:ai_friend/features/gallery/gallery_video/gallery_video_page.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
-import 'package:ai_friend/locator.dart';
+import 'package:ai_friend/domain/services/locator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 import 'package:ai_friend/widgets/screen_wrap.dart';
@@ -97,7 +97,7 @@ class _GalleryVideoPageViewState extends State<GalleryVideoPageView> {
                         widget.videos[_currentIndex.toInt()].mediaData!;
                     final name = widget.videos[_currentIndex.toInt()].content;
 
-                    final file = await locator<FireStorageProvider>()
+                    final file = await locator<FireStorage>()
                         .getMediaFile(bytes, name, 'mp4');
 
                     await ImageGallerySaver.saveFile(file.path, name: name);

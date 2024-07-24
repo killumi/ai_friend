@@ -6,9 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path_provider/path_provider.dart';
 // import 'package:http/http.dart' as http;
 
-Uint8List? testVideoB;
-
-class FireStorageProvider {
+class FireStorage {
   final instance = FirebaseStorage.instance;
 
   Future<String> getMediaUrl(IChatMessage message) async {
@@ -48,18 +46,8 @@ class FireStorageProvider {
     return file;
   }
 
-  // Future<Uint8List?> downloadVideo(String assetName) async {
-  //   final ref = instance.ref();
-  // final results = await ref.child('videos').listAll();
-  // final item = results.items.firstWhere((e) => e.name.contains(assetName));
-  //   final data = await item.getData();
-  //   return data;
-  // }
-
   Future<Uint8List> downloadVideo(String assetName) async {
-    // Uint8List? data;
     final Completer<Uint8List> completer = Completer<Uint8List>();
-    // TaskState? state;
     final ref = instance.ref();
     final results = await ref.child('videos').listAll();
     final item = results.items.firstWhere((e) => e.name.contains(assetName));
@@ -72,40 +60,24 @@ class FireStorageProvider {
     downloadTask.snapshotEvents.listen((taskSnapshot) async {
       switch (taskSnapshot.state) {
         case TaskState.running:
-          // state = TaskState.running;
-          // log('message: TaskState.running');
           break;
         case TaskState.paused:
-          // state = TaskState.paused;
-
-          // log('message: TaskState.paused');
-
           break;
         case TaskState.success:
-          // log('message: TaskState.success');
-
-          // data = await file.readAsBytes();
           completer.complete(file.readAsBytesSync());
-        // state = TaskState.success;
-        // return data;
-        // break;
+          // state = TaskState.success;
+          // return data;
+          break;
         case TaskState.canceled:
           // log('message: TaskState.canceled');
           // state = TaskState.canceled;
-
           break;
         case TaskState.error:
           // state = TaskState.error;
-
           // log('message: TaskState.error');
-
           break;
       }
     });
-
-    // if (state == TaskState.success) {
-    //   return data!;
-    // }
 
     return completer.future;
   }

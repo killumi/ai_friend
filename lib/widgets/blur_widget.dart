@@ -2,7 +2,7 @@
 import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:ai_friend/app_router.dart';
+import 'package:ai_friend/domain/services/app_router.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
 import 'package:ai_friend/widgets/app_button.dart';

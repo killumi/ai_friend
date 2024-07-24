@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
-import 'package:ai_friend/app_router.dart';
+import 'package:ai_friend/domain/services/app_router.dart';
 import 'package:ai_friend/features/profile/hobby/hobby_item.dart';
 import 'package:ai_friend/features/profile/hobby/hobby_provider.dart';
 import 'package:ai_friend/features/profile/hobby/hobby_storage.dart';

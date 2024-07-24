@@ -9,7 +9,7 @@ import 'package:ai_friend/features/chat/widgets/continue_chat_widget.dart';
 import 'package:ai_friend/features/chat/widgets/message_widget.dart';
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
-import 'package:ai_friend/locator.dart';
+import 'package:ai_friend/domain/services/locator.dart';
 import 'package:ai_friend/widgets/screen_wrap.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

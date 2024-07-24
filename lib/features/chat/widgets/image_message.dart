@@ -1,7 +1,7 @@
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 import 'package:ai_friend/domain/firebase/fire_storage.dart';
 import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
-import 'package:ai_friend/locator.dart';
+import 'package:ai_friend/domain/services/locator.dart';
 import 'package:ai_friend/widgets/blur_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,7 @@ class _ImageMessageState extends State<ImageMessage>
   @override
   bool get wantKeepAlive => true;
 
-  final firebaseProvider = locator<FireStorageProvider>();
+  final firebaseProvider = locator<FireStorage>();
   IChatMessage get message => widget.message;
   bool get isPreview => widget.isPreview!;
 
@@ -50,7 +50,7 @@ class _ImageMessageState extends State<ImageMessage>
 
   void _loadImage() async {
     if (widget.message.mediaData != null) return;
-    url = await locator<FireStorageProvider>().getMediaUrl(message);
+    url = await locator<FireStorage>().getMediaUrl(message);
     final imageStreamProvider = NetworkImage(url!);
     _imageStream = imageStreamProvider.resolve(ImageConfiguration.empty);
     _imageStream?.addListener(ImageStreamListener(_updateImage));
