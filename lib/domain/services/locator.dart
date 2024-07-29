@@ -1,6 +1,8 @@
-import 'package:ai_friend/domain/firebase/fire_db.dart';
+import 'package:ai_friend/domain/firebase/fire_database.dart';
 import 'package:ai_friend/domain/helpers/rate_app_helper.dart';
-import 'package:ai_friend/domain/storages/assistant_storage.dart';
+import 'package:ai_friend/domain/app_providers/connection_provider.dart';
+import 'package:ai_friend/features/assistants/assistant_storage.dart';
+import 'package:ai_friend/features/assistants/assistants_provider.dart';
 import 'package:ai_friend/features/chat/chat_provider.dart';
 import 'package:ai_friend/features/chat/chat_script/chat_script_provider.dart';
 import 'package:ai_friend/features/chat/chat_script/chat_script_storage.dart';
@@ -24,29 +26,36 @@ Future<void> initLocator() async {
   // firebase
   locator.registerLazySingleton<FirebaseConfig>(() => FirebaseConfig());
   locator.registerLazySingleton<FireDatabase>(() => FireDatabase());
+  // locator.registerLazySingleton<FireStorage>(() => FireStorage());
   locator.registerLazySingleton<FireStorage>(() => FireStorage());
   // local storages
   locator.registerLazySingleton<AssistantStorage>(() => AssistantStorage());
   locator.registerLazySingleton<OnboardingStorage>(() => OnboardingStorage());
-  locator.registerLazySingleton<ChatStorage>(() => ChatStorage());
-  locator.registerLazySingleton<ChatScriptStorage>(() => ChatScriptStorage());
+  // locator.registerLazySingleton<ChatStorage>(() => ChatStorage());
+  // locator.registerLazySingleton<ChatScriptStorage>(() => ChatScriptStorage());
   locator.registerLazySingleton<RateAppStorage>(() => RateAppStorage());
   locator.registerLazySingleton<NameStorage>(() => NameStorage());
   locator.registerLazySingleton<HobbyStorage>(() => HobbyStorage());
+  // services
+  locator.registerLazySingleton<ConnectivityProvider>(
+      () => ConnectivityProvider());
   // state providers
   locator.registerLazySingleton<OnboardingProvider>(
       () => OnboardingProvider(locator<OnboardingStorage>()));
 
+  locator.registerLazySingleton<AssistantsProvider>(() =>
+      AssistantsProvider(locator<FireDatabase>(), locator<AssistantStorage>()));
+
   locator.registerLazySingleton<ChatScriptProvider>(
     () => ChatScriptProvider(
-      locator<FirebaseConfig>(),
-      locator<ChatScriptStorage>(),
+      locator<AssistantsProvider>(),
+      locator<FireDatabase>(),
     ),
   );
 
   locator.registerLazySingleton<ChatProvider>(
     () => ChatProvider(
-      locator<ChatStorage>(),
+      locator<AssistantsProvider>(),
       locator<ChatScriptProvider>(),
     ),
   );

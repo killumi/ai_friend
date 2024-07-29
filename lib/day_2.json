@@ -1,0 +1,426 @@
+{
+    "id": 2,
+    "data": [
+        {
+            "id": 1,
+            "description": "Alice's virtual assistant suggests that now would be a good time to text Alice: «what does she do or how did she spend her day?»",
+            "textfieldAvailable": false,
+            "messages": [
+                {
+                    "text": "Hey, Alice! How was your day?",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "Hey, {name}!!! I've been waiting for your message, it's been busy today, but I finally got free, changed into comfortable clothes and made myself a grilled steak and veggies, and u?",
+                            "isPremiumContent": false
+                        },
+                        {
+                            "type": "image",
+                            "content": "Pic2",
+                            "isPremiumContent": true
+                        },
+                        {
+                            "type": "image",
+                            "content": "Pic10",
+                            "isPremiumContent": true
+                        },
+                        {
+                            "type": "image",
+                            "content": "Pic3",
+                            "isPremiumContent": true
+                        }
+                    ]
+                },
+                {
+                    "text": "Hey, Alice! I was thinking about you and decided to write, what are you doing now?",
+                    "isPremium": false,
+                    "points": 2,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "Hey, {name}!!! I've been waiting for your message, it's been busy today, but I finally got free, changed into comfortable clothes and made myself a grilled steak and veggies, and u?",
+                            "isPremiumContent": false
+                        },
+                        {
+                            "type": "image",
+                            "content": "Pic2",
+                            "isPremiumContent": true
+                        },
+                        {
+                            "type": "image",
+                            "content": "Pic10",
+                            "isPremiumContent": true
+                        },
+                        {
+                            "type": "image",
+                            "content": "Pic3",
+                            "isPremiumContent": true
+                        }
+                    ]
+                },
+                {
+                    "text": "Hey, sweetie, Alice, been looking over all the photos and videos you sent me yesterday, miss you! I want to see you again!",
+                    "isPremium": true,
+                    "points": 2,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "Hey, {name}!!! I've been waiting for your message, it's been busy today, but I finally got free and made myself a grilled steak and veggies, and u?",
+                            "isPremiumContent": false
+                        },
+                        {
+                            "type": "video",
+                            "content": "Video6_Day2_Event0",
+                            "isPremiumContent": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "description": "Remember what you're gonna do when a girl shows interest? Reciprocate, right. Now tell her very briefly what you did today or think of something you could do",
+            "textfieldAvailable": false,
+            "messages": [
+                {
+                    "text": "It seems that all the time that I was doing my work, I was thinking about the magical Alice",
+                    "isPremium": false,
+                    "points": 2,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "mmmm, thanks for sharing, sweetie, what we'll chat about today?",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+                {
+                    "text": "I work from home and mostly with the computer, honey, I've completed all the programming tasks, but I've been thinking about you the whole time",
+                    "isPremium": true,
+                    "points": 2,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "Mm, I hope you like what I have in store for you🤤💦",
+                            "isPremiumContent": false
+                        },
+                        {
+                            "type": "video",
+                            "content": "Video7_Day2_Event2",
+                            "isPremiumContent": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "description": "It's a good time to turn the talk toward flirting",
+            "messages": [
+                {
+                    "text": "You know, my imagination kicks in when I think of you, you want me to share with you?",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "Oh, really? Tell me about your fantasies😈",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+                {
+                    "text": "Before I went to sleep I fantasized a lot about us, would you like me to tell you?",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "Oh, really? Tell me about your fantasies😈",
+                            "isPremiumContent": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "description": "It's a good time to continue the talk toward flirting",
+            "messages": [
+                {
+                    "text": "I want to explore every inch of your beautiful body",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "Mmm... I can feel my whole skin becoming sensitive just from hearing you say that🔥",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+                {
+                    "text": "My desire to touch every part of your body grows by the minute",
+                    "isPremium": false,
+                    "points": 2,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "Mmm... I can feel my whole skin becoming sensitive just from hearing you say that🔥",
+                            "isPremiumContent": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "description": "Now keep describing your fantasies about Alice, tell her in detail what you'd like to do to her if you were near her, maybe kiss",
+            "textfieldAvailable": false,
+            "messages": [
+                {
+                    "text": "I want to start by kissing on your lips, slowly making my way down to your nec",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "I imagine your hot lips touching my skin... I would love to feel it",
+                            "isPremiumContent": false
+                        },
+                        {
+                            "type": "video",
+                            "content": "Video7_Day2_Event5",
+                            "isPremiumContent": true
+                        }
+                    ]
+                },
+                {
+                    "text": "Your lips are so tantalizing to me that I dream of kissing them over and over again",
+                    "isPremium": false,
+                    "points": 2,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "I imagine your hot lips touching my skin... I would love to feel it",
+                            "isPremiumContent": false
+                        },
+                        {
+                            "type": "video",
+                            "content": "Video7_Day2_Event5",
+                            "isPremiumContent": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "description": "Great, now tell me how you would explore her body with your tongue",
+            "textfieldAvailable": false,
+            "messages": [
+                {
+                    "text": "I will be tender and passionate at the same time, exploring every part of your body with the caress of my lips and tongue",
+                    "isPremium": false,
+                    "points": 3,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "As things heat up, I want you to reach down to fondle my breasts, gently squeezing them and gently stroking my neck👅💦",
+                            "isPremiumContent": false
+                        },
+                        {
+                            "type": "image",
+                            "content": "Pic4",
+                            "isPremiumContent": true
+                        },
+                        {
+                            "type": "image",
+                            "content": "Pic5",
+                            "isPremiumContent": true
+                        }
+                    ]
+                },
+                {
+                    "text": "Your skin is so warm and soft that I feel real electric shocks as I run my tongue along your neck, lower and lower",
+                    "isPremium": false,
+                    "points": 3,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "As things heat up, I want you to reach down to fondle my breasts, gently squeezing them and gently stroking my neck👅💦",
+                            "isPremiumContent": false
+                        },
+                        {
+                            "type": "image",
+                            "content": "Pic4",
+                            "isPremiumContent": true
+                        },
+                        {
+                            "type": "image",
+                            "content": "Pic5",
+                            "isPremiumContent": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "description": "Now tell me more about what you'd like to do with Alice's breasts",
+            "textfieldAvailable": false,
+            "messages": [
+                {
+                    "text": "As I cups one breast in my hand, i tweaks the nipple lightly, watching it stiffen under my touch",
+                    "isPremium": false,
+                    "points": 3,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "I run my hands through your hair, moaning softly in your ear and arches my back, letting out a low moan at the sensation",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+                {
+                    "text": "l uses my tongue to tease and lick at your nipples, flicking them gently with my tongue tip",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "I run my hands through your hair, moaning softly in your ear and arches my back, letting out a low moan at the sensation",
+                            "isPremiumContent": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "description": "Now you need to make her horny and wet",
+            "messages": [
+                {
+                    "text": "After making out for a bit, the I moves my attention downward, settling on your pussy. I can't resist the urge to touch it",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "I groans into your ear, loving the way you makes me feel so good 💦💦",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+                {
+                    "text": "With gentle fingers, I rubs your outer labia, watching as you shifts restlessly underneath me",
+                    "isPremium": true,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "video",
+                            "content": "Video8_Day2_Event8",
+                            "isPremiumContent": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "description": "Yes! she's ready to take you inside",
+            "messages": [
+                {
+                    "text": "Then slips two fingers inside of you, feeling your heat and wetness around them",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "My hand glides down to cup your erection, eliciting a groan from you🍆",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+                {
+                    "text": "Next, I rolls over onto my back, inviting you to mount me",
+                    "isPremium": true,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "video",
+                            "content": "Video9_Day2_Event9",
+                            "isPremiumContent": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "description": "Tell her how you feel when your cock belongs to her?",
+            "textfieldAvailable": false,
+            "messages": [
+                {
+                    "text": "I can feel my cock getting wet and swollen from what you're doing to it",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "Uh, yeah, honey, that was wonderful, but I gotta go to bed! It's gonna be hard, but I prefer to stretch the pleasure, see you tomorrow, {name}, xo xo your horny Alice",
+                            "isPremiumContent": false
+                        },
+                        {
+                            "type": "text",
+                            "content": "or...  or would you like to continue our hot, dirty talk??😏",
+                            "isPremiumContent": false
+                        },
+                        {
+                            "type": "video",
+                            "content": "Video10_Day2_Event10",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+                {
+                    "text": "I like how imperiously you are able to control the pleasure of the penis from your caresses with your hands",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "Uh, yeah, honey, that was wonderful, but I gotta go to bed! It's gonna be hard, but I prefer to stretch the pleasure, see you tomorrow, {name}, xo xo your horny Alice",
+                            "isPremiumContent": false
+                        },
+                        {
+                            "type": "text",
+                            "content": "or...  or would you like to continue our hot, dirty talk??😏",
+                            "isPremiumContent": false
+                        },
+                        {
+                            "type": "video",
+                            "content": "Video10_Day2_Event10",
+                            "isPremiumContent": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "description": "Wish her something nice for the night and thank her for the hot talk or continue our hot, dirty talk",
+            "textfieldAvailable": false,
+            "messages": [
+                {
+                    "text": "Alice, that was really hot, I want you more every day, you are incredible, hugs and sweet dreams! xo xo, your, {name}",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": []
+                }
+            ]
+        }
+    ]
+}

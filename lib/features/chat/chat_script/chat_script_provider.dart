@@ -1,24 +1,29 @@
 import 'dart:developer';
-import 'package:ai_friend/features/chat/chat_script/chat_script_storage.dart';
+import 'package:ai_friend/domain/entity/i_assistant/i_assistant.dart';
+import 'package:ai_friend/domain/firebase/fire_database.dart';
+import 'package:ai_friend/features/assistants/assistants_provider.dart';
 import 'package:ai_friend/domain/entity/i_script_day/i_script_day.dart';
 import 'package:ai_friend/domain/entity/i_script_message_data/i_script_message_data.dart';
-import 'package:ai_friend/domain/firebase/firebase_config.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
 import 'package:ai_friend/domain/services/locator.dart';
 import 'package:flutter/material.dart';
 
 class ChatScriptProvider extends ChangeNotifier {
-  final FirebaseConfig _config;
-  final ChatScriptStorage _storage;
+  final AssistantsProvider _assistantsProvider;
+  final FireDatabase _database;
+
+  IScriptDay? dailyScript;
+  List<IScriptDay> assistantScript = [];
+
   bool _isShowScriptBox = false;
   bool showEndDayUI = false;
-
-  late IScriptDay? dailyScript;
   bool unlockTextField = false;
 
+  IAssistant get currentAssistant => _assistantsProvider.currentAssistant!;
+
   // current int index day and message
-  int get currentDayNumber => _storage.currentDay;
-  int get currentMessageNumber => _storage.currentMessage;
+  int get currentDayNumber => currentAssistant.scriptDayIndex!;
+  int get currentMessageNumber => currentAssistant.scriptMessageIndex!;
 
   IScriptMessageData? get scriptMessage =>
       dailyScript?.data[currentMessageNumber];
@@ -39,23 +44,40 @@ class ChatScriptProvider extends ChangeNotifier {
 
   // bool get isHasPremium => locator<PaymentProvider>().isHasPremium;
 
-  int get allDaysLenght => _config.dayLength;
+  int get assistantScriptLength => assistantScript.length;
 
-  ChatScriptProvider(this._config, this._storage);
+  ChatScriptProvider(this._assistantsProvider, this._database);
 
   Future<void> initScript() async {
-    // print('allDaysLenght: $allDaysLenght');
-    dailyScript = await _config.getDailyChatScript(currentDayNumber);
+    assistantScript = [];
+    notifyListeners();
 
-    // print('dailyScript___: $dailyScript');
-    if (daylyScriptIsEnd && currentDayNumber == allDaysLenght) {
+    try {
+      assistantScript = await _database.getScript(currentAssistant.id);
+
+      if (currentDayNumber > assistantScript.length) {
+        dailyScript = null;
+      } else {
+        dailyScript = assistantScript[currentDayNumber];
+      }
+      notifyListeners();
+      assistantScript.forEach((day) {
+        print('Day ID: ${day.id}, Messages: ${day.toString()}');
+      });
+    } catch (e) {
+      print('Error: $e');
+    }
+    print('allDaysLenght: $assistantScriptLength');
+    print('dailyScript___: $dailyScript');
+
+    if (daylyScriptIsEnd && currentDayNumber == assistantScriptLength) {
       dailyScript = null;
       showEndDayUI = false;
     }
 
     if (!locator<PaymentProvider>().isHasPremium &&
         daylyScriptIsEnd &&
-        currentDayNumber != allDaysLenght) {
+        currentDayNumber != assistantScriptLength) {
       showEndDayUI = true;
     }
 
@@ -75,74 +97,69 @@ class ChatScriptProvider extends ChangeNotifier {
 
   Future<void> showNextMessage() async {
     if (daylyScriptIsEnd) {
-      // log('NEED SHOW PREMIUM SCREEN TO SHOW NEX DAY SCRIPT');
-      if (allDaysLenght == currentDayNumber ||
+      log('NEED SHOW PREMIUM SCREEN TO SHOW NEX DAY SCRIPT');
+      if (assistantScriptLength == currentDayNumber ||
           locator<PaymentProvider>().isHasPremium) {
         showEndDayUI = false;
       } else {
         showEndDayUI = true;
       }
       showNextDay();
-
       notifyListeners();
       return;
     }
 
-    // print('currentMessageNumber: $currentMessageNumber');
-    await _storage.setCurrentMessage(currentMessageNumber + 1);
-    // print('currentMessageNumber2: $currentMessageNumber');
+    print('currentMessageNumber1: $currentMessageNumber');
+    currentAssistant.scriptMessageIndex = currentMessageNumber + 1;
+    await currentAssistant.save();
+    print('currentMessageNumber2: $currentMessageNumber');
     notifyListeners();
   }
 
-  Future<void> showPrevMessage() async {
-    if (currentMessageNumber == 0) {
-      if (currentDayNumber > 1) {
-        await _storage.setCurrentDay(currentDayNumber - 1);
-        dailyScript = await _config.getDailyChatScript(currentDayNumber);
-        await _storage.setCurrentMessage(dailyScript!.data.length - 1);
-      }
-      notifyListeners();
-      return;
-    }
-    await _storage.setCurrentMessage(currentMessageNumber - 1);
-    notifyListeners();
-  }
+  // Future<void> showPrevMessage() async {
+  //   if (currentMessageNumber == 0) {
+  //     if (currentDayNumber > 1) {
+  //       await _storage.setCurrentDay(currentDayNumber - 1);
+  //       dailyScript = await _config.getDailyChatScript(currentDayNumber);
+  //       await _storage.setCurrentMessage(dailyScript!.data.length - 1);
+  //     }
+  //     notifyListeners();
+  //     return;
+  //   }
+  //   await _storage.setCurrentMessage(currentMessageNumber - 1);
+  //   notifyListeners();
+  // }
 
-  Future<void> showPrevDay() async {
-    if (dailyScript == null) {
-      await _storage.setCurrentDay(_config.dayLength);
-      dailyScript = await _config.getDailyChatScript(currentDayNumber);
-      await _storage.setCurrentMessage(dailyScript!.data.length - 1);
-      notifyListeners();
-      return;
-    }
-    if (currentDayNumber > 1) {
-      await _storage.setCurrentDay(currentDayNumber - 1);
-      dailyScript = await _config.getDailyChatScript(currentDayNumber);
-      await _storage.setCurrentMessage(dailyScript!.data.length - 1);
-    }
+  // Future<void> showPrevDay() async {
+  //   if (dailyScript == null) {
+  //     await _storage.setCurrentDay(_config.dayLength);
+  //     dailyScript = await _config.getDailyChatScript(currentDayNumber);
+  //     await _storage.setCurrentMessage(dailyScript!.data.length - 1);
+  //     notifyListeners();
+  //     return;
+  //   }
+  //   if (currentDayNumber > 1) {
+  //     await _storage.setCurrentDay(currentDayNumber - 1);
+  //     dailyScript = await _config.getDailyChatScript(currentDayNumber);
+  //     await _storage.setCurrentMessage(dailyScript!.data.length - 1);
+  //   }
 
-    notifyListeners();
-  }
+  //   notifyListeners();
+  // }
 
   Future<void> showNextDay() async {
-    if (currentDayNumber == _config.dayLength) {
+    if (currentDayNumber == assistantScriptLength) {
       dailyScript = null;
       notifyListeners();
       return;
     }
-    await _storage.setCurrentDay(currentDayNumber + 1);
-    dailyScript = await _config.getDailyChatScript(currentDayNumber);
-    notifyListeners();
-    await _storage.setCurrentMessage(0);
-    notifyListeners();
-  }
 
-  Future<void> restart() async {
-    unlock(false);
-    await _storage.setCurrentDay(1);
-    dailyScript = await _config.getDailyChatScript(currentDayNumber);
-    await _storage.setCurrentMessage(0);
+    print('currentDayNumber 1: $currentDayNumber');
+    currentAssistant.scriptDayIndex = currentDayNumber + 1;
+    currentAssistant.scriptMessageIndex = 0;
+    await currentAssistant.save();
+    print('currentDayNumber 2: $currentDayNumber');
+    dailyScript = assistantScript[currentDayNumber];
     notifyListeners();
   }
 

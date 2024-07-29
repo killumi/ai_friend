@@ -8,36 +8,36 @@ part 'i_script_day.g.dart';
 @HiveType(typeId: 2)
 class IScriptDay extends HiveObject {
   @HiveField(0)
-  final int day;
+  final int id;
 
   @HiveField(1)
   final List<IScriptMessageData> data;
 
   IScriptDay({
-    required this.day,
+    required this.id,
     required this.data,
   });
 
   IScriptDay copyWith({
-    int? day,
+    int? id,
     List<IScriptMessageData>? data,
   }) {
     return IScriptDay(
-      day: day ?? this.day,
+      id: id ?? this.id,
       data: data ?? this.data,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'day': day,
+      'id': id,
       'data': data.map((x) => x.toMap()).toList(),
     };
   }
 
   factory IScriptDay.fromMap(Map<String, dynamic> map) {
     return IScriptDay(
-      day: map['day'] as int,
+      id: map['id'] as int,
       data: List<IScriptMessageData>.from(
         (map['data'] as Iterable<dynamic>).map<IScriptMessageData>(
           (x) => IScriptMessageData.fromMap(x as Map<String, dynamic>),
@@ -52,15 +52,15 @@ class IScriptDay extends HiveObject {
       IScriptDay.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'IScriptDay(day: $day, data: $data)';
+  String toString() => 'IScriptDay(id: $id, data: $data)';
 
   @override
   bool operator ==(covariant IScriptDay other) {
     if (identical(this, other)) return true;
 
-    return other.day == day && listEquals(other.data, data);
+    return other.id == id && listEquals(other.data, data);
   }
 
   @override
-  int get hashCode => day.hashCode ^ data.hashCode;
+  int get hashCode => id.hashCode ^ data.hashCode;
 }

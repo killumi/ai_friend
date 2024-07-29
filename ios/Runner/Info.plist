@@ -64,5 +64,11 @@
 		<true/>
 		<key>FacebookClientToken</key>
 		<string>bff552c6e07c7b1e28c89a36ec13e8fb</string>
+		<!-- wifi state -->
+		<key>NSAppTransportSecurity</key>
+		<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		</dict>
 	</dict>
 </plist>

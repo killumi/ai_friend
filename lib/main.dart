@@ -1,13 +1,17 @@
 import 'dart:async';
 
 import 'package:ai_friend/domain/firebase/fire_auth.dart';
+import 'package:ai_friend/domain/firebase/fire_storage.dart';
 import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
-import 'package:ai_friend/domain/firebase/fire_db.dart';
+import 'package:ai_friend/domain/firebase/fire_database.dart';
 import 'package:ai_friend/domain/helpers/rate_app_helper.dart';
+import 'package:ai_friend/domain/app_providers/connection_provider.dart';
 import 'package:ai_friend/domain/services/push_notifications.dart';
 import 'package:ai_friend/domain/analitics/singular_analitics.dart';
 import 'package:ai_friend/domain/helpers/tracking_helper.dart';
-import 'package:ai_friend/domain/storages/assistant_storage.dart';
+import 'package:ai_friend/features/assistants/assistant_storage.dart';
+import 'package:ai_friend/features/assistants/assistant_list_screen.dart';
+import 'package:ai_friend/features/assistants/assistants_provider.dart';
 import 'package:ai_friend/features/chat/chat_provider.dart';
 import 'package:ai_friend/features/chat/chat_screen.dart';
 import 'package:ai_friend/features/chat/chat_script/chat_script_provider.dart';
@@ -30,6 +34,7 @@ import 'package:ai_friend/features/profile/name/name_storage.dart';
 import 'package:ai_friend/features/profile/profile_provider.dart';
 import 'package:apphud/apphud.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:oktoast/oktoast.dart';
@@ -56,8 +61,8 @@ void main() async {
   // INIT HIVE
   await Hive.initFlutter();
   // STORAGES
-  await ChatScriptStorage.openStorage();
-  await ChatStorage.openStorage();
+  // await ChatScriptStorage.openStorage();
+  // await ChatStorage.openStorage();
   await OnboardingStorage.openStorage();
   await BirthDateStorage.openStorage();
   await NameStorage.openStorage();
@@ -66,7 +71,12 @@ void main() async {
   await RateAppStorage.openStorage();
   await AssistantStorage.openStorage();
   // LOAD ASSISTANT PROFILES
-  await locator<FireDatabase>().getAssistants();
+  // await AssistantStorage().clear();
+  await locator<AssistantsProvider>().updateAssistants();
+  // await locator<FireStorage>().checkImages();
+  // final result = await locator<FireDatabase>().getScript('alice');
+  // print('RESULT SCRIPT ____: ${result.length}');
+  // await locator<FireDatabase>().uploadData();
   // INIT GPT
   locator<ChatProvider>().initOpenAI();
 
@@ -81,11 +91,14 @@ void main() async {
   // ANALITICS INIT
   await SingularAnalitics.init();
   await FirebaseAnaliticsService.init();
+  // services
+
   // RATE APP INIT
   await RateAppHelper.init();
   // PUSH NOTIFICATIONS
   await PushNotificationService.initFirebaseMessaging();
   await PushNotificationService.initOneSignal();
+
   runApp(const MyApp());
 }
 
@@ -101,18 +114,8 @@ class _MyAppState extends State<MyApp> {
   bool get introWasShown => locator<OnboardingStorage>().wasShown;
 
   @override
-  void initState() {
-    connectSubscription = Connectivity()
-        .onConnectivityChanged
-        .listen((List<ConnectivityResult> result) {
-      print('$result');
-    });
-    super.initState();
-  }
-
-  @override
   dispose() {
-    connectSubscription.cancel();
+    locator<ConnectivityProvider>().dispose();
     super.dispose();
   }
 
@@ -121,12 +124,16 @@ class _MyAppState extends State<MyApp> {
     return OKToast(
       child: MultiProvider(
         providers: [
+          ChangeNotifierProvider(
+            create: (_) => locator<ConnectivityProvider>(),
+          ),
           ChangeNotifierProvider(create: (_) => locator<OnboardingProvider>()),
           ChangeNotifierProvider(create: (_) => locator<ChatProvider>()),
           ChangeNotifierProvider(create: (_) => locator<ChatScriptProvider>()),
           ChangeNotifierProvider(create: (_) => locator<ProfileProvider>()),
           ChangeNotifierProvider(create: (_) => locator<HobbyProvider>()),
           ChangeNotifierProvider(create: (_) => locator<PaymentProvider>()),
+          ChangeNotifierProvider(create: (_) => locator<AssistantsProvider>()),
         ],
         child: FutureBuilder(
           future: locator<PaymentProvider>().updatePremiumStatus(),
@@ -136,11 +143,12 @@ class _MyAppState extends State<MyApp> {
               debugShowCheckedModeBanner: false,
               title: 'Lovevo',
               navigatorKey: navigatorKey,
-              home: introWasShown
-                  ? isHasPremium
-                      ? const ChatScreen()
-                      : const PaymentScreen()
-                  : const StartScreen(),
+              home: const AssistantListScreen(),
+              // home: introWasShown
+              //     ? isHasPremium
+              //         ? const ChatScreen()
+              //         : const PaymentScreen()
+              //     : const StartScreen(),
             );
           },
         ),

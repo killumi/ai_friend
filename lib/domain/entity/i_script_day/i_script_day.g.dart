@@ -17,7 +17,7 @@ class IScriptDayAdapter extends TypeAdapter<IScriptDay> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return IScriptDay(
-      day: fields[0] as int,
+      id: fields[0] as int,
       data: (fields[1] as List).cast<IScriptMessageData>(),
     );
   }
@@ -27,7 +27,7 @@ class IScriptDayAdapter extends TypeAdapter<IScriptDay> {
     writer
       ..writeByte(2)
       ..writeByte(0)
-      ..write(obj.day)
+      ..write(obj.id)
       ..writeByte(1)
       ..write(obj.data);
   }

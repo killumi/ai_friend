@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:ai_friend/domain/entity/i_assistant/i_assistant.dart';
+import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 import 'package:collection/collection.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -11,6 +12,7 @@ class AssistantStorage {
 
   static openStorage() async {
     if (!Hive.isBoxOpen(name)) {
+      Hive.registerAdapter(IChatMessageAdapter());
       Hive.registerAdapter(IAssistantAdapter());
       await Hive.openBox<IAssistant>(name);
     }
@@ -29,7 +31,14 @@ class AssistantStorage {
       final existingProfileKey = box.keys.firstWhere(
         (key) => box.get(key)?.id == profile.id,
       );
-      await box.put(existingProfileKey, profile);
+      await box.put(
+        existingProfileKey,
+        profile.copyWith(
+          messages: existing.messages,
+          scriptDayIndex: existing.scriptDayIndex,
+          scriptMessageIndex: existing.scriptMessageIndex,
+        ),
+      );
       return;
     }
 

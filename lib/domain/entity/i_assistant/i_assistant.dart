@@ -1,7 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
+
+import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
+import 'package:intl/intl.dart';
 
 part 'i_assistant.g.dart';
 
@@ -16,26 +20,38 @@ class IAssistant extends HiveObject {
   @HiveField(4)
   final String assistantKey;
   @HiveField(5)
-  final String avatarsSrc;
+  final String avatar;
   @HiveField(6)
   final String chatImagesSrc;
   @HiveField(7)
   final String chatVideosSrc;
   @HiveField(8)
-  final String profileSrc;
+  final List<String> photos;
   @HiveField(9)
-  final String scriptId;
+  List<IChatMessage>? messages;
+  @HiveField(10)
+  int? scriptDayIndex;
+  @HiveField(11)
+  int? scriptMessageIndex;
+  @HiveField(12)
+  bool? hide;
+
+  // photos: List<String>.from(
+  //       (map['photos'] as List).map((item) => item as String)),
 
   IAssistant({
     required this.id,
     required this.name,
     required this.age,
     required this.assistantKey,
-    required this.avatarsSrc,
+    required this.avatar,
     required this.chatImagesSrc,
     required this.chatVideosSrc,
-    required this.profileSrc,
-    required this.scriptId,
+    required this.photos,
+    this.messages,
+    this.scriptDayIndex,
+    this.scriptMessageIndex,
+    this.hide,
   });
 
   IAssistant copyWith({
@@ -43,22 +59,28 @@ class IAssistant extends HiveObject {
     String? name,
     String? age,
     String? assistantKey,
-    String? avatarsSrc,
+    String? avatar,
     String? chatImagesSrc,
     String? chatVideosSrc,
-    String? profileSrc,
-    String? scriptId,
+    List<String>? photos,
+    List<IChatMessage>? messages,
+    int? scriptDayIndex,
+    int? scriptMessageIndex,
+    bool? hide,
   }) {
     return IAssistant(
       id: id ?? this.id,
       name: name ?? this.name,
       age: age ?? this.age,
       assistantKey: assistantKey ?? this.assistantKey,
-      avatarsSrc: avatarsSrc ?? this.avatarsSrc,
+      avatar: avatar ?? this.avatar,
       chatImagesSrc: chatImagesSrc ?? this.chatImagesSrc,
       chatVideosSrc: chatVideosSrc ?? this.chatVideosSrc,
-      profileSrc: profileSrc ?? this.profileSrc,
-      scriptId: scriptId ?? this.scriptId,
+      photos: photos ?? this.photos,
+      messages: messages ?? this.messages,
+      scriptDayIndex: scriptDayIndex ?? this.scriptDayIndex,
+      scriptMessageIndex: scriptMessageIndex ?? this.scriptMessageIndex,
+      hide: hide ?? this.hide,
     );
   }
 
@@ -68,12 +90,28 @@ class IAssistant extends HiveObject {
       'name': name,
       'age': age,
       'assistantKey': assistantKey,
-      'avatarsSrc': avatarsSrc,
+      'avatar': avatar,
       'chatImagesSrc': chatImagesSrc,
       'chatVideosSrc': chatVideosSrc,
-      'profileSrc': profileSrc,
-      'scriptId': scriptId,
+      'photos': photos,
+      'messages': messages?.map((x) => x.toMap()).toList() ?? [],
+      'scriptDayIndex': scriptDayIndex,
+      'scriptMessageIndex': scriptMessageIndex,
+      'hide': hide,
     };
+  }
+
+  String getDate(IChatMessage message) {
+    final dateTime = message.date!;
+    final dayFormat = DateFormat('dd');
+    final monthFormat = DateFormat('MM');
+    final timeFormat = DateFormat('HH:mm');
+
+    final day = dayFormat.format(dateTime);
+    final month = monthFormat.format(dateTime);
+    final time = timeFormat.format(dateTime);
+
+    return '$day.$month $time';
   }
 
   factory IAssistant.fromMap(Map<String, dynamic> map) {
@@ -82,11 +120,24 @@ class IAssistant extends HiveObject {
       name: map['name'] as String,
       age: map['age'] as String,
       assistantKey: map['assistantKey'] as String,
-      avatarsSrc: map['avatarsSrc'] as String,
+      avatar: map['avatar'] as String,
       chatImagesSrc: map['chatImagesSrc'] as String,
       chatVideosSrc: map['chatVideosSrc'] as String,
-      profileSrc: map['profileSrc'] as String,
-      scriptId: map['scriptId'] as String,
+      photos: List<String>.from(
+          (map['photos'] as List).map((item) => item as String)),
+      messages: map['messages'] != null
+          ? List<IChatMessage>.from(
+              (map['messages'] as List<dynamic>).map<IChatMessage?>(
+                (x) => IChatMessage.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : [],
+      scriptDayIndex:
+          map.containsKey('scriptDayIndex') ? map['scriptDayIndex'] as int : 0,
+      scriptMessageIndex: map.containsKey('scriptMessageIndex')
+          ? map['scriptMessageIndex'] as int
+          : 0,
+      hide: map['hide'] != null ? map['hide'] as bool : false,
     );
   }
 
@@ -97,7 +148,7 @@ class IAssistant extends HiveObject {
 
   @override
   String toString() {
-    return 'IAssistant(id: $id, name: $name, age: $age, assistantKey: $assistantKey, avatarsSrc: $avatarsSrc, chatImagesSrc: $chatImagesSrc, chatVideosSrc: $chatVideosSrc, profileSrc: $profileSrc, scriptId: $scriptId)';
+    return 'IAssistant(id: $id, name: $name, age: $age, assistantKey: $assistantKey, avatar: $avatar, chatImagesSrc: $chatImagesSrc, chatVideosSrc: $chatVideosSrc, photos: $photos, messages: $messages, scriptDayIndex: $scriptDayIndex, scriptMessageIndex: $scriptMessageIndex, hide: $hide)';
   }
 
   @override
@@ -108,11 +159,11 @@ class IAssistant extends HiveObject {
         other.name == name &&
         other.age == age &&
         other.assistantKey == assistantKey &&
-        other.avatarsSrc == avatarsSrc &&
+        other.avatar == avatar &&
         other.chatImagesSrc == chatImagesSrc &&
         other.chatVideosSrc == chatVideosSrc &&
-        other.profileSrc == profileSrc &&
-        other.scriptId == scriptId;
+        listEquals(other.photos, photos) &&
+        other.hide == hide;
   }
 
   @override
@@ -121,10 +172,10 @@ class IAssistant extends HiveObject {
         name.hashCode ^
         age.hashCode ^
         assistantKey.hashCode ^
-        avatarsSrc.hashCode ^
+        avatar.hashCode ^
         chatImagesSrc.hashCode ^
         chatVideosSrc.hashCode ^
-        profileSrc.hashCode ^
-        scriptId.hashCode;
+        photos.hashCode ^
+        hide.hashCode;
   }
 }

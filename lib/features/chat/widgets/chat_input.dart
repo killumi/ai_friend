@@ -1,3 +1,4 @@
+import 'package:ai_friend/domain/services/app_router.dart';
 import 'package:ai_friend/features/chat/chat_provider.dart';
 import 'package:ai_friend/features/chat/chat_script/chat_script_provider.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
@@ -34,15 +35,15 @@ class _ChatInputState extends State<ChatInput> {
         context.select((ChatScriptProvider e) => e.isShowScriptBox);
     final textfieldAvailable =
         context.select((ChatScriptProvider e) => e.textfieldAvailable);
-    // final currentScriptMessageData =
-    //     context.select((ChatScriptProvider e) => e.scriptMessage);
+    final currentScriptMessageData =
+        context.select((ChatScriptProvider e) => e.scriptMessage);
     final isShowRollUpBoxButton =
         context.select((ChatScriptProvider e) => e.isShowRollUpBoxButton);
     final isHasFocus = context.select((ChatProvider e) => e.isHasFocus);
     final isHasPremium = context.select((PaymentProvider e) => e.isHasPremium);
     final showSendButton = context.select((ChatProvider e) => e.showSendButton);
-    // final scriptIsEnded =
-    // context.select((ChatScriptProvider e) => e.dailyScript) == null;
+    final scriptIsEnded =
+        context.select((ChatScriptProvider e) => e.dailyScript) == null;
 
     return GestureDetector(
       onVerticalDragEnd: (r) {
@@ -70,10 +71,10 @@ class _ChatInputState extends State<ChatInput> {
                   onTap: () {
                     if (!isHasPremium && !textfieldAvailable) {
                       chatProvider.node.unfocus();
-                      // AppRouter.openPaywall(context, false);
-                      scriptProvider.showScriptBox(true);
+                      AppRouter.openPaywall(context, false);
+                      // scriptProvider.showScriptBox(true);
                     }
-                    // print('object');
+                    print('object');
                     return;
                   },
                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -100,18 +101,17 @@ class _ChatInputState extends State<ChatInput> {
                             curve: Curves.ease,
                             child: Bounce(
                               onTap: () async {
-                                // if (textfieldAvailable) {
-                                // await chatProvider.sendMessageGetAnswer(
-                                //   null,
-                                //   messageData: currentScriptMessageData,
-                                // );
-                                // chatProvider.node.unfocus();
-                                // scriptProvider.showScriptBox(true);
+                                if (textfieldAvailable) {
+                                  await chatProvider.sendMessageGetAnswer(
+                                    null,
+                                    messageData: currentScriptMessageData,
+                                  );
+                                  chatProvider.node.unfocus();
+                                  scriptProvider.showScriptBox(true);
 
-                                // await scriptProvider.showNextMessage();
-                                // } else {
-                                // }
-                                chatProvider.sendMessageToGPT();
+                                  await scriptProvider.showNextMessage();
+                                } else {}
+                                await chatProvider.sendMessageToGPT();
                               },
                               tilt: false,
                               scaleFactor: 0.89,
@@ -140,12 +140,14 @@ class _ChatInputState extends State<ChatInput> {
                       : AnimatedScale(
                           scale:
                               isShowRollUpBoxButton && !isShowScriptBox ? 1 : 0,
+                          // scale: 1,
                           duration: const Duration(milliseconds: 350),
                           curve: Curves.ease,
                           child: AnimatedOpacity(
                             opacity: isShowRollUpBoxButton && !isShowScriptBox
                                 ? 1
                                 : 0,
+                            // opacity: 1,
                             duration: const Duration(milliseconds: 260),
                             curve: Curves.ease,
                             child: Bounce(

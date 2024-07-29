@@ -80,7 +80,7 @@ class IChatMessage extends HiveObject {
     return IChatMessage(
       date: map['date'] != null
           ? DateTime.fromMillisecondsSinceEpoch(map['date'] as int)
-          : null,
+          : DateTime.now(),
       isBot: map['isBot'] != null ? map['isBot'] as bool : true,
       type: map['type'] as String,
       content: map['content'] as String,

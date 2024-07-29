@@ -1,10 +1,13 @@
+import 'package:ai_friend/domain/entity/i_assistant/i_assistant.dart';
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 import 'package:ai_friend/domain/firebase/fire_storage.dart';
 import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
 import 'package:ai_friend/domain/services/locator.dart';
+import 'package:ai_friend/features/assistants/assistants_provider.dart';
 import 'package:ai_friend/widgets/blur_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:swipe_image_gallery/swipe_image_gallery.dart';
 
 class ImageMessage extends StatefulWidget {
@@ -49,8 +52,10 @@ class _ImageMessageState extends State<ImageMessage>
   // }
 
   void _loadImage() async {
+    final src =
+        context.read<AssistantsProvider>().currentAssistant!.chatImagesSrc;
     if (widget.message.mediaData != null) return;
-    url = await locator<FireStorage>().getMediaUrl(message);
+    url = await locator<FireStorage>().getMediaUrl(src, message);
     final imageStreamProvider = NetworkImage(url!);
     _imageStream = imageStreamProvider.resolve(ImageConfiguration.empty);
     _imageStream?.addListener(ImageStreamListener(_updateImage));

@@ -65,65 +65,65 @@ class _GalleryScreenState extends State<GalleryScreen> {
                 )
               ],
               views: [
-                ValueListenableBuilder(
-                    valueListenable: locator<ChatStorage>().box.listenable(),
-                    builder: (context, box, widget) {
-                      final images = locator<ChatStorage>().images;
-                      return images.isEmpty
-                          ? Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Assets.icons.galleryIcon.svg(
-                                  width: 48,
-                                  color: const Color(0xffA9A1B2),
-                                ),
-                                const SizedBox(height: 15),
-                                const Text(
-                                  "Alice hasn't sent her photos yet",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Color(0xffA9A1B2),
-                                    fontFamily: FontFamily.gothamPro,
-                                  ),
-                                ),
-                                const SizedBox(height: 100),
-                              ],
-                            )
-                          : CustomScrollView(
-                              slivers: [
-                                GalleryImageGrid(images: images),
-                              ],
-                            );
-                    }),
-                ValueListenableBuilder(
-                    valueListenable: locator<ChatStorage>().box.listenable(),
-                    builder: (context, box, widget) {
-                      final videos = locator<ChatStorage>().videos;
+                // ValueListenableBuilder(
+                //     valueListenable: locator<ChatStorage>().box.listenable(),
+                //     builder: (context, box, widget) {
+                //       final images = locator<ChatStorage>().images;
+                //       return images.isEmpty
+                //           ? Column(
+                //               mainAxisAlignment: MainAxisAlignment.center,
+                //               children: [
+                //                 Assets.icons.galleryIcon.svg(
+                //                   width: 48,
+                //                   color: const Color(0xffA9A1B2),
+                //                 ),
+                //                 const SizedBox(height: 15),
+                //                 const Text(
+                //                   "Alice hasn't sent her photos yet",
+                //                   style: TextStyle(
+                //                     fontSize: 16,
+                //                     color: Color(0xffA9A1B2),
+                //                     fontFamily: FontFamily.gothamPro,
+                //                   ),
+                //                 ),
+                //                 const SizedBox(height: 100),
+                //               ],
+                //             )
+                //           : CustomScrollView(
+                //               slivers: [
+                //                 GalleryImageGrid(images: images),
+                //               ],
+                //             );
+                //     }),
+                // ValueListenableBuilder(
+                //     valueListenable: locator<ChatStorage>().box.listenable(),
+                //     builder: (context, box, widget) {
+                //       final videos = locator<ChatStorage>().videos;
 
-                      return videos.isEmpty
-                          ? Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Assets.icons.galleryIcon.svg(
-                                  width: 48,
-                                  color: const Color(0xffA9A1B2),
-                                ),
-                                const SizedBox(height: 15),
-                                const Text(
-                                  "Alice hasn't sent her videos yet",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Color(0xffA9A1B2),
-                                    fontFamily: FontFamily.gothamPro,
-                                  ),
-                                ),
-                                const SizedBox(height: 100),
-                              ],
-                            )
-                          : CustomScrollView(
-                              slivers: [GalleryVideoGrid(videos: videos)],
-                            );
-                    }),
+                //       return videos.isEmpty
+                //           ? Column(
+                //               mainAxisAlignment: MainAxisAlignment.center,
+                //               children: [
+                //                 Assets.icons.galleryIcon.svg(
+                //                   width: 48,
+                //                   color: const Color(0xffA9A1B2),
+                //                 ),
+                //                 const SizedBox(height: 15),
+                //                 const Text(
+                //                   "Alice hasn't sent her videos yet",
+                //                   style: TextStyle(
+                //                     fontSize: 16,
+                //                     color: Color(0xffA9A1B2),
+                //                     fontFamily: FontFamily.gothamPro,
+                //                   ),
+                //                 ),
+                //                 const SizedBox(height: 100),
+                //               ],
+                //             )
+                //           : CustomScrollView(
+                //               slivers: [GalleryVideoGrid(videos: videos)],
+                //             );
+                //     }),
               ],
             ),
           ),

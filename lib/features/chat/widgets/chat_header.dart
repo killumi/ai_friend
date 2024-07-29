@@ -1,10 +1,12 @@
 import 'package:ai_friend/domain/services/app_router.dart';
 import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
 import 'package:ai_friend/domain/firebase/firebase_config.dart';
+import 'package:ai_friend/features/assistants/assistants_provider.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
 import 'package:ai_friend/gen/fonts.gen.dart';
 import 'package:ai_friend/domain/services/locator.dart';
+import 'package:ai_friend/widgets/assistant_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -22,8 +24,11 @@ class _ChatHeaderState extends State<ChatHeader> {
 
   @override
   Widget build(BuildContext context) {
+    final currentAssistant =
+        context.select((AssistantsProvider e) => e.currentAssistant);
     final isHasPremium = context.select((PaymentProvider e) => e.isHasPremium);
     final isSmal = MediaQuery.of(context).size.height < 750;
+    final name = currentAssistant!.name;
 
     return Align(
       alignment: Alignment.topCenter,
@@ -52,17 +57,37 @@ class _ChatHeaderState extends State<ChatHeader> {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: GestureDetector(
-                      onTap: () => AppRouter.openSettings(context),
+                      onTap: () => AppRouter.pop(context),
                       child: Container(
                         height: 40,
                         width: 40,
                         color: Colors.transparent,
                         alignment: Alignment.centerLeft,
-                        child: Assets.icons.settingsIcon.svg(),
+                        child: const Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
                 ),
+                // SizedBox(
+                //   width: 96,
+                //   height: 40,
+                //   child: Align(
+                //     alignment: Alignment.centerLeft,
+                //     child: GestureDetector(
+                //       onTap: () => AppRouter.openSettings(context),
+                //       child: Container(
+                //         height: 40,
+                //         width: 40,
+                //         color: Colors.transparent,
+                //         alignment: Alignment.centerLeft,
+                //         child: Assets.icons.settingsIcon.svg(),
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 Expanded(
                   child: GestureDetector(
                     onTap: toggleOpenMenu,
@@ -71,11 +96,12 @@ class _ChatHeaderState extends State<ChatHeader> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Assets.images.chatAvatar.image(width: 40),
+                          AssistantAvatar(
+                              assistant: currentAssistant, size: 40),
                           const SizedBox(width: 10),
-                          const Text(
-                            'Alice',
-                            style: TextStyle(
+                          Text(
+                            name,
+                            style: const TextStyle(
                               color: Color(0xFFFBFBFB),
                               fontSize: 18,
                               fontFamily: FontFamily.gothamPro,
@@ -158,7 +184,7 @@ class _ChatHeaderState extends State<ChatHeader> {
                       },
                       child: _buildOption(
                         Assets.icons.lipsProfile.svg(),
-                        'Alice’s Profile',
+                        '$name’s Profile',
                       ),
                     ),
                     if (showMedia) const SizedBox(height: 12),

@@ -28,12 +28,15 @@ class AppRouter {
     //         (route) => false)
     //     : Navigator.of(context)
     //         .push(CupertinoPageRoute(builder: (context) => const ChatScreen()));
-    final route = PageRouteAnimator(
-      child: const ChatScreen(),
-      routeAnimation: RouteAnimation.rightToLeftWithFade,
-      curve: Curves.ease,
-      duration: const Duration(milliseconds: 600),
-      reverseDuration: const Duration(milliseconds: 600),
+    // final route = PageRouteAnimator(
+    //   child: const ChatScreen(),
+    //   routeAnimation: RouteAnimation.rightToLeftWithFade,
+    //   curve: Curves.ease,
+    //   duration: const Duration(milliseconds: 600),
+    //   reverseDuration: const Duration(milliseconds: 600),
+    // );
+    final route = CupertinoPageRoute(
+      builder: (context) => const ChatScreen(),
     );
 
     removeRoutes

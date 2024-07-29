@@ -1,11 +1,15 @@
+import 'dart:developer';
+
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 import 'package:ai_friend/domain/firebase/fire_storage.dart';
 import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
+import 'package:ai_friend/features/assistants/assistants_provider.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
 import 'package:ai_friend/domain/services/locator.dart';
 import 'package:ai_friend/widgets/blur_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:swipe_image_gallery/swipe_image_gallery.dart';
 import 'package:video_player/video_player.dart';
 
@@ -23,8 +27,7 @@ class _VideoMessageState extends State<VideoMessage>
     with AutomaticKeepAliveClientMixin {
   VideoPlayerController? _controller;
   bool _isPlaying = true;
-  final firebaseProvider = locator<FireStorage>();
-  // bool _isBlurred = true;
+  final fireStorage = locator<FireStorage>();
 
   @override
   bool get wantKeepAlive => true;
@@ -32,7 +35,6 @@ class _VideoMessageState extends State<VideoMessage>
   @override
   void initState() {
     super.initState();
-    // _isBlurred = widget.isPreview!;
     _initVideoController();
   }
 
@@ -42,19 +44,23 @@ class _VideoMessageState extends State<VideoMessage>
     super.dispose();
   }
 
-  // void toggleBlur() {
-  //   _isBlurred = !_isBlurred;
-  //   setState(() {});
-  // }
-
   Future<void> _initVideoController() async {
+    log('START INIT VIDEO');
     if (widget.message.mediaData != null) {
-      final file = await firebaseProvider.getMediaFile(
+      log('START INIT VIDEO WITH UNTI8LIST AS FILE');
+      final file = await fireStorage.getMediaFile(
           widget.message.mediaData!, widget.message.content, 'mp4');
       _controller = VideoPlayerController.file(file);
       _controller!.setVolume(0);
     } else {
-      final url = await firebaseProvider.getMediaUrl(widget.message);
+      log('START INIT VIDEO WITH URL');
+
+      final src =
+          context.read<AssistantsProvider>().currentAssistant!.chatVideosSrc;
+      log('CURRENT SRC: $src');
+      final url = await fireStorage.getMediaUrl(src, widget.message);
+      log('VIDEO URL: $url ');
+
       _controller = VideoPlayerController.networkUrl(Uri.parse(url));
       _controller!.setVolume(0);
     }
@@ -92,9 +98,9 @@ class _VideoMessageState extends State<VideoMessage>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final size = MediaQuery.of(context).size;
 
-    super.build(context);
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(widget.isPreview! ? 10 : 0),
@@ -102,7 +108,6 @@ class _VideoMessageState extends State<VideoMessage>
       ),
       constraints: !widget.isPreview!
           ? BoxConstraints(maxWidth: size.width, maxHeight: size.height)
-          // ? const BoxConstraints(maxWidth: 1000, maxHeight: 1000)
           : const BoxConstraints(maxWidth: 350, maxHeight: 380),
       child: _controller?.value.isInitialized ?? false
           ? AspectRatio(

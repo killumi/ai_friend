@@ -21,18 +21,21 @@ class IAssistantAdapter extends TypeAdapter<IAssistant> {
       name: fields[2] as String,
       age: fields[3] as String,
       assistantKey: fields[4] as String,
-      avatarsSrc: fields[5] as String,
+      avatar: fields[5] as String,
       chatImagesSrc: fields[6] as String,
       chatVideosSrc: fields[7] as String,
-      profileSrc: fields[8] as String,
-      scriptId: fields[9] as String,
+      photos: (fields[8] as List).cast<String>(),
+      messages: (fields[9] as List?)?.cast<IChatMessage>(),
+      scriptDayIndex: fields[10] as int?,
+      scriptMessageIndex: fields[11] as int?,
+      hide: fields[12] as bool?,
     );
   }
 
   @override
   void write(BinaryWriter writer, IAssistant obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(12)
       ..writeByte(1)
       ..write(obj.id)
       ..writeByte(2)
@@ -42,15 +45,21 @@ class IAssistantAdapter extends TypeAdapter<IAssistant> {
       ..writeByte(4)
       ..write(obj.assistantKey)
       ..writeByte(5)
-      ..write(obj.avatarsSrc)
+      ..write(obj.avatar)
       ..writeByte(6)
       ..write(obj.chatImagesSrc)
       ..writeByte(7)
       ..write(obj.chatVideosSrc)
       ..writeByte(8)
-      ..write(obj.profileSrc)
+      ..write(obj.photos)
       ..writeByte(9)
-      ..write(obj.scriptId);
+      ..write(obj.messages)
+      ..writeByte(10)
+      ..write(obj.scriptDayIndex)
+      ..writeByte(11)
+      ..write(obj.scriptMessageIndex)
+      ..writeByte(12)
+      ..write(obj.hide);
   }
 
   @override
