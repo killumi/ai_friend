@@ -81,8 +81,8 @@ class PaymentProvider with ChangeNotifier {
   Future<bool> updatePremiumStatus() async {
     try {
       final result = await Apphud.hasPremiumAccess();
-      // _isHasPremium = result;
-      _isHasPremium = true;
+      _isHasPremium = result;
+      // _isHasPremium = true;
       notifyListeners();
       return _isHasPremium;
     } on ApphudError catch (e) {

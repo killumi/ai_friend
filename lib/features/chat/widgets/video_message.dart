@@ -53,11 +53,11 @@ class _VideoMessageState extends State<VideoMessage>
       _controller = VideoPlayerController.file(file);
       _controller!.setVolume(0);
     } else {
-      log('START INIT VIDEO WITH URL');
+      // log('START INIT VIDEO WITH URL');
 
       final src =
           context.read<AssistantsProvider>().currentAssistant!.chatVideosSrc;
-      log('CURRENT SRC: $src');
+      // log('CURRENT SRC: $src');
       final url = await fireStorage.getMediaUrl(src, widget.message);
       log('VIDEO URL: $url ');
 

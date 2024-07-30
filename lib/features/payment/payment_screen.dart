@@ -255,7 +255,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     onTap: () async {
                       final result = await provider.restore();
                       if (!result) return;
-                      AppRouter.openChat(context, removeRoutes: true);
+                      AppRouter.openAssistantList(context, removeRoutes: true);
                     },
                     child: const Text(
                       'Restore Purchase',
@@ -308,7 +308,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     if (!result) return;
     context.read<ChatProvider>().chatListKey = GlobalKey<AnimatedListState>();
     await Future.delayed(const Duration(milliseconds: 200));
-    AppRouter.openChat(context, removeRoutes: true);
+    AppRouter.openAssistantList(context, removeRoutes: true);
   }
 
   void closeScreen() {
@@ -317,6 +317,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
       return;
     }
 
-    AppRouter.openChat(context);
+    AppRouter.openAssistantList(context);
   }
 }

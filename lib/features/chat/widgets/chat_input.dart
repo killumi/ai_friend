@@ -1,4 +1,3 @@
-import 'package:ai_friend/domain/services/app_router.dart';
 import 'package:ai_friend/features/chat/chat_provider.dart';
 import 'package:ai_friend/features/chat/chat_script/chat_script_provider.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
@@ -42,8 +41,8 @@ class _ChatInputState extends State<ChatInput> {
     final isHasFocus = context.select((ChatProvider e) => e.isHasFocus);
     final isHasPremium = context.select((PaymentProvider e) => e.isHasPremium);
     final showSendButton = context.select((ChatProvider e) => e.showSendButton);
-    final scriptIsEnded =
-        context.select((ChatScriptProvider e) => e.dailyScript) == null;
+    // final scriptIsEnded =
+    // context.select((ChatScriptProvider e) => e.dailyScript) == null;
 
     return GestureDetector(
       onVerticalDragEnd: (r) {
@@ -71,10 +70,9 @@ class _ChatInputState extends State<ChatInput> {
                   onTap: () {
                     if (!isHasPremium && !textfieldAvailable) {
                       chatProvider.node.unfocus();
-                      AppRouter.openPaywall(context, false);
-                      // scriptProvider.showScriptBox(true);
+                      scriptProvider.showScriptBox(true);
+                      chatProvider.scrollDown();
                     }
-                    print('object');
                     return;
                   },
                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -110,8 +108,9 @@ class _ChatInputState extends State<ChatInput> {
                                   scriptProvider.showScriptBox(true);
 
                                   await scriptProvider.showNextMessage();
-                                } else {}
-                                await chatProvider.sendMessageToGPT();
+                                } else {
+                                  await chatProvider.sendMessageToGPT();
+                                }
                               },
                               tilt: false,
                               scaleFactor: 0.89,
@@ -151,8 +150,10 @@ class _ChatInputState extends State<ChatInput> {
                             duration: const Duration(milliseconds: 260),
                             curve: Curves.ease,
                             child: Bounce(
-                              onTap: () {
+                              onTap: () async {
                                 scriptProvider.showScriptBox(true);
+                                await Future.delayed(
+                                    const Duration(milliseconds: 500));
                                 chatProvider.scrollDown();
                               },
                               tilt: false,

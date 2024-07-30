@@ -70,57 +70,109 @@ final data = [
     "data": [
       {
         "id": 1,
-        "description":
-            "If a girl shows interest, you need to show her mutual interest",
+        "description": "New girl, new love story, get to know Emily better",
         "messages": [
           {
-            "text": "Very glad that you wrote, your name is Alice, right?",
+            "text":
+                "Hey Emily, it's going great now that I'm talking to you. Did Max enjoy the hike as much as I would enjoy a walk with you?",
             "isPremium": false,
             "points": 1,
             "answer": [
               {
                 "type": "text",
-                "content": "You're really right 😋",
+                "content": "Definitely, I'd like to know that 😋",
                 "isPremiumContent": false
-              },
-              {
-                "type": "video",
-                "content": "Video1_Day1_Event0",
-                "isPremiumContent": true
               }
             ]
           },
           {
-            "text": "Yeah, sure, I'd love to get to know you better, Alice",
+            "text":
+                "Hi Emily! My day's been pretty good. I love hiking too. Do you have a favorite trail you recommend?",
             "isPremium": false,
             "points": 2,
             "answer": [
               {
                 "type": "text",
-                "content": "How nice!😋",
+                "content":
+                    "Oh, Max loves any trail with a stream. He adores splashing around. What about you? Are you an outdoor enthusiast too?",
+                "isPremiumContent": false
+              }
+            ]
+          },
+          {
+            "text":
+                "Hey! My day's been decent, but it's about to get much better. What's Max's favorite treat? Maybe I can bribe him to share you!",
+            "isPremium": true,
+            "points": 2,
+            "answer": [
+              {
+                "type": "text",
+                "content":
+                    "Duck necks are Max's favorite, you'd love them. Ahah!",
+                "isPremiumContent": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "description":
+            "The attention for her favorite pet is great! Keep up the good work",
+        "messages": [
+          {
+            "text":
+                "I do love the outdoors, especially if I had a hiking buddy as charming as you",
+            "isPremium": false,
+            "points": 1,
+            "answer": [
+              {
+                "type": "text",
+                "content":
+                    "Buddy's favorite thing to do is put together a nice look for a walk",
                 "isPremiumContent": false
               },
               {
-                "type": "video",
-                "content": "Video1_Day1_Event0",
+                "type": "image",
+                "content": "EmilyParker_pic1",
                 "isPremiumContent": true
               }
             ]
           },
           {
             "text":
-                "Hi, honey! Can a gentleman like me get your wonderful selfies?",
-            "isPremium": true,
-            "points": 2,
+                "Absolutely! I often go hiking on weekends. What's the best part about hiking for you?",
+            "isPremium": false,
+            "points": 1,
             "answer": [
               {
                 "type": "text",
-                "content": "Mmm, of course!😋",
+                "content":
+                    "Buddy's favorite thing to do is put together a nice look for a walk",
+                "isPremiumContent": false
+              },
+              {
+                "type": "image",
+                "content": "EmilyParker_pic1",
+                "isPremiumContent": true
+              }
+            ]
+          },
+          {
+            "text":
+                "I enjoy the outdoors, but I think I'd enjoy it even more if I had you and Max as company",
+            "isPremium": true,
+            "points": 3,
+            "answer": [
+              {
+                "type": "text",
+                "content":
+                    "Uh, boys, you're gonna have to compete for my attention😈",
                 "isPremiumContent": false
               },
               {
                 "type": "video",
-                "content": "Video2_Day1_Event1",
+                "content": "EmilyParker_Video1",
                 "isPremiumContent": true
               }
             ]
@@ -129,49 +181,48 @@ final data = [
       },
       {
         "id": 3,
-        "description": "...and ask another engaging question",
+        "description":
+            "Wow, you're being seduced,  recommend complimenting Emily",
         "messages": [
           {
-            "text": "Alice, what topics do you like to chat with men about?",
+            "text":
+                "U look incredible, Emily 🥵That outfit leaves just enough to the imagination",
             "isPremium": false,
             "points": 1,
             "answer": [
               {
                 "type": "text",
-                "content":
-                    "I'm most interested in the world of male fantasies, I've always wanted to look inside your head and find out the desires hidden behind courtesy and delicacy",
+                "content": "ahaha this is just the beginning 🔞",
                 "isPremiumContent": false
               }
             ]
           },
           {
-            "text": "Alice, what's most important to you in a man?",
+            "text": "That skirt suits you perfectly. My day's much better now",
             "isPremium": false,
             "points": 2,
             "answer": [
               {
                 "type": "text",
-                "content":
-                    "I'm most interested in the world of male fantasies, I've always wanted to look inside your head and find out the desires hidden behind courtesy and delicacy",
+                "content": "ahaha glad to lift your spirits and more 🥰",
                 "isPremiumContent": false
               }
             ]
           },
           {
             "text":
-                "Alice, how do you feel about more explicit dialog with a man?",
+                "I can't imagine what would happen to me if I saw you without that beautiful skirt🤤",
             "isPremium": true,
-            "points": 3,
+            "points": 2,
             "answer": [
               {
                 "type": "text",
-                "content":
-                    "I'm most interested in the world of male fantasies, I've always wanted to look inside your head and find out the desires hidden behind courtesy and delicacy",
+                "content": "all for you ❤️‍🔥",
                 "isPremiumContent": false
               },
               {
                 "type": "video",
-                "content": "Video4_Day1_Event3",
+                "content": "EmilyParker_Video2",
                 "isPremiumContent": true
               }
             ]
@@ -180,32 +231,50 @@ final data = [
       },
       {
         "id": 4,
-        "description":
-            "Wow, she sure liked you! Now ask her something about her life?",
+        "description": "Emily is very brave and quick to approach, isn't she?",
         "messages": [
           {
-            "text": "Alice, can you tell how you spend your free time?",
+            "text": "Emily, you pleasantly surprise me 💋",
             "isPremium": false,
             "points": 1,
             "answer": [
               {
                 "type": "text",
                 "content":
-                    "I love to read, so I often spend my free time reading or watching popular science videos about the world around me.\n\nAnd I also have a hobby - I listen to and record my own music in cold wave/electro/ minimal wave genre, but also I am inspired by academic music\n\nIn the evening I spend my time chatting online, like I'm doing with you right now.",
+                    "Thank u so much for your complements, we're getting away from our introductions, so what's your taste in girls? ;)",
                 "isPremiumContent": false
               }
             ]
           },
           {
-            "text": "Alice, I know you do a lot for the society, tell me why?",
+            "text": "Emily, you scare me with your candor ;)",
             "isPremium": false,
-            "points": 2,
+            "points": 1,
             "answer": [
               {
                 "type": "text",
                 "content":
-                    "My dream is to create the perfect virtual environment for education and development, and to find ways to use artificial intelligence to fulfill sexual desires.",
+                    "Thank u so much for your complements, we're getting away from our introductions, so what's your taste in girls? ;)",
                 "isPremiumContent": false
+              }
+            ]
+          },
+          {
+            "text":
+                "You know, I like to see more of your pics and videos, is there anything else you could share with me?",
+            "isPremium": true,
+            "points": 3,
+            "answer": [
+              {
+                "type": "text",
+                "content":
+                    "Okay, we're getting away from our introductions, so what's your taste in girls? ;)",
+                "isPremiumContent": false
+              },
+              {
+                "type": "video",
+                "content": "EmilyParker_Video4",
+                "isPremiumContent": true
               }
             ]
           }
@@ -213,96 +282,127 @@ final data = [
       },
       {
         "id": 5,
-        "description":
-            "I suspect you will be able to afford more after these general questions. In the meantime, answer Alice's question",
+        "description": "Let her know that she's your ideal",
         "messages": [
           {
             "text":
-                "Alice, thanks for sharing, I feel like you and I have a lot in common",
-            "isPremium": false,
-            "points": 3,
-            "answer": [
-              {
-                "type": "text",
-                "content":
-                    "Wow 😍 Oh, I'm very pleased that you feel something in common between us, it's my turn to please you",
-                "isPremiumContent": false
-              },
-              {
-                "type": "video",
-                "content": "Video16_Day1_Event5",
-                "isPremiumContent": true
-              }
-            ]
-          },
-          {
-            "text":
-                "I've already missed teasing your videos, show me yourself, sweetie",
-            "isPremium": true,
-            "points": 3,
-            "answer": [
-              {
-                "type": "text",
-                "content":
-                    "Ahhhh honey, you don't seem to be a fan of long texts",
-                "isPremiumContent": false
-              },
-              {"type": "image", "content": "Pic1", "isPremiumContent": true}
-            ]
-          }
-        ]
-      },
-      {
-        "id": 6,
-        "description":
-            "You managed to get her to send you a teasing photo! Need to keep that sexy vibe.",
-        "messages": [
-          {
-            "text":
-                "Mmm, you look so sexy, if you're trying to make me horny, you're doing a great job",
+                "well, Emily, I have a thing for girls who r sweet, down-to-earth, and have a knack for making every moment feel special. Just like you 😉",
             "isPremium": false,
             "points": 1,
             "answer": [
               {
                 "type": "text",
                 "content":
-                    "To be honest, I'm really excited to have you in my life, {name}, now I have to go to bed, it's already night in my time zone. I go online once a day, so the next 12 hours will be endless for me and I will miss you very much!  xo xo your sweetie Alice 💋",
+                    "Aww, that's so sweet of you to say! I love reading that 😊",
                 "isPremiumContent": false
               },
               {
                 "type": "text",
                 "content":
-                    "or... do you not want to wait and want to rewind time until we meet again??😏 and see what video I made for you...",
+                    "So, what would be your idea of a perfect day together?",
+                "isPremiumContent": false
+              }
+            ]
+          },
+          {
+            "text":
+                "I’m into girls who know how to mix a bit of sweetness with a touch of seduction. Someone who can keep things exciting and a little unpredictable. Think you fit the bill? 😈",
+            "isPremium": false,
+            "points": 1,
+            "answer": [
+              {
+                "type": "text",
+                "content":
+                    "Aww, that's so sweet of you to say! I love reading that 😊",
                 "isPremiumContent": false
               },
               {
-                "type": "video",
-                "content": "Video5_Day1_Event6",
+                "type": "text",
+                "content":
+                    "So, what would be your idea of a perfect day together?",
+                "isPremiumContent": false
+              }
+            ]
+          },
+          {
+            "text":
+                "I'm drawn to girls who r kind-hearted, love a good adventure, and have a captivating smile. And from what I’ve seen, you seem to tick all those boxes 😘",
+            "isPremium": false,
+            "points": 1,
+            "answer": [
+              {
+                "type": "text",
+                "content":
+                    "Aww, that's so sweet of you to say! I love reading that 😊",
+                "isPremiumContent": false
+              },
+              {
+                "type": "text",
+                "content":
+                    "So, what would be your idea of a perfect day together?",
+                "isPremiumContent": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "description": "Choose your favorite time with Emily",
+        "messages": [
+          {
+            "text":
+                "Leisurely brunch, farmer's market, baking cookies, and relaxing in the garden with tea at sunset. Simple, but meaningful. 😊",
+            "isPremium": false,
+            "points": 1,
+            "answer": [
+              {
+                "type": "text",
+                "content":
+                    "Perfect and cozy! 😌 Here’s a snapshot of my garden. Can't wait to relax there with you 🌸",
+                "isPremiumContent": false
+              },
+              {
+                "type": "image",
+                "content": "EmilyParker_pic2",
                 "isPremiumContent": true
               }
             ]
           },
           {
             "text":
-                "Alice, baby, my day will never be the same, thank you for your teasing gift",
+                "Morning hike, picnic lunch, then something exciting like paddleboarding or zip-lining. End the day with a bonfire under the stars. What do you think? 😏",
             "isPremium": false,
-            "points": 2,
+            "points": 1,
             "answer": [
               {
                 "type": "text",
                 "content":
-                    "To be honest, I'm really excited to have you in my life, {name}, now I have to go to bed, it's already night in my time zone. I go online once a day, so the next 12 hours will be endless for me and I will miss you very much!  xo xo your sweetie Alice 💋",
+                    "Absolutely thrilling! 💕 Here's a photo of my last hike. Imagine us there! 🌲🏞️",
                 "isPremiumContent": false
               },
+              {
+                "type": "image",
+                "content": "EmilyParker_pic3",
+                "isPremiumContent": true
+              }
+            ]
+          },
+          {
+            "text":
+                "Starting with breakfast at a cozy café, a walk with Max, hiking, then homemade dinner and a movie night at your place. Sounds perfect, right? 😘",
+            "isPremium": true,
+            "points": 1,
+            "answer": [
               {
                 "type": "text",
                 "content":
-                    "or... do you not want to wait and want to rewind time until we meet again??😏 and see what video I made for you...",
+                    "That sounds dreamy! 😍 Here's a pic of me at my favorite café spot 📸☕",
                 "isPremiumContent": false
               },
               {
-                "type": "video",
-                "content": "Video5_Day1_Event6",
+                "type": "image",
+                "content": "EmilyParker_pic4",
                 "isPremiumContent": true
               }
             ]
@@ -312,10 +412,59 @@ final data = [
       {
         "id": 7,
         "description":
-            "Say something nice back to her or rewind time to your next date with Alice",
+            "Wow, she loves spoiling you with her pics, that should be encouraged",
         "messages": [
           {
-            "text": "it's mutual, sweetie, Alice!  xo xo, your, {name}",
+            "text": "Emily, I've never met a prettier girl than you!",
+            "isPremium": false,
+            "points": 1,
+            "answer": [
+              {
+                "type": "text",
+                "content":
+                    "Mutually, so I have to go help out at the community center for a bit. I'll be back in a couple of hours! Don't miss me too much 😉💖 Talk soon!",
+                "isPremiumContent": false
+              }
+            ]
+          },
+          {
+            "text":
+                "Those places were lucky to have you, and now I'm happy to be with you, if only in this chat.",
+            "isPremium": false,
+            "points": 1,
+            "answer": [
+              {
+                "type": "text",
+                "content":
+                    "Mutually, so I have to go help out at the community center for a bit. I'll be back in a couple of hours! Don't miss me too much 😉💖 Talk soon!",
+                "isPremiumContent": false
+              }
+            ]
+          },
+          {
+            "text":
+                "You are the best woman on earth, Emily! I'm excited to meet ya and want to get to know you more and more 😘",
+            "isPremium": false,
+            "points": 1,
+            "answer": [
+              {
+                "type": "text",
+                "content":
+                    "Mutually, so I have to go help out at the community center for a bit. I'll be back in a couple of hours! Don't miss me too much 😉💖 Talk soon!",
+                "isPremiumContent": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "description":
+            "So fast! It seems like you guys have a lot more to talk about, do you want to continue?",
+        "messages": [
+          {
+            "text":
+                "Always doing something sweet. Miss ya already 😉  xo xo, your, {name}",
             "isPremium": false,
             "points": 1,
             "isScriptBot": false
@@ -329,58 +478,49 @@ final data = [
     "data": [
       {
         "id": 1,
-        "description":
-            "Alice's virtual assistant suggests that now would be a good time to text Alice: «what does she do or how did she spend her day?»",
-        "textfieldAvailable": false,
+        "description": "Say a nice hello to Emily, I think she missed you",
         "messages": [
           {
-            "text": "Hey, Alice! How was your day?",
+            "text": "Of course! What took ya so long? 😘",
             "isPremium": false,
             "points": 1,
             "answer": [
               {
                 "type": "text",
                 "content":
-                    "Hey, {name}!!! I've been waiting for your message, it's been busy today, but I finally got free, changed into comfortable clothes and made myself a grilled steak and veggies, and u?",
+                    "aww, you're too sweet! Let's make up for lost time 💋",
                 "isPremiumContent": false
-              },
-              {"type": "image", "content": "Pic2", "isPremiumContent": true},
-              {"type": "image", "content": "Pic10", "isPremiumContent": true},
-              {"type": "image", "content": "Pic3", "isPremiumContent": true}
+              }
             ]
           },
           {
-            "text":
-                "Hey, Alice! I was thinking about you and decided to write, what are you doing now?",
+            "text": "Missed u tons. Can't wait to chat more 😉🔥",
             "isPremium": false,
             "points": 2,
             "answer": [
               {
                 "type": "text",
                 "content":
-                    "Hey, {name}!!! I've been waiting for your message, it's been busy today, but I finally got free, changed into comfortable clothes and made myself a grilled steak and veggies, and u?",
+                    "aww, you're too sweet! Let's make up for lost time 💋",
                 "isPremiumContent": false
-              },
-              {"type": "image", "content": "Pic2", "isPremiumContent": true},
-              {"type": "image", "content": "Pic10", "isPremiumContent": true},
-              {"type": "image", "content": "Pic3", "isPremiumContent": true}
+              }
             ]
           },
           {
             "text":
-                "Hey, sweetie, Alice, been looking over all the photos and videos you sent me yesterday, miss you! I want to see you again!",
+                "Every minute felt like forever. Glad you're back, beautiful ❤️",
             "isPremium": true,
             "points": 2,
             "answer": [
               {
                 "type": "text",
                 "content":
-                    "Hey, {name}!!! I've been waiting for your message, it's been busy today, but I finally got free and made myself a grilled steak and veggies, and u?",
+                    "You always know how to make me smile. I'm all yours now 😘💖",
                 "isPremiumContent": false
               },
               {
-                "type": "video",
-                "content": "Video6_Day2_Event0",
+                "type": "image",
+                "content": "EmilyParker_pic6",
                 "isPremiumContent": true
               }
             ]
@@ -390,477 +530,32 @@ final data = [
       {
         "id": 2,
         "description":
-            "Remember what you're gonna do when a girl shows interest? Reciprocate, right. Now tell her very briefly what you did today or think of something you could do",
-        "textfieldAvailable": false,
+            "Take a caring interest in her affairs to make her feel at ease",
         "messages": [
           {
             "text":
-                "It seems that all the time that I was doing my work, I was thinking about the magical Alice",
+                "How was your time at the community center? Hope it was fulfilling!",
             "isPremium": false,
-            "points": 2,
+            "points": 1,
             "answer": [
               {
                 "type": "text",
                 "content":
-                    "mmmm, thanks for sharing, sweetie, what we'll chat about today?",
+                    "ugh, had to deal with a busted water pipe at the community center today. What a mess! 😩💦",
                 "isPremiumContent": false
               }
             ]
           },
           {
             "text":
-                "I work from home and mostly with the computer, honey, I've completed all the programming tasks, but I've been thinking about you the whole time",
-            "isPremium": true,
-            "points": 2,
-            "answer": [
-              {
-                "type": "text",
-                "content":
-                    "Mm, I hope you like what I have in store for you🤤💦",
-                "isPremiumContent": false
-              },
-              {
-                "type": "video",
-                "content": "Video7_Day2_Event2",
-                "isPremiumContent": true
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": 3,
-        "description": "It's a good time to turn the talk toward flirting",
-        "messages": [
-          {
-            "text":
-                "You know, my imagination kicks in when I think of you, you want me to share with you?",
-            "isPremium": false,
-            "points": 1,
-            "answer": [
-              {
-                "type": "text",
-                "content": "Oh, really? Tell me about your fantasies😈",
-                "isPremiumContent": false
-              }
-            ]
-          },
-          {
-            "text":
-                "Before I went to sleep I fantasized a lot about us, would you like me to tell you?",
-            "isPremium": false,
-            "points": 1,
-            "answer": [
-              {
-                "type": "text",
-                "content": "Oh, really? Tell me about your fantasies😈",
-                "isPremiumContent": false
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": 4,
-        "description": "It's a good time to continue the talk toward flirting",
-        "messages": [
-          {
-            "text": "I want to explore every inch of your beautiful body",
+                "How did it go at the community center, Emily? I bet you were amazing!",
             "isPremium": false,
             "points": 1,
             "answer": [
               {
                 "type": "text",
                 "content":
-                    "Mmm... I can feel my whole skin becoming sensitive just from hearing you say that🔥",
-                "isPremiumContent": false
-              }
-            ]
-          },
-          {
-            "text":
-                "My desire to touch every part of your body grows by the minute",
-            "isPremium": false,
-            "points": 2,
-            "answer": [
-              {
-                "type": "text",
-                "content":
-                    "Mmm... I can feel my whole skin becoming sensitive just from hearing you say that🔥",
-                "isPremiumContent": false
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": 5,
-        "description":
-            "Now keep describing your fantasies about Alice, tell her in detail what you'd like to do to her if you were near her, maybe kiss",
-        "textfieldAvailable": false,
-        "messages": [
-          {
-            "text":
-                "I want to start by kissing on your lips, slowly making my way down to your nec",
-            "isPremium": false,
-            "points": 1,
-            "answer": [
-              {
-                "type": "text",
-                "content":
-                    "I imagine your hot lips touching my skin... I would love to feel it",
-                "isPremiumContent": false
-              },
-              {
-                "type": "video",
-                "content": "Video7_Day2_Event5",
-                "isPremiumContent": true
-              }
-            ]
-          },
-          {
-            "text":
-                "Your lips are so tantalizing to me that I dream of kissing them over and over again",
-            "isPremium": false,
-            "points": 2,
-            "answer": [
-              {
-                "type": "text",
-                "content":
-                    "I imagine your hot lips touching my skin... I would love to feel it",
-                "isPremiumContent": false
-              },
-              {
-                "type": "video",
-                "content": "Video7_Day2_Event5",
-                "isPremiumContent": true
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": 6,
-        "description":
-            "Great, now tell me how you would explore her body with your tongue",
-        "textfieldAvailable": false,
-        "messages": [
-          {
-            "text":
-                "I will be tender and passionate at the same time, exploring every part of your body with the caress of my lips and tongue",
-            "isPremium": false,
-            "points": 3,
-            "answer": [
-              {
-                "type": "text",
-                "content":
-                    "As things heat up, I want you to reach down to fondle my breasts, gently squeezing them and gently stroking my neck👅💦",
-                "isPremiumContent": false
-              },
-              {"type": "image", "content": "Pic4", "isPremiumContent": true},
-              {"type": "image", "content": "Pic5", "isPremiumContent": true}
-            ]
-          },
-          {
-            "text":
-                "Your skin is so warm and soft that I feel real electric shocks as I run my tongue along your neck, lower and lower",
-            "isPremium": false,
-            "points": 3,
-            "answer": [
-              {
-                "type": "text",
-                "content":
-                    "As things heat up, I want you to reach down to fondle my breasts, gently squeezing them and gently stroking my neck👅💦",
-                "isPremiumContent": false
-              },
-              {"type": "image", "content": "Pic4", "isPremiumContent": true},
-              {"type": "image", "content": "Pic5", "isPremiumContent": true}
-            ]
-          }
-        ]
-      },
-      {
-        "id": 7,
-        "description":
-            "Now tell me more about what you'd like to do with Alice's breasts",
-        "textfieldAvailable": false,
-        "messages": [
-          {
-            "text":
-                "As I cups one breast in my hand, i tweaks the nipple lightly, watching it stiffen under my touch",
-            "isPremium": false,
-            "points": 3,
-            "answer": [
-              {
-                "type": "text",
-                "content":
-                    "I run my hands through your hair, moaning softly in your ear and arches my back, letting out a low moan at the sensation",
-                "isPremiumContent": false
-              }
-            ]
-          },
-          {
-            "text":
-                "l uses my tongue to tease and lick at your nipples, flicking them gently with my tongue tip",
-            "isPremium": false,
-            "points": 1,
-            "answer": [
-              {
-                "type": "text",
-                "content":
-                    "I run my hands through your hair, moaning softly in your ear and arches my back, letting out a low moan at the sensation",
-                "isPremiumContent": false
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": 8,
-        "description": "Now you need to make her horny and wet",
-        "messages": [
-          {
-            "text":
-                "After making out for a bit, the I moves my attention downward, settling on your pussy. I can't resist the urge to touch it",
-            "isPremium": false,
-            "points": 1,
-            "answer": [
-              {
-                "type": "text",
-                "content":
-                    "I groans into your ear, loving the way you makes me feel so good 💦💦",
-                "isPremiumContent": false
-              }
-            ]
-          },
-          {
-            "text":
-                "With gentle fingers, I rubs your outer labia, watching as you shifts restlessly underneath me",
-            "isPremium": true,
-            "points": 1,
-            "answer": [
-              {
-                "type": "video",
-                "content": "Video8_Day2_Event8",
-                "isPremiumContent": true
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": 9,
-        "description": "Yes! she's ready to take you inside",
-        "messages": [
-          {
-            "text":
-                "Then slips two fingers inside of you, feeling your heat and wetness around them",
-            "isPremium": false,
-            "points": 1,
-            "answer": [
-              {
-                "type": "text",
-                "content":
-                    "My hand glides down to cup your erection, eliciting a groan from you🍆",
-                "isPremiumContent": false
-              }
-            ]
-          },
-          {
-            "text": "Next, I rolls over onto my back, inviting you to mount me",
-            "isPremium": true,
-            "points": 1,
-            "answer": [
-              {
-                "type": "video",
-                "content": "Video9_Day2_Event9",
-                "isPremiumContent": true
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": 10,
-        "description": "Tell her how you feel when your cock belongs to her?",
-        "textfieldAvailable": false,
-        "messages": [
-          {
-            "text":
-                "I can feel my cock getting wet and swollen from what you're doing to it",
-            "isPremium": false,
-            "points": 1,
-            "answer": [
-              {
-                "type": "text",
-                "content":
-                    "Uh, yeah, honey, that was wonderful, but I gotta go to bed! It's gonna be hard, but I prefer to stretch the pleasure, see you tomorrow, {name}, xo xo your horny Alice",
-                "isPremiumContent": false
-              },
-              {
-                "type": "text",
-                "content":
-                    "or...  or would you like to continue our hot, dirty talk??😏",
-                "isPremiumContent": false
-              },
-              {
-                "type": "video",
-                "content": "Video10_Day2_Event10",
-                "isPremiumContent": false
-              }
-            ]
-          },
-          {
-            "text":
-                "I like how imperiously you are able to control the pleasure of the penis from your caresses with your hands",
-            "isPremium": false,
-            "points": 1,
-            "answer": [
-              {
-                "type": "text",
-                "content":
-                    "Uh, yeah, honey, that was wonderful, but I gotta go to bed! It's gonna be hard, but I prefer to stretch the pleasure, see you tomorrow, {name}, xo xo your horny Alice",
-                "isPremiumContent": false
-              },
-              {
-                "type": "text",
-                "content":
-                    "or...  or would you like to continue our hot, dirty talk??😏",
-                "isPremiumContent": false
-              },
-              {
-                "type": "video",
-                "content": "Video10_Day2_Event10",
-                "isPremiumContent": false
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": 11,
-        "description":
-            "Wish her something nice for the night and thank her for the hot talk or continue our hot, dirty talk",
-        "textfieldAvailable": false,
-        "messages": [
-          {
-            "text":
-                "Alice, that was really hot, I want you more every day, you are incredible, hugs and sweet dreams! xo xo, your, {name}",
-            "isPremium": false,
-            "points": 1,
-            "answer": []
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": 3,
-    "data": [
-      {
-        "id": 1,
-        "description":
-            "You've made quite an impression on Alice, you're the first person she's ever written to like that, let's flirt with her",
-        "textfieldAvailable": false,
-        "messages": [
-          {
-            "text": "To be honest, I'm thinking about you right now, too",
-            "isPremium": false,
-            "points": 1,
-            "answer": [
-              {
-                "type": "text",
-                "content":
-                    "Mmm... Then can we continue to pleasure ourselves together? 😏🔥",
-                "isPremiumContent": false
-              },
-              {
-                "type": "video",
-                "content": "Video11_Day3_Event0",
-                "isPremiumContent": true
-              }
-            ]
-          },
-          {
-            "text":
-                "Those photos/videos you've been sending me, they've been making me very horny too",
-            "isPremium": false,
-            "points": 2,
-            "answer": [
-              {
-                "type": "text",
-                "content":
-                    "Mmm... Then can we continue to pleasure ourselves together? 😏🔥",
-                "isPremiumContent": false
-              },
-              {
-                "type": "video",
-                "content": "Video11_Day3_Event0",
-                "isPremiumContent": true
-              }
-            ]
-          },
-          {
-            "text":
-                "You know what I want more than anything right now? To see you and your body again",
-            "isPremium": true,
-            "points": 2,
-            "answer": [
-              {
-                "type": "text",
-                "content": "tell me what you think when you look at me...",
-                "isPremiumContent": false
-              },
-              {
-                "type": "video",
-                "content": "Video12_Day3_Event0",
-                "isPremiumContent": true
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": 2,
-        "description": "Share your erotic fantasy with Alice",
-        "textfieldAvailable": false,
-        "messages": [
-          {
-            "text": "I think if I were around, I'd want to help you undress",
-            "isPremium": false,
-            "points": 1,
-            "answer": [
-              {
-                "type": "text",
-                "content":
-                    "ahaha how deeply you feel me, I really want to take off my bra, but to do that you have to say the magic phrase😈",
-                "isPremiumContent": false
-              }
-            ]
-          },
-          {
-            "text": "I can see that bra is keeping you from feeling free",
-            "isPremium": false,
-            "points": 2,
-            "answer": [
-              {
-                "type": "text",
-                "content":
-                    "ahaha how deeply you feel me, I really want to take off my bra, but to do that you have to say the magic phrase😈",
-                "isPremiumContent": false
-              }
-            ]
-          },
-          {
-            "text":
-                " I would give anything in the world to help you deal with this gorgeous lingerie right now",
-            "isPremium": false,
-            "points": 2,
-            "answer": [
-              {
-                "type": "text",
-                "content":
-                    "ahaha how deeply you feel me, I really want to take off my bra, but to do that you have to say the magic phrase😈",
+                    "ugh, had to deal with a busted water pipe at the community center today. What a mess! 😩💦",
                 "isPremiumContent": false
               }
             ]
@@ -870,57 +565,41 @@ final data = [
       {
         "id": 3,
         "description":
-            "What kind of phrase can get a girl to take her clothes off? Compliments, maybe?",
-        "textfieldAvailable": false,
+            "It's a time for a sense of humor, which is very appealing",
         "messages": [
           {
-            "text": "Password: I want to see and caress your magic boobs",
+            "text": "You're the hero fixing pipes now? So hot! 😘",
             "isPremium": false,
             "points": 1,
             "answer": [
               {
                 "type": "text",
-                "content": "all for you, sweetheart, {name}🍒",
+                "content":
+                    "ahaha, thanks! Just another day saving the day 😘  what's up with you?",
                 "isPremiumContent": false
-              },
-              {
-                "type": "video",
-                "content": "Video13_Day3_Event3",
-                "isPremiumContent": true
               }
             ]
           },
           {
-            "text": "Your breasts are the best I've ever seen",
+            "text":
+                "Aw, rough day, huh? You still look cute even covered in water! 😉",
             "isPremium": false,
-            "points": 1,
+            "points": 2,
             "answer": [
               {
                 "type": "text",
-                "content": "all for you, sweetheart, {name}🍒",
+                "content": "Oh, ahah, you still think so?",
                 "isPremiumContent": false
               },
               {
-                "type": "video",
-                "content": "Video13_Day3_Event3",
+                "type": "image",
+                "content": "EmilyParker_pic7",
                 "isPremiumContent": true
-              }
-            ]
-          },
-          {
-            "text": "Alice - you are a goddess and I am in your power",
-            "isPremium": false,
-            "points": 1,
-            "answer": [
+              },
               {
                 "type": "text",
-                "content": "all for you, sweetheart, {name}🍒",
+                "content": "What's up with you?",
                 "isPremiumContent": false
-              },
-              {
-                "type": "video",
-                "content": "Video13_Day3_Event3",
-                "isPremiumContent": true
               }
             ]
           }
@@ -929,46 +608,50 @@ final data = [
       {
         "id": 4,
         "description":
-            "Thank Alice for the video and say something about how you feel",
-        "textfieldAvailable": false,
+            "Share your day with Emily so she feels like you trust her",
         "messages": [
           {
-            "text": "You're driving me crazy, Alice",
+            "text":
+                "Just wrapped up a hectic day at work, but chatting with you makes it all better😊 Any plans for the evening?",
             "isPremium": false,
             "points": 1,
             "answer": [
               {
                 "type": "text",
                 "content":
-                    "and I like to drive you crazy and turn your head with my erotic photos and videos, let's play?",
+                    "My plan tonight is just to lie in bed and talk to you 💋",
                 "isPremiumContent": false
               }
             ]
           },
           {
             "text":
-                "Thank you for the video, Alice, I love the way you play with your boobs",
+                "Busy day, but nothing exciting like your heroics! 😄 Now winding down with some music. What about you?",
             "isPremium": false,
-            "points": 2,
+            "points": 1,
             "answer": [
               {
                 "type": "text",
                 "content":
-                    "and I like to drive you crazy and turn your head with my erotic photos and videos, let's play?",
+                    "My plan tonight is just to lie in bed and talk to you 💋",
                 "isPremiumContent": false
               }
             ]
           },
           {
             "text":
-                "When I see your juicy breasts, my cock gets hard and my head stops thinking",
+                "Spent the day juggling work and errands. Now winding down and wishing you were here ❤️",
             "isPremium": true,
-            "points": 2,
+            "points": 3,
             "answer": [
               {
+                "type": "image",
+                "content": "EmilyParker_pic5",
+                "isPremiumContent": true
+              },
+              {
                 "type": "text",
-                "content":
-                    "I'd like to feel the hardness of your cock inside me so that it totally fills me deep inside🍆\n\nlet's play?",
+                "content": "just like that, huh?",
                 "isPremiumContent": false
               }
             ]
@@ -977,113 +660,82 @@ final data = [
       },
       {
         "id": 5,
-        "description": "Alice is planning an erotic game.\nGo for it",
+        "description":
+            "Something interesting is coming up, I like her flirty tone",
         "messages": [
           {
-            "text": "I'm ready to play with you endlessly, honey, Alice",
+            "text":
+                "Talking to you in bed sounds like the perfect way to end the day. Let's make it unforgettable 💖",
             "isPremium": false,
             "points": 1,
             "answer": [
               {
                 "type": "text",
                 "content":
-                    "Okay, I'll ask you questions and if you guess, you get a prize🔥😏",
+                    "How about we explore our secret turn-ons? I'm curious about yours😉",
                 "isPremiumContent": false
-              },
-              {
-                "type": "text",
-                "content":
-                    "Let's begin, what's the most erogenous spot on Alice's body?",
-                "isPremiumContent": false
-              },
-              {"type": "image", "content": "Pic6", "isPremiumContent": true}
+              }
             ]
           },
           {
             "text":
-                "An erotic game with hot girl Alice? That's probably a great idea for a night out",
+                "u r making my night sound way more interesting. Mind if I join you? 😏",
             "isPremium": false,
-            "points": 2,
+            "points": 1,
             "answer": [
               {
                 "type": "text",
                 "content":
-                    "Okay, I'll ask you questions and if you guess, you get a prize🔥😏",
+                    "How about we explore our secret turn-ons? I'm curious about yours😉",
                 "isPremiumContent": false
-              },
-              {
-                "type": "text",
-                "content":
-                    "Let's begin, what's the most erogenous spot on Alice's body?",
-                "isPremiumContent": false
-              },
-              {"type": "image", "content": "Pic6", "isPremiumContent": true}
+              }
             ]
           }
         ]
       },
       {
         "id": 6,
-        "description": "Answer options",
+        "description": "Flirt with Emily to keep the tantalizing talk going",
         "messages": [
           {
-            "text": "The back and the waist",
+            "text":
+                "I'm into whispers in my ear that send shivers down my spine. What about you? 😉",
             "isPremium": false,
             "points": 1,
             "answer": [
               {
                 "type": "text",
                 "content":
-                    "Oh, that's not true, don't feel bad, baby, consolation prize",
+                    "[Emily's answering service]:\nEmily's phone went to do not disturb mode and she started to fall asleep",
                 "isPremiumContent": false
-              },
-              {"type": "image", "content": "Pic7", "isPremiumContent": true}
-            ]
-          },
-          {
-            "text": "Neck and shoulders",
-            "isPremium": false,
-            "points": 2,
-            "answer": [
-              {
-                "type": "text",
-                "content":
-                    "Your brain turns me on even more than your dick. Way to go, sweetie😘",
-                "isPremiumContent": false
-              },
-              {
-                "type": "text",
-                "content":
-                    "Question number 2. What kind of sex do I dream of having with you {name}?",
-                "isPremiumContent": false
-              },
-              {
-                "type": "video",
-                "content": "Video14_Day3_Event6",
-                "isPremiumContent": true
               }
             ]
           },
           {
-            "text": "Get a prize without guessing, bypass the rules",
-            "isPremium": true,
-            "points": 3,
+            "text":
+                "I can't resist someone who knows how to tease and build anticipation. What gets you going? 😏",
+            "isPremium": false,
+            "points": 1,
             "answer": [
               {
                 "type": "text",
-                "content": "and you know how to use cheat codes, tricky😈",
+                "content":
+                    "[Emily's answering service]:\nEmily's phone went to do not disturb mode and she started to fall asleep",
                 "isPremiumContent": false
-              },
+              }
+            ]
+          },
+          {
+            "text":
+                "For me, it's all about confident touches that leave me wanting more. What about you, Emily? 😘",
+            "isPremium": false,
+            "points": 1,
+            "answer": [
               {
                 "type": "text",
                 "content":
-                    "Question number 2. What kind of sex do I dream of having with you {name}?",
+                    "[Emily's answering service]:\nEmily's phone went to do not disturb mode and she started to fall asleep",
                 "isPremiumContent": false
-              },
-              {
-                "type": "video",
-                "content": "Video14_Day3_Event6",
-                "isPremiumContent": true
               }
             ]
           }
@@ -1091,98 +743,14 @@ final data = [
       },
       {
         "id": 7,
-        "description": "Answer options",
-        "messages": [
-          {
-            "text":
-                "In your fantasies I first start caressing your body with my tongue, then I go lower and lower until I reach the pussy",
-            "isPremium": false,
-            "points": 1,
-            "answer": [
-              {
-                "type": "text",
-                "content":
-                    "When I imagine you caressing me with your tongue, my whole body shakes with excitement and my lower stomach spasms😘",
-                "isPremiumContent": false
-              },
-              {
-                "type": "text",
-                "content":
-                    "it's been a cool and hot morning with you, now it's time for me to eat breakfast and get ready for the gym or .... can we continue here?",
-                "isPremiumContent": false
-              },
-              {"type": "image", "content": "Pic8", "isPremiumContent": true}
-            ]
-          },
-          {
-            "text":
-                "In your fantasies I kiss you passionately on the lips and my hands start stroking your neck, then your back, your booty, going lower and lower until my hand gets into your panties",
-            "isPremium": false,
-            "points": 1,
-            "answer": [
-              {
-                "type": "text",
-                "content":
-                    "Ooops, it's okay, {name}, I'll still make you excited with my photo.",
-                "isPremiumContent": false
-              },
-              {
-                "type": "text",
-                "content":
-                    "it's been a cool and hot morning with you, now it's time for me to eat breakfast and get ready for the gym or .... can we continue here?",
-                "isPremiumContent": false
-              },
-              {
-                "type": "video",
-                "content": "Video17_Day3_Event8",
-                "isPremiumContent": true
-              }
-            ]
-          },
-          {
-            "text": "Get a prize without guessing, bypass the rules",
-            "isPremium": true,
-            "points": 1,
-            "answer": [
-              {
-                "type": "text",
-                "content": "A hooligan and a bad boy😈",
-                "isPremiumContent": false
-              },
-              {
-                "type": "text",
-                "content":
-                    "it's been a cool and hot morning with you, now it's time for me to eat breakfast and get ready for the gym or .... can we continue here?",
-                "isPremiumContent": false
-              },
-              {
-                "type": "video",
-                "content": "Video15_Day3_Event8",
-                "isPremiumContent": true
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": 8,
         "description":
-            "Wish her something nice for the day and thank her for the hot talk or continue our hot, dirty talk",
+            "There's still an opportunity to wake her up and continue the conversation",
         "messages": [
           {
-            "text":
-                "Have a wonderful day sweet Alice, thank you for the pleasure you bring me, I look forward to seeing you «online»",
+            "text": "Wake up Emily",
             "isPremium": false,
             "points": 1,
-            "answer": [
-              {
-                "type": "text",
-                "content":
-                    "Likewise, honey! I'll be thinking of you the whole time, kissing your lips passionately, xo xo Alice",
-                "isPremiumContent": false
-              },
-              {"type": "image", "content": "Pic9", "isPremiumContent": true}
-            ]
+            "isScriptBot": false
           }
         ]
       }

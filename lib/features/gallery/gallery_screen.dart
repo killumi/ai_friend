@@ -1,3 +1,5 @@
+import 'package:ai_friend/features/assistants/assistant_storage.dart';
+import 'package:ai_friend/features/assistants/assistants_provider.dart';
 import 'package:ai_friend/features/gallery/gallery_image/gallery_image_grid.dart';
 import 'package:ai_friend/features/gallery/gallery_video/gallery_video_grid.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
@@ -6,7 +8,6 @@ import 'package:ai_friend/widgets/app_header.dart';
 import 'package:ai_friend/widgets/screen_wrap.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:flutter/material.dart';
-import 'package:ai_friend/features/chat/chat_storage.dart';
 import 'package:ai_friend/domain/services/locator.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -65,65 +66,67 @@ class _GalleryScreenState extends State<GalleryScreen> {
                 )
               ],
               views: [
-                // ValueListenableBuilder(
-                //     valueListenable: locator<ChatStorage>().box.listenable(),
-                //     builder: (context, box, widget) {
-                //       final images = locator<ChatStorage>().images;
-                //       return images.isEmpty
-                //           ? Column(
-                //               mainAxisAlignment: MainAxisAlignment.center,
-                //               children: [
-                //                 Assets.icons.galleryIcon.svg(
-                //                   width: 48,
-                //                   color: const Color(0xffA9A1B2),
-                //                 ),
-                //                 const SizedBox(height: 15),
-                //                 const Text(
-                //                   "Alice hasn't sent her photos yet",
-                //                   style: TextStyle(
-                //                     fontSize: 16,
-                //                     color: Color(0xffA9A1B2),
-                //                     fontFamily: FontFamily.gothamPro,
-                //                   ),
-                //                 ),
-                //                 const SizedBox(height: 100),
-                //               ],
-                //             )
-                //           : CustomScrollView(
-                //               slivers: [
-                //                 GalleryImageGrid(images: images),
-                //               ],
-                //             );
-                //     }),
-                // ValueListenableBuilder(
-                //     valueListenable: locator<ChatStorage>().box.listenable(),
-                //     builder: (context, box, widget) {
-                //       final videos = locator<ChatStorage>().videos;
+                ValueListenableBuilder(
+                    valueListenable:
+                        locator<AssistantStorage>().box.listenable(),
+                    builder: (context, box, widget) {
+                      final images = locator<AssistantsProvider>().images;
+                      return images.isEmpty
+                          ? Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Assets.icons.galleryIcon.svg(
+                                  width: 48,
+                                  color: const Color(0xffA9A1B2),
+                                ),
+                                const SizedBox(height: 15),
+                                const Text(
+                                  "Alice hasn't sent her photos yet",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Color(0xffA9A1B2),
+                                    fontFamily: FontFamily.gothamPro,
+                                  ),
+                                ),
+                                const SizedBox(height: 100),
+                              ],
+                            )
+                          : CustomScrollView(
+                              slivers: [
+                                GalleryImageGrid(images: images),
+                              ],
+                            );
+                    }),
+                ValueListenableBuilder(
+                    valueListenable:
+                        locator<AssistantStorage>().box.listenable(),
+                    builder: (context, box, widget) {
+                      final videos = locator<AssistantsProvider>().videos;
 
-                //       return videos.isEmpty
-                //           ? Column(
-                //               mainAxisAlignment: MainAxisAlignment.center,
-                //               children: [
-                //                 Assets.icons.galleryIcon.svg(
-                //                   width: 48,
-                //                   color: const Color(0xffA9A1B2),
-                //                 ),
-                //                 const SizedBox(height: 15),
-                //                 const Text(
-                //                   "Alice hasn't sent her videos yet",
-                //                   style: TextStyle(
-                //                     fontSize: 16,
-                //                     color: Color(0xffA9A1B2),
-                //                     fontFamily: FontFamily.gothamPro,
-                //                   ),
-                //                 ),
-                //                 const SizedBox(height: 100),
-                //               ],
-                //             )
-                //           : CustomScrollView(
-                //               slivers: [GalleryVideoGrid(videos: videos)],
-                //             );
-                //     }),
+                      return videos.isEmpty
+                          ? Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Assets.icons.galleryIcon.svg(
+                                  width: 48,
+                                  color: const Color(0xffA9A1B2),
+                                ),
+                                const SizedBox(height: 15),
+                                const Text(
+                                  "Alice hasn't sent her videos yet",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Color(0xffA9A1B2),
+                                    fontFamily: FontFamily.gothamPro,
+                                  ),
+                                ),
+                                const SizedBox(height: 100),
+                              ],
+                            )
+                          : CustomScrollView(
+                              slivers: [GalleryVideoGrid(videos: videos)],
+                            );
+                    }),
               ],
             ),
           ),

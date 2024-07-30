@@ -63,31 +63,11 @@ class _ChatHeaderState extends State<ChatHeader> {
                         width: 40,
                         color: Colors.transparent,
                         alignment: Alignment.centerLeft,
-                        child: const Icon(
-                          Icons.arrow_back,
-                          color: Colors.white,
-                        ),
+                        child: Assets.icons.leftChevron.svg(width: 28),
                       ),
                     ),
                   ),
                 ),
-                // SizedBox(
-                //   width: 96,
-                //   height: 40,
-                //   child: Align(
-                //     alignment: Alignment.centerLeft,
-                //     child: GestureDetector(
-                //       onTap: () => AppRouter.openSettings(context),
-                //       child: Container(
-                //         height: 40,
-                //         width: 40,
-                //         color: Colors.transparent,
-                //         alignment: Alignment.centerLeft,
-                //         child: Assets.icons.settingsIcon.svg(),
-                //       ),
-                //     ),
-                //   ),
-                // ),
                 Expanded(
                   child: GestureDetector(
                     onTap: toggleOpenMenu,

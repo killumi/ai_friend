@@ -9,11 +9,15 @@ import 'package:flutter/widgets.dart';
 class AppHeader extends StatelessWidget {
   final String title;
   final bool showBackButton;
+  final Widget? leading;
+  final Widget? trailing;
 
   const AppHeader({
     Key? key,
     required this.title,
     required this.showBackButton,
+    this.leading,
+    this.trailing,
   }) : super(key: key);
 
   @override
@@ -75,6 +79,11 @@ class AppHeader extends StatelessWidget {
                   ),
                 ),
               ),
+            ),
+          if (leading != null)
+            Positioned(
+              left: 16,
+              child: leading!,
             ),
         ],
       ),

@@ -34,7 +34,6 @@ import 'package:ai_friend/features/profile/name/name_storage.dart';
 import 'package:ai_friend/features/profile/profile_provider.dart';
 import 'package:apphud/apphud.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:oktoast/oktoast.dart';
@@ -73,26 +72,14 @@ void main() async {
   // LOAD ASSISTANT PROFILES
   // await AssistantStorage().clear();
   await locator<AssistantsProvider>().updateAssistants();
-  // await locator<FireStorage>().checkImages();
-  // final result = await locator<FireDatabase>().getScript('alice');
-  // print('RESULT SCRIPT ____: ${result.length}');
   // await locator<FireDatabase>().uploadData();
   // INIT GPT
   locator<ChatProvider>().initOpenAI();
-
-  // await locator<ChatScriptProvider>().initScript();
-  // final name = locator<NameStorage>().name;
-  // if (name.isNotEmpty) {
-  //   await locator<ChatProvider>().createThread();
-  // }
-  // await locator<ChatProvider>().initMessages();
-  // await locator<ProfileProvider>().init();
-
+  await locator<ProfileProvider>().init();
   // ANALITICS INIT
   await SingularAnalitics.init();
   await FirebaseAnaliticsService.init();
   // services
-
   // RATE APP INIT
   await RateAppHelper.init();
   // PUSH NOTIFICATIONS
@@ -143,12 +130,11 @@ class _MyAppState extends State<MyApp> {
               debugShowCheckedModeBanner: false,
               title: 'Lovevo',
               navigatorKey: navigatorKey,
-              home: const AssistantListScreen(),
-              // home: introWasShown
-              //     ? isHasPremium
-              //         ? const ChatScreen()
-              //         : const PaymentScreen()
-              //     : const StartScreen(),
+              home: introWasShown
+                  ? isHasPremium
+                      ? const AssistantListScreen()
+                      : const PaymentScreen()
+                  : const StartScreen(),
             );
           },
         ),

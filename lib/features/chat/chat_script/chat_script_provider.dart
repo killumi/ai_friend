@@ -25,8 +25,15 @@ class ChatScriptProvider extends ChangeNotifier {
   int get currentDayNumber => currentAssistant.scriptDayIndex!;
   int get currentMessageNumber => currentAssistant.scriptMessageIndex!;
 
-  IScriptMessageData? get scriptMessage =>
-      dailyScript?.data[currentMessageNumber];
+  IScriptMessageData? get scriptMessage {
+    print('currentMessageNumber: $currentMessageNumber');
+    if (dailyScript == null) {
+      log('DAILY SCROPI NULL: $dailyScript');
+      return null;
+    }
+
+    return dailyScript?.data[currentMessageNumber];
+  }
 
   bool get isShowScriptBox => _isShowScriptBox;
   bool get isShowRollUpBoxButton => dailyScript != null;
@@ -40,7 +47,7 @@ class ChatScriptProvider extends ChangeNotifier {
 
   // показ баннера после 3 сообщения
   bool get needShowPremiumBanner =>
-      currentDayNumber == 1 && currentMessageNumber == 3;
+      currentDayNumber == 0 && currentMessageNumber >= 3;
 
   // bool get isHasPremium => locator<PaymentProvider>().isHasPremium;
 
@@ -49,7 +56,10 @@ class ChatScriptProvider extends ChangeNotifier {
   ChatScriptProvider(this._assistantsProvider, this._database);
 
   Future<void> initScript() async {
+    log('currentDayNumber______: $currentDayNumber');
+    log('currentMessageNumber____: $currentMessageNumber');
     assistantScript = [];
+    dailyScript = null;
     notifyListeners();
 
     try {
@@ -61,14 +71,14 @@ class ChatScriptProvider extends ChangeNotifier {
         dailyScript = assistantScript[currentDayNumber];
       }
       notifyListeners();
-      assistantScript.forEach((day) {
-        print('Day ID: ${day.id}, Messages: ${day.toString()}');
-      });
+      // assistantScript.forEach((day) {
+      //   print('Day ID: ${day.id}, Messages: ${day.toString()}');
+      // });
     } catch (e) {
       print('Error: $e');
     }
-    print('allDaysLenght: $assistantScriptLength');
-    print('dailyScript___: $dailyScript');
+    // print('allDaysLenght: $assistantScriptLength');
+    // print('dailyScript___: $dailyScript');
 
     if (daylyScriptIsEnd && currentDayNumber == assistantScriptLength) {
       dailyScript = null;
@@ -90,10 +100,10 @@ class ChatScriptProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void showCurrent() {
-    log(currentDayNumber.toString());
-    log(currentMessageNumber.toString());
-  }
+  // void showCurrent() {
+  //   log(currentDayNumber.toString());
+  //   log(currentMessageNumber.toString());
+  // }
 
   Future<void> showNextMessage() async {
     if (daylyScriptIsEnd) {

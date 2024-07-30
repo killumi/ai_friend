@@ -5,8 +5,6 @@ import 'package:ai_friend/features/assistants/assistant_storage.dart';
 import 'package:ai_friend/features/assistants/assistants_provider.dart';
 import 'package:ai_friend/features/chat/chat_provider.dart';
 import 'package:ai_friend/features/chat/chat_script/chat_script_provider.dart';
-import 'package:ai_friend/features/chat/chat_script/chat_script_storage.dart';
-import 'package:ai_friend/features/chat/chat_storage.dart';
 import 'package:ai_friend/domain/firebase/fire_storage.dart';
 import 'package:ai_friend/domain/firebase/firebase_config.dart';
 import 'package:ai_friend/features/onboarding/onboarding_provider.dart';

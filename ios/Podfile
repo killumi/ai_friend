@@ -52,7 +52,9 @@ end
 #   end
 # end
 
-pod 'FacebookSDK'
 pod 'FBSDKCoreKit'
+pod 'FBSDKShareKit'
+pod 'FacebookSDK'
+
 # pod 'Firebase/Core'
 # pod 'Firebase/Auth'

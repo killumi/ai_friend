@@ -1,4 +1,5 @@
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
+import 'package:ai_friend/features/assistants/assistant_list_screen.dart';
 import 'package:ai_friend/features/bot_profile/bot_profile_screen.dart';
 import 'package:ai_friend/features/bot_profile/bot_short_profile.dart';
 import 'package:ai_friend/features/chat/chat_provider.dart';
@@ -22,21 +23,19 @@ class AppRouter {
   static void openChat(BuildContext context, {bool removeRoutes = false}) {
     context.read<ChatProvider>().chatListKey = GlobalKey<AnimatedListState>();
 
-    // removeRoutes
-    //     ? Navigator.of(context).pushAndRemoveUntil(
-    //         CupertinoPageRoute(builder: (context) => const ChatScreen()),
-    //         (route) => false)
-    //     : Navigator.of(context)
-    //         .push(CupertinoPageRoute(builder: (context) => const ChatScreen()));
-    // final route = PageRouteAnimator(
-    //   child: const ChatScreen(),
-    //   routeAnimation: RouteAnimation.rightToLeftWithFade,
-    //   curve: Curves.ease,
-    //   duration: const Duration(milliseconds: 600),
-    //   reverseDuration: const Duration(milliseconds: 600),
-    // );
     final route = CupertinoPageRoute(
       builder: (context) => const ChatScreen(),
+    );
+
+    removeRoutes
+        ? Navigator.of(context).pushAndRemoveUntil(route, (route) => false)
+        : Navigator.push(context, route);
+  }
+
+  static void openAssistantList(BuildContext context,
+      {bool removeRoutes = false}) {
+    final route = CupertinoPageRoute(
+      builder: (context) => const AssistantListScreen(),
     );
 
     removeRoutes

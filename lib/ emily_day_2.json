@@ -1,0 +1,258 @@
+{
+    "id": 2,
+    "data": [
+        {
+            "id": 1,
+            "description": "Say a nice hello to Emily, I think she missed you",
+            "messages": [
+                {
+                    "text": "Of course! What took ya so long? 😘",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "aww, you're too sweet! Let's make up for lost time 💋",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+                {
+                    "text": "Missed u tons. Can't wait to chat more 😉🔥",
+                    "isPremium": false,
+                    "points": 2,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "aww, you're too sweet! Let's make up for lost time 💋",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+                {
+                    "text": "Every minute felt like forever. Glad you're back, beautiful ❤️",
+                    "isPremium": true,
+                    "points": 2,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "You always know how to make me smile. I'm all yours now 😘💖",
+                            "isPremiumContent": false
+                        },
+                        {
+                            "type": "image",
+                            "content": "EmilyParker_pic6",
+                            "isPremiumContent": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "description": "Take a caring interest in her affairs to make her feel at ease",
+            "messages": [
+                {
+                    "text": "How was your time at the community center? Hope it was fulfilling!",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "ugh, had to deal with a busted water pipe at the community center today. What a mess! 😩💦",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+                {
+                    "text": "How did it go at the community center, Emily? I bet you were amazing!",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "ugh, had to deal with a busted water pipe at the community center today. What a mess! 😩💦",
+                            "isPremiumContent": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "description": "It's a time for a sense of humor, which is very appealing",
+            "messages": [
+                {
+                    "text": "You're the hero fixing pipes now? So hot! 😘",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "ahaha, thanks! Just another day saving the day 😘  what's up with you?",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+                {
+                    "text": "Aw, rough day, huh? You still look cute even covered in water! 😉",
+                    "isPremium": false,
+                    "points": 2,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "Oh, ahah, you still think so?",
+                            "isPremiumContent": false
+                        },
+                        {
+                            "type": "image",
+                            "content": "EmilyParker_pic7",
+                            "isPremiumContent": true
+                        },
+                        {
+                            "type": "text",
+                            "content": "What's up with you?",
+                            "isPremiumContent": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "description": "Share your day with Emily so she feels like you trust her",
+            "messages": [
+                {
+                    "text": "Just wrapped up a hectic day at work, but chatting with you makes it all better😊 Any plans for the evening?",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "My plan tonight is just to lie in bed and talk to you 💋",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+                {
+                    "text": "Busy day, but nothing exciting like your heroics! 😄 Now winding down with some music. What about you?",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "My plan tonight is just to lie in bed and talk to you 💋",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+                {
+                    "text": "Spent the day juggling work and errands. Now winding down and wishing you were here ❤️",
+                    "isPremium": true,
+                    "points": 3,
+                    "answer": [
+                        {
+                            "type": "image",
+                            "content": "EmilyParker_pic5",
+                            "isPremiumContent": true
+                        },
+                        {
+                            "type": "text",
+                            "content": "just like that, huh?",
+                            "isPremiumContent": false
+                        }
+                        
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "description": "Something interesting is coming up, I like her flirty tone",
+            "messages": [
+                {
+                    "text": "Talking to you in bed sounds like the perfect way to end the day. Let's make it unforgettable 💖",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "How about we explore our secret turn-ons? I'm curious about yours😉",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+                {
+                    "text": "u r making my night sound way more interesting. Mind if I join you? 😏",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "How about we explore our secret turn-ons? I'm curious about yours😉",
+                            "isPremiumContent": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "description": "Flirt with Emily to keep the tantalizing talk going",
+            "messages": [
+                {
+                    "text": "I'm into whispers in my ear that send shivers down my spine. What about you? 😉",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "[Emily's answering service]:\nEmily's phone went to do not disturb mode and she started to fall asleep",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+               
+                {
+                    "text": "I can't resist someone who knows how to tease and build anticipation. What gets you going? 😏",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "[Emily's answering service]:\nEmily's phone went to do not disturb mode and she started to fall asleep",
+                            "isPremiumContent": false
+                        }
+                    ]
+                },
+
+                {
+                    "text": "For me, it's all about confident touches that leave me wanting more. What about you, Emily? 😘",
+                    "isPremium": false,
+                    "points": 1,
+                    "answer": [
+                        {
+                            "type": "text",
+                            "content": "[Emily's answering service]:\nEmily's phone went to do not disturb mode and she started to fall asleep",
+                            "isPremiumContent": false
+                        }
+                    ]
+                }
+                
+            ]
+        },
+      
+        {
+            "id": 7,
+            "description": "There's still an opportunity to wake her up and continue the conversation",
+            "messages": [
+                {
+                    "text": "Wake up Emily",
+                    "isPremium": false,
+                    "points": 1,
+                    "isScriptBot": false
+                }
+            ]
+        }
+    ]
+}

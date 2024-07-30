@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:ai_friend/domain/entity/i_assistant/i_assistant.dart';
 import 'package:ai_friend/domain/services/app_router.dart';
+import 'package:ai_friend/features/assistants/assistants_provider.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
 import 'package:ai_friend/features/profile/hobby/hobby_helper.dart';
 import 'package:ai_friend/features/profile/hobby/hobby_item.dart';
@@ -24,12 +26,11 @@ class _BotProfileScreenState extends State<BotProfileScreen> {
   late PageController _pageController;
   double _currentIndex = 0;
 
-  final List<ImageProvider> _imagePaths = [
-    Assets.alicePhotos.img1.provider(),
-    Assets.alicePhotos.img2.provider(),
-    Assets.alicePhotos.img3.provider(),
-    Assets.alicePhotos.img4.provider(),
-  ];
+  IAssistant get currentAssistant =>
+      context.read<AssistantsProvider>().currentAssistant!;
+  List<String> get urls => currentAssistant.photos;
+  String get name => currentAssistant.name;
+  String get age => currentAssistant.age;
 
   final List<HOBBY> aliceHobby = [
     HOBBY.height,
@@ -60,7 +61,7 @@ class _BotProfileScreenState extends State<BotProfileScreen> {
 
   void next() {
     HapticFeedback.mediumImpact();
-    if (_currentIndex == _imagePaths.length - 1) {
+    if (_currentIndex == urls.length - 1) {
       _pageController.animateToPage(
         0,
         duration: const Duration(milliseconds: 10),
@@ -102,14 +103,14 @@ class _BotProfileScreenState extends State<BotProfileScreen> {
                                 child: AspectRatio(
                                   aspectRatio: 0.85 / 1,
                                   child: PageView.builder(
-                                    itemCount: _imagePaths.length,
+                                    itemCount: urls.length,
                                     controller: _pageController,
                                     // physics:
                                     //     const NeverScrollableScrollPhysics(),
                                     itemBuilder: (context, index) {
                                       return BotProfileImage(
                                         isBlured: index != 0 && !isHasPremium,
-                                        data: _imagePaths[index],
+                                        url: urls[index],
                                       );
                                     },
                                   ),
@@ -172,9 +173,9 @@ class _BotProfileScreenState extends State<BotProfileScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(height: 15),
-                            const Text(
-                              'Alice, 25 y.o.',
-                              style: TextStyle(
+                            Text(
+                              '$name, $age y.o.',
+                              style: const TextStyle(
                                 color: Color(0xFFFBFBFB),
                                 fontSize: 24,
                                 fontFamily: FontFamily.gothamPro,
@@ -182,10 +183,9 @@ class _BotProfileScreenState extends State<BotProfileScreen> {
                               ),
                             ),
                             const SizedBox(height: 5),
-                            const Text(
-                              // "Hi, handsome! I'm your virtual muse, Alice.\nLet's forget about everything and dive into the world of our fiery conversation right now!",
-                              "Hi, handsome! I'm your virtual muse, Alice.\nLet's forget about everything and dive into the world of our conversation right now!",
-                              style: TextStyle(
+                            Text(
+                              "Hi, handsome! I'm your virtual muse, $name.\nLet's forget about everything and dive into the world of our conversation right now!",
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,
                                 fontFamily: FontFamily.sFPro,
@@ -231,9 +231,9 @@ class _BotProfileScreenState extends State<BotProfileScreen> {
 }
 
 class BotProfileImage extends StatelessWidget {
-  final ImageProvider data;
+  final String url;
   final bool isBlured;
-  const BotProfileImage({required this.data, this.isBlured = true, super.key});
+  const BotProfileImage({required this.url, this.isBlured = true, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -242,8 +242,8 @@ class BotProfileImage extends StatelessWidget {
         Container(
           padding: const EdgeInsets.only(left: 15, bottom: 10),
           decoration: BoxDecoration(
-            color: Colors.white,
-            image: DecorationImage(image: data, fit: BoxFit.cover),
+            color: const Color(0xff170C22),
+            image: DecorationImage(image: NetworkImage(url), fit: BoxFit.cover),
           ),
         ),
         Positioned.fill(

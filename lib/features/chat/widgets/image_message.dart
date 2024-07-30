@@ -1,4 +1,3 @@
-import 'package:ai_friend/domain/entity/i_assistant/i_assistant.dart';
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 import 'package:ai_friend/domain/firebase/fire_storage.dart';
 import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
@@ -31,12 +30,10 @@ class _ImageMessageState extends State<ImageMessage>
   String? url;
   ImageStream? _imageStream;
   ImageProvider<Object>? _imageProvider;
-  // bool _isBlurred = true;
 
   @override
   void initState() {
     super.initState();
-    // _isBlurred = isPreview;
     _loadImage();
   }
 
@@ -46,12 +43,8 @@ class _ImageMessageState extends State<ImageMessage>
     super.dispose();
   }
 
-  // void toggleBlur() {
-  //   _isBlurred = !_isBlurred;
-  //   setState(() {});
-  // }
-
   void _loadImage() async {
+    if (message.mediaData != null) return;
     final src =
         context.read<AssistantsProvider>().currentAssistant!.chatImagesSrc;
     if (widget.message.mediaData != null) return;
@@ -72,11 +65,8 @@ class _ImageMessageState extends State<ImageMessage>
 
   @override
   Widget build(BuildContext context) {
-    // final isHasPremium = context.select((PaymentProvider e) => e.isHasPremium);
-
     super.build(context);
     return Container(
-      // margin: EdgeInsets.only(bottom: isPreview ? 10 : 0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(isPreview ? 10 : 0),
         color: isPreview ? const Color(0xff423556) : Colors.transparent,
@@ -87,100 +77,40 @@ class _ImageMessageState extends State<ImageMessage>
             ? ClipRRect(
                 borderRadius: BorderRadius.circular(isPreview ? 10 : 0),
                 child: AspectRatio(
-                    aspectRatio: 9 / 13,
-                    child: Stack(
-                      fit: StackFit.expand,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            if (!isPreview) return;
-                            FirebaseAnaliticsService.logOnTapToMessageI();
-                            SwipeImageGallery(
-                              context: context,
-                              initialIndex: 0,
-                              transitionDuration: 300,
-                              dismissDragDistance: 100,
-                              backgroundOpacity: 0.95,
-                              children: [
-                                ImageMessage(
-                                    message: widget.message, isPreview: false)
-                              ],
-                            ).show();
-                          },
-                          child: widget.message.mediaData != null
-                              ? Image.memory(
-                                  widget.message.mediaData!,
-                                  fit: isPreview
-                                      ? BoxFit.cover
-                                      : BoxFit.fitWidth,
-                                )
-                              : Image(
-                                  image: _imageProvider!,
-                                  fit: isPreview
-                                      ? BoxFit.cover
-                                      : BoxFit.fitWidth,
-                                ),
-                        ),
-                        // widget.message.mediaData != null
-                        //     ? Image.memory(
-                        //         widget.message.mediaData!,
-                        //         fit: isPreview ? BoxFit.cover : BoxFit.fitWidth,
-                        //       )
-                        //     : Image(
-                        //         image: _imageProvider!,
-                        //         fit: isPreview ? BoxFit.cover : BoxFit.fitWidth,
-                        //       ),
-                        const BlurWidget(),
-                        // Positioned.fill(
-                        //   child: IgnorePointer(
-                        //     ignoring: isHasPremium,
-                        //     child: ProAnimatedBlur(
-                        //       blur: isHasPremium ? 0 : 15,
-                        //       duration: const Duration(milliseconds: 200),
-                        //       curve: Curves.ease,
-                        //       child: GestureDetector(
-                        //         onTap: () =>
-                        //             AppRouter.openPaywall(context, false),
-                        //         child: Container(
-                        //           color: Colors.transparent,
-                        //           child: Center(
-                        //             child: AnimatedOpacity(
-                        //               opacity: isHasPremium ? 0 : 1,
-                        //               duration:
-                        //                   const Duration(milliseconds: 200),
-                        //               curve: Curves.ease,
-                        //               child: SizedBox(
-                        //                 height: 40,
-                        //                 width: 120,
-                        //                 child: AppButton(
-                        //                   title: 'Unblur',
-                        //                   icon: Assets.icons.proIcon
-                        //                       .svg(width: 23),
-                        //                   onTap: () => AppRouter.openPaywall(
-                        //                       context, false),
-                        //                 ),
-                        //               ),
-                        //             ),
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ),
-                        // )
-                      ],
-                    )
-
-                    // widget.message.mediaData != null
-                    //     ? Image.memory(
-                    //         widget.message.mediaData!,
-                    //         fit: isPreview ? BoxFit.cover : BoxFit.fitWidth,
-                    //       )
-                    //     : Image(
-                    //         image: _imageProvider!,
-                    //         fit: isPreview ? BoxFit.cover : BoxFit.fitWidth,
-                    //       ),
-
-                    ),
+                  aspectRatio: 9 / 13,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          if (!isPreview) return;
+                          FirebaseAnaliticsService.logOnTapToMessageI();
+                          SwipeImageGallery(
+                            context: context,
+                            initialIndex: 0,
+                            transitionDuration: 300,
+                            dismissDragDistance: 100,
+                            backgroundOpacity: 0.95,
+                            children: [
+                              ImageMessage(
+                                  message: widget.message, isPreview: false)
+                            ],
+                          ).show();
+                        },
+                        child: widget.message.mediaData != null
+                            ? Image.memory(
+                                widget.message.mediaData!,
+                                fit: isPreview ? BoxFit.cover : BoxFit.fitWidth,
+                              )
+                            : Image(
+                                image: _imageProvider!,
+                                fit: isPreview ? BoxFit.cover : BoxFit.fitWidth,
+                              ),
+                      ),
+                      const BlurWidget(),
+                    ],
+                  ),
+                ),
               )
             : const AspectRatio(
                 aspectRatio: 9 / 13,

@@ -100,7 +100,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 onTap: () =>
                                     AppRouter.openPaywall(context, false),
                                 child: Container(
-                                  height: 80,
+                                  height: 90,
                                   padding: const EdgeInsets.only(
                                     left: 30,
                                     top: 14,
@@ -110,7 +110,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                     image: DecorationImage(
                                       image: Assets.images.settingsPopup
                                           .provider(),
-                                      fit: BoxFit.cover,
+                                      fit: BoxFit.fitWidth,
                                     ),
                                   ),
                                   child: const Text(

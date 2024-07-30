@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:ai_friend/domain/services/app_router.dart';
+import 'package:ai_friend/features/chat/chat_script/chat_script_provider.dart';
 import 'package:ai_friend/gen/fonts.gen.dart';
 import 'package:ai_friend/widgets/assistant_avatar.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,7 +27,9 @@ class AssistantItem extends StatelessWidget {
       onTap: () async {
         final provider = context.read<AssistantsProvider>();
         provider.selectAssistant(assistant);
-        AppRouter.openChat(context);
+        await context.read<ChatScriptProvider>().initScript().then((e) {
+          AppRouter.openChat(context);
+        });
       },
       child: Container(
         height: 60,
