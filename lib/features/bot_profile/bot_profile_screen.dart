@@ -4,7 +4,6 @@ import 'package:ai_friend/domain/services/app_router.dart';
 import 'package:ai_friend/features/assistants/assistants_provider.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
 import 'package:ai_friend/features/profile/hobby/hobby_helper.dart';
-import 'package:ai_friend/features/profile/hobby/hobby_item.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
 import 'package:ai_friend/gen/fonts.gen.dart';
 import 'package:ai_friend/widgets/app_button.dart';
@@ -28,19 +27,21 @@ class _BotProfileScreenState extends State<BotProfileScreen> {
 
   IAssistant get currentAssistant =>
       context.read<AssistantsProvider>().currentAssistant!;
-  List<String> get urls => currentAssistant.photos;
   String get name => currentAssistant.name;
+  List<String> get urls => currentAssistant.photos;
   String get age => currentAssistant.age;
+  String get description => currentAssistant.description;
+  List<String> get hobby => currentAssistant.hobby;
 
-  final List<HOBBY> aliceHobby = [
-    HOBBY.height,
-    HOBBY.music,
-    HOBBY.literature,
-    HOBBY.technology,
-    HOBBY.friendly,
-    HOBBY.artDesign,
-    HOBBY.intellectual,
-  ];
+  // final List<HOBBY> aliceHobby = [
+  //   HOBBY.height,
+  //   HOBBY.music,
+  //   HOBBY.literature,
+  //   HOBBY.technology,
+  //   HOBBY.friendly,
+  //   HOBBY.artDesign,
+  //   HOBBY.intellectual,
+  // ];
 
   @override
   void initState() {
@@ -184,7 +185,7 @@ class _BotProfileScreenState extends State<BotProfileScreen> {
                             ),
                             const SizedBox(height: 5),
                             Text(
-                              "Hi, handsome! I'm your virtual muse, $name.\nLet's forget about everything and dive into the world of our conversation right now!",
+                              description,
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,
@@ -199,15 +200,8 @@ class _BotProfileScreenState extends State<BotProfileScreen> {
                                 alignment: WrapAlignment.start,
                                 spacing: 4,
                                 runSpacing: 4,
-                                children: aliceHobby
-                                    .map(
-                                      (e) => HobbyItem(
-                                        value: e,
-                                        isEditMod: true,
-                                        isSelected: true,
-                                        onChanged: (e) {},
-                                      ),
-                                    )
+                                children: hobby
+                                    .map((e) => e.getFakeHobbyItem())
                                     .toList(),
                               ),
                             ),

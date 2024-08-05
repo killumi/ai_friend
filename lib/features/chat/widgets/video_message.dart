@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 import 'package:ai_friend/domain/firebase/fire_storage.dart';
 import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
@@ -45,9 +43,9 @@ class _VideoMessageState extends State<VideoMessage>
   }
 
   Future<void> _initVideoController() async {
-    log('START INIT VIDEO');
+    // log('START INIT VIDEO');
     if (widget.message.mediaData != null) {
-      log('START INIT VIDEO WITH UNTI8LIST AS FILE');
+      // log('START INIT VIDEO WITH UNTI8LIST AS FILE');
       final file = await fireStorage.getMediaFile(
           widget.message.mediaData!, widget.message.content, 'mp4');
       _controller = VideoPlayerController.file(file);
@@ -59,7 +57,7 @@ class _VideoMessageState extends State<VideoMessage>
           context.read<AssistantsProvider>().currentAssistant!.chatVideosSrc;
       // log('CURRENT SRC: $src');
       final url = await fireStorage.getMediaUrl(src, widget.message);
-      log('VIDEO URL: $url ');
+      // log('VIDEO URL: $url ');
 
       _controller = VideoPlayerController.networkUrl(Uri.parse(url));
       _controller!.setVolume(0);

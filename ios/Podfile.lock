@@ -1317,6 +1317,8 @@ PODS:
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - permission_handler_apple (9.3.0):
+    - Flutter
   - PromisesObjC (2.4.0)
   - rate_my_app (1.1.4):
     - Flutter
@@ -1361,6 +1363,7 @@ DEPENDENCIES:
   - image_gallery_saver (from `.symlinks/plugins/image_gallery_saver/ios`)
   - onesignal_flutter (from `.symlinks/plugins/onesignal_flutter/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - rate_my_app (from `.symlinks/plugins/rate_my_app/ios`)
   - share_plus (from `.symlinks/plugins/share_plus/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
@@ -1445,6 +1448,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/onesignal_flutter/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
   rate_my_app:
     :path: ".symlinks/plugins/rate_my_app/ios"
   share_plus:
@@ -1513,6 +1518,7 @@ SPEC CHECKSUMS:
   onesignal_flutter: c64704854df3c77f5e8b464abc15b65c8c74001a
   OneSignalXCFramework: f06edd9b146c7ac5935136a117ce2a5fdd6420f6
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
+  permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   rate_my_app: e249ec0751c276811746ff89558c23dc0da39f0c
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21

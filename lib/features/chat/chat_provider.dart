@@ -90,36 +90,73 @@ class ChatProvider extends ChangeNotifier {
       await currentAssistant.save();
     } else {
       for (var message in _savedMessages) {
-        _addNewMessageToList(message, animated: false);
+        await _addNewMessageToList(message, animated: false);
       }
     }
     isLoading = false;
     notifyListeners();
   }
 
-  void _addNewMessageToList(IChatMessage message,
-      {bool animated = true, bool enableScroll = true}) {
+  // Future<void> initChat() async {
+  //   isLoading = true;
+  //   notifyListeners();
+
+  //   _messages = [];
+  //   if (_savedMessages.isEmpty) {
+  //     final startMessage = IChatMessage(
+  //       date: DateTime.now(),
+  //       isPremiumContent: false,
+  //       type: "text",
+  //       isBot: true,
+  //       content: currentAssistant.startMessage,
+  //     );
+  //     await _addNewMessageToList(startMessage);
+  //     currentAssistant.messages?.add(startMessage);
+  //     await currentAssistant.save();
+  //   } else {
+  //     for (var message in _savedMessages) {
+  //       await _addNewMessageToList(message, animated: false);
+  //     }
+  //   }
+  //   await Future.delayed(const Duration(milliseconds: 200));
+  //   isLoading = false;
+  //   notifyListeners();
+  // }
+
+  Future<void> _addNewMessageToList(
+    IChatMessage message, {
+    bool animated = true,
+  }) async {
     final index = _messages.length;
     _messages.add(message);
+    notifyListeners();
     if (animated) {
       chatListKey.currentState?.insertItem(index);
     }
 
-    notifyListeners();
-    if (enableScroll) scrollDown(animate: animated);
+    await scrollDown(animate: animated);
+    // notifyListeners();
   }
 
-  Future<void> scrollDown({bool animate = true}) async {
+  Future<void> scrollDown({bool animate = true, bool min = false}) async {
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) async {
-      if (!animate) {
-        scrollController.jumpTo(scrollController.position.extentTotal);
-        return;
+      if (min) {
+        if (scrollController.hasClients) {
+          scrollController.jumpTo(scrollController.position.maxScrollExtent);
+        }
       } else {
-        scrollController.animateTo(
-          scrollController.position.maxScrollExtent,
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.linearToEaseOut,
-        );
+        if (!animate) {
+          if (scrollController.hasClients) {
+            scrollController.jumpTo(scrollController.position.extentTotal);
+          }
+          return;
+        } else {
+          scrollController.animateTo(
+            scrollController.position.maxScrollExtent,
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.ease,
+          );
+        }
       }
     });
   }
@@ -142,33 +179,36 @@ class ChatProvider extends ChangeNotifier {
           ? textController.text.trim()
           : message?.text.replaceUserName() ?? '',
     );
-
+    await Future.delayed(const Duration(milliseconds: 550));
     _addNewMessageToList(userMessage);
     _textController.clear();
     playIncomingMessageRingtone();
     await saveMessageToBox(userMessage);
     FirebaseAnaliticsService.logOnSendScriptMessage(messages.length);
 
-    await Future.delayed(const Duration(milliseconds: 1000));
+    await Future.delayed(const Duration(milliseconds: 400));
     final answer = message?.answer ?? messageData?.answer;
     if (answer == null || answer.isEmpty) {
       showLoader(false);
+      await Future.delayed(const Duration(milliseconds: 650));
       scrollDown();
       return;
     }
     final random = math.Random();
-    final milliseconds = random.nextInt(3001) + 1450;
-    // final milliseconds = random.nextInt(1000) + 500;
+    final milliseconds = random.nextInt(2001) + 1450;
+    // final milliseconds = 350;
     for (var e in answer) {
       await Future.delayed(Duration(milliseconds: milliseconds));
       e = e.copyWith(content: e.content.replaceUserName());
       await saveMessageToBox(e);
-      final updatedMEss = await saveMessageWithMedia(e);
-      _addNewMessageToList(updatedMEss ?? e);
+      final updatedMessage = await saveMessageWithMedia(e);
+      _addNewMessageToList(updatedMessage ?? e);
       playIncomingMessageRingtone();
     }
-    await Future.delayed(const Duration(seconds: 1));
+    // await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(milliseconds: 500));
     showLoader(false);
+    await Future.delayed(const Duration(milliseconds: 500));
     scrollDown();
   }
 
@@ -375,7 +415,7 @@ class ChatProvider extends ChangeNotifier {
     isHasFocus = _node.hasFocus;
     notifyListeners();
     if (isHasFocus) {
-      _chatScriptProvider.showScriptBox(false);
+      _chatScriptProvider.expandScriptBox(false);
       await Future.delayed(const Duration(milliseconds: 300));
       scrollDown();
     }

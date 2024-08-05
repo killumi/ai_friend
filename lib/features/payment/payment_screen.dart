@@ -2,6 +2,7 @@
 
 import 'package:ai_friend/domain/services/app_router.dart';
 import 'package:ai_friend/domain/firebase/firebase_config.dart';
+import 'package:ai_friend/features/assistants/assistants_provider.dart';
 import 'package:ai_friend/features/chat/chat_provider.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
 import 'package:ai_friend/gen/assets.gen.dart';
@@ -29,6 +30,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
     final provider = context.watch<PaymentProvider>();
     final price = provider.getPrice();
     final isSmal = MediaQuery.of(context).size.height < 750;
+    final currentAssistant =
+        context.read<AssistantsProvider>().currentAssistant;
+    final image = currentAssistant == null
+        ? Assets.images.paywall.provider()
+        : NetworkImage(currentAssistant.paywallImage);
 
     return Stack(
       children: [
@@ -53,7 +59,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               child: Container(
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: Assets.images.paywall.provider(),
+                                    image: image,
                                     fit: isSmal
                                         ? BoxFit.contain
                                         : BoxFit.fitWidth,

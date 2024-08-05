@@ -1,8 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:ai_friend/domain/services/app_router.dart';
 import 'package:ai_friend/domain/firebase/fire_storage.dart';
-import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
 import 'package:ai_friend/features/gallery/gallery_header.dart';
+import 'package:ai_friend/features/gallery/gallery_helper.dart';
 import 'package:ai_friend/features/gallery/gallery_video/gallery_video_page.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
 import 'package:ai_friend/domain/services/locator.dart';
@@ -10,8 +10,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 import 'package:ai_friend/widgets/screen_wrap.dart';
 import 'package:flutter/services.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 
 class GalleryVideoPageView extends StatefulWidget {
@@ -84,7 +82,6 @@ class _GalleryVideoPageViewState extends State<GalleryVideoPageView> {
                   currentIndex: _currentIndex,
                   totalLength: widget.videos.length,
                   onSave: () async {
-                    FirebaseAnaliticsService.logOnSaveV();
                     if (widget.videos[_currentIndex.toInt()].mediaData ==
                         null) {
                       return;
@@ -99,16 +96,7 @@ class _GalleryVideoPageViewState extends State<GalleryVideoPageView> {
 
                     final file = await locator<FireStorage>()
                         .getMediaFile(bytes, name, 'mp4');
-
-                    await ImageGallerySaver.saveFile(file.path, name: name);
-                    showToast(
-                      'Video was saved',
-                      textPadding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
-                      position: ToastPosition.center,
-                      duration: const Duration(seconds: 3),
-                      animationCurve: Curves.ease,
-                    );
+                    await locator<GalleryHelper>().onSaveVideo(file, name);
                   },
                 ),
                 Expanded(

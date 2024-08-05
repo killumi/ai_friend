@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 import 'package:ai_friend/domain/firebase/firebase_config.dart';
 import 'package:ai_friend/domain/services/locator.dart';
@@ -48,7 +46,9 @@ class _ChatScreenState extends State<ChatScreen> {
 
       await Future.delayed(const Duration(milliseconds: 500));
       _showOverlay = false;
-      setState(() {});
+      setState(() {
+        provider.scrollDown(animate: false, min: true);
+      });
     }
   }
 
@@ -58,16 +58,12 @@ class _ChatScreenState extends State<ChatScreen> {
     final messages = chatProvider.messages;
     final listKey = chatProvider.chatListKey;
     final scrollController = chatProvider.scrollController;
-    final currentDayNumber =
-        context.select((ChatScriptProvider e) => e.currentDayNumber);
-    final currentMessageNumber =
-        context.select((ChatScriptProvider e) => e.currentMessageNumber);
-    final daylyScriptIsEnd =
-        context.select((ChatScriptProvider e) => e.showEndDayUI);
-    final needShowPremiumBanner =
-        context.select((ChatScriptProvider e) => e.needShowPremiumBanner);
+    final isShowScriptWidgets =
+        context.select((ChatScriptProvider e) => e.isShowScriptWidgets);
+    final showPremiumBanner =
+        context.select((ChatScriptProvider e) => e.showPremiumBanner);
     final isHasPremium = context.select((PaymentProvider e) => e.isHasPremium);
-    log('needShowPremiumBanner : $needShowPremiumBanner , $currentDayNumber, $currentMessageNumber');
+
     return ScreenWrap(
       resizeToAvoidBottomInset: true,
       child: Stack(
@@ -85,29 +81,24 @@ class _ChatScreenState extends State<ChatScreen> {
                           ),
                         )
                       : AnimatedList(
+                          shrinkWrap: true,
                           controller: scrollController,
                           padding: const EdgeInsets.only(
-                              left: 16, right: 16, bottom: 25, top: 15),
+                              left: 16, right: 16, bottom: 25, top: 30),
                           key: listKey,
                           initialItemCount: messages.length,
                           itemBuilder: (context, index, animation) =>
                               _buildItem(messages[index], animation),
                         ),
                 ),
-                if (!needShowPremiumBanner && !daylyScriptIsEnd || isHasPremium)
+                if (!showPremiumBanner && isShowScriptWidgets || isHasPremium)
                   const ChatScriptMessagesBox(),
-                if (!needShowPremiumBanner && !daylyScriptIsEnd || isHasPremium)
-                  const ChatInput(),
-                if (daylyScriptIsEnd && !isHasPremium)
-                  const ContinueChatWidget(
-                    title:
-                        'Alice will be online in 12 hours. You can get a PRO and continue chatting with her right away',
-                  ),
-                if (needShowPremiumBanner && !isHasPremium)
+                if (!showPremiumBanner || isHasPremium) const ChatInput(),
+                if (showPremiumBanner && !isHasPremium)
                   ContinueChatWidget(
                     title: !showMedia
-                        ? 'To continue chatting with Alice, upgrade to PRO'
-                        : 'To keep chatting with Alice and receiving her photos and videos, upgrade to PRO',
+                        ? 'To continue chatting with ${chatProvider.currentAssistant.name}, upgrade to PRO'
+                        : 'To keep chatting with ${chatProvider.currentAssistant.name} and receiving her photos and videos, upgrade to PRO',
                   ),
               ],
             ),
@@ -139,7 +130,7 @@ class _ChatScreenState extends State<ChatScreen> {
     final slideTween = Tween<Offset>(
       begin: const Offset(0, 1),
       end: Offset.zero,
-    );
+    ).chain(CurveTween(curve: Curves.easeOut));
 
     return SlideTransition(
       position: animation.drive(slideTween),

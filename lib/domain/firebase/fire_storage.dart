@@ -58,7 +58,7 @@ class FireStorage {
     return file;
   }
 
-  Future<Uint8List> downloadVideo(String src, String assetName) async {
+  Future<Uint8List?> downloadVideo(String src, String assetName) async {
     final Completer<Uint8List> completer = Completer<Uint8List>();
     try {
       final ref = instance.ref();

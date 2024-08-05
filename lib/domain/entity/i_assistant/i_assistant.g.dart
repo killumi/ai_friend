@@ -29,13 +29,17 @@ class IAssistantAdapter extends TypeAdapter<IAssistant> {
       scriptDayIndex: fields[10] as int?,
       scriptMessageIndex: fields[11] as int?,
       hide: fields[12] as bool?,
+      paywallImage: fields[13] as String,
+      description: fields[14] as String,
+      hobby: (fields[15] as List).cast<String>(),
+      startMessage: fields[16] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, IAssistant obj) {
     writer
-      ..writeByte(12)
+      ..writeByte(16)
       ..writeByte(1)
       ..write(obj.id)
       ..writeByte(2)
@@ -59,7 +63,15 @@ class IAssistantAdapter extends TypeAdapter<IAssistant> {
       ..writeByte(11)
       ..write(obj.scriptMessageIndex)
       ..writeByte(12)
-      ..write(obj.hide);
+      ..write(obj.hide)
+      ..writeByte(13)
+      ..write(obj.paywallImage)
+      ..writeByte(14)
+      ..write(obj.description)
+      ..writeByte(15)
+      ..write(obj.hobby)
+      ..writeByte(16)
+      ..write(obj.startMessage);
   }
 
   @override

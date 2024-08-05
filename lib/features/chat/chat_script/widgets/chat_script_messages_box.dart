@@ -14,12 +14,13 @@ class ChatScriptMessagesBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<ChatScriptProvider>();
-    final showAllBox = provider.isShowScriptBox;
+    final isBoxExpanded = provider.isScriptBoxExpanded;
+    final isShowScriptWidgets = provider.isShowScriptWidgets;
     final isLoading = context.select((ChatProvider e) => e.isLoading);
+    final runAnimation = isLoading || isBoxExpanded;
+    final message = provider.message;
 
-    final runAnimation = isLoading || showAllBox;
-
-    return provider.dailyScript == null && !isLoading
+    return !isShowScriptWidgets
         ? const SizedBox(height: 1)
         : Stack(
             children: [
@@ -28,9 +29,9 @@ class ChatScriptMessagesBox extends StatelessWidget {
                   onTap: () => provider.toggleShowScriptBox(),
                   onVerticalDragEnd: (r) {
                     if (r.velocity.pixelsPerSecond.dy > 500) {
-                      provider.showScriptBox(false);
+                      provider.expandScriptBox(false);
                     } else {
-                      provider.showScriptBox(true);
+                      provider.expandScriptBox(true);
                     }
                   },
                   child: Container(
@@ -42,7 +43,7 @@ class ChatScriptMessagesBox extends StatelessWidget {
                         minHeight: 1,
                         maxHeight: isLoading
                             ? 75
-                            : showAllBox
+                            : isBoxExpanded
                                 ? 420
                                 : 10,
                       ),
@@ -98,13 +99,12 @@ class ChatScriptMessagesBox extends StatelessWidget {
                                         ),
                                       ),
                                 const SizedBox(height: 12),
-                                if (provider.dailyScript != null)
+                                if (isShowScriptWidgets)
                                   AnimatedSize(
                                     duration: const Duration(milliseconds: 500),
                                     curve: Curves.ease,
                                     child: Text(
-                                      provider.scriptMessage!.description
-                                          .replaceUserName(),
+                                      message!.description.replaceUserName(),
                                       textAlign: TextAlign.center,
                                       style: const TextStyle(
                                         color: Color(0xFFFBFBFB),
@@ -114,11 +114,11 @@ class ChatScriptMessagesBox extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                if (provider.dailyScript != null)
+                                if (isShowScriptWidgets)
                                   Column(
                                     children: [
                                       const SizedBox(height: 20),
-                                      ...provider.scriptMessage!.messages
+                                      ...message!.messages
                                           .map(
                                               (e) => ChatScriptMessage(data: e))
                                           .toList(),

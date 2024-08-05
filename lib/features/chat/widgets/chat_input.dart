@@ -30,20 +30,24 @@ class _ChatInputState extends State<ChatInput> {
   Widget build(BuildContext context) {
     final chatProvider = context.read<ChatProvider>();
     final scriptProvider = context.read<ChatScriptProvider>();
-    final isShowScriptBox =
-        context.select((ChatScriptProvider e) => e.isShowScriptBox);
-    final textfieldAvailable =
-        context.select((ChatScriptProvider e) => e.textfieldAvailable);
-    final currentScriptMessageData =
-        context.select((ChatScriptProvider e) => e.scriptMessage);
-    final isShowRollUpBoxButton =
-        context.select((ChatScriptProvider e) => e.isShowRollUpBoxButton);
+    final isShowScriptWidgets =
+        context.select((ChatScriptProvider e) => e.isShowScriptWidgets);
+    final isScriptBoxExpanded =
+        context.select((ChatScriptProvider e) => e.isScriptBoxExpanded);
+    // final textfieldAvailable =
+    //     context.select((ChatScriptProvider e) => e.textfieldAvailable);
+    // final currentScriptMessageData =
+    //     context.select((ChatScriptProvider e) => e.message);
+    // final isShowRollUpBoxButton =
+    //     context.select((ChatScriptProvider e) => e.isShowScriptWidgets);
     final isHasFocus = context.select((ChatProvider e) => e.isHasFocus);
     final isHasPremium = context.select((PaymentProvider e) => e.isHasPremium);
     final showSendButton = context.select((ChatProvider e) => e.showSendButton);
     // final scriptIsEnded =
     // context.select((ChatScriptProvider e) => e.dailyScript) == null;
 
+    // print('isShowScriptWidgets: $isShowScriptWidgets');
+    // print('isScriptBoxExpanded: $isScriptBoxExpanded');
     return GestureDetector(
       onVerticalDragEnd: (r) {
         if (r.velocity.pixelsPerSecond.dy > 500) {
@@ -66,14 +70,13 @@ class _ChatInputState extends State<ChatInput> {
                   onTapOutside: (e) {
                     chatProvider.node.unfocus();
                   },
-                  readOnly: !isHasPremium && !textfieldAvailable,
+                  readOnly: !isHasPremium,
                   onTap: () {
-                    if (!isHasPremium && !textfieldAvailable) {
+                    if (!isHasPremium) {
                       chatProvider.node.unfocus();
-                      scriptProvider.showScriptBox(true);
+                      scriptProvider.expandScriptBox(true);
                       chatProvider.scrollDown();
                     }
-                    return;
                   },
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   prefix: isHasPremium
@@ -81,10 +84,8 @@ class _ChatInputState extends State<ChatInput> {
                       : Container(
                           alignment: Alignment.centerRight,
                           width: 35,
-                          child: Icon(
-                            textfieldAvailable
-                                ? CupertinoIcons.lock_open
-                                : CupertinoIcons.lock,
+                          child: const Icon(
+                            CupertinoIcons.lock,
                             color: Colors.white54,
                           ),
                         ),
@@ -99,18 +100,7 @@ class _ChatInputState extends State<ChatInput> {
                             curve: Curves.ease,
                             child: Bounce(
                               onTap: () async {
-                                if (textfieldAvailable) {
-                                  await chatProvider.sendMessageGetAnswer(
-                                    null,
-                                    messageData: currentScriptMessageData,
-                                  );
-                                  chatProvider.node.unfocus();
-                                  scriptProvider.showScriptBox(true);
-
-                                  await scriptProvider.showNextMessage();
-                                } else {
-                                  await chatProvider.sendMessageToGPT();
-                                }
+                                await chatProvider.sendMessageToGPT();
                               },
                               tilt: false,
                               scaleFactor: 0.89,
@@ -137,13 +127,14 @@ class _ChatInputState extends State<ChatInput> {
                           ),
                         )
                       : AnimatedScale(
-                          scale:
-                              isShowRollUpBoxButton && !isShowScriptBox ? 1 : 0,
+                          scale: isShowScriptWidgets && !isScriptBoxExpanded
+                              ? 1
+                              : 0,
                           // scale: 1,
                           duration: const Duration(milliseconds: 350),
                           curve: Curves.ease,
                           child: AnimatedOpacity(
-                            opacity: isShowRollUpBoxButton && !isShowScriptBox
+                            opacity: isShowScriptWidgets && !isScriptBoxExpanded
                                 ? 1
                                 : 0,
                             // opacity: 1,
@@ -151,7 +142,7 @@ class _ChatInputState extends State<ChatInput> {
                             curve: Curves.ease,
                             child: Bounce(
                               onTap: () async {
-                                scriptProvider.showScriptBox(true);
+                                scriptProvider.expandScriptBox(true);
                                 await Future.delayed(
                                     const Duration(milliseconds: 500));
                                 chatProvider.scrollDown();

@@ -1,3 +1,4 @@
+import 'package:ai_friend/domain/entity/i_assistant/i_assistant.dart';
 import 'package:ai_friend/features/assistants/assistant_storage.dart';
 import 'package:ai_friend/features/assistants/assistants_provider.dart';
 import 'package:ai_friend/features/gallery/gallery_image/gallery_image_grid.dart';
@@ -10,6 +11,7 @@ import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:ai_friend/domain/services/locator.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:provider/provider.dart';
 
 class GalleryScreen extends StatefulWidget {
   const GalleryScreen({super.key});
@@ -19,6 +21,10 @@ class GalleryScreen extends StatefulWidget {
 }
 
 class _GalleryScreenState extends State<GalleryScreen> {
+  IAssistant get currentAssistant =>
+      context.read<AssistantsProvider>().currentAssistant!;
+  String get name => currentAssistant.name;
+
   @override
   Widget build(BuildContext context) {
     return ScreenWrap(
@@ -80,9 +86,9 @@ class _GalleryScreenState extends State<GalleryScreen> {
                                   color: const Color(0xffA9A1B2),
                                 ),
                                 const SizedBox(height: 15),
-                                const Text(
-                                  "Alice hasn't sent her photos yet",
-                                  style: TextStyle(
+                                Text(
+                                  "$name hasn't sent her photos yet",
+                                  style: const TextStyle(
                                     fontSize: 16,
                                     color: Color(0xffA9A1B2),
                                     fontFamily: FontFamily.gothamPro,
@@ -112,9 +118,9 @@ class _GalleryScreenState extends State<GalleryScreen> {
                                   color: const Color(0xffA9A1B2),
                                 ),
                                 const SizedBox(height: 15),
-                                const Text(
-                                  "Alice hasn't sent her videos yet",
-                                  style: TextStyle(
+                                Text(
+                                  "$name hasn't sent her videos yet",
+                                  style: const TextStyle(
                                     fontSize: 16,
                                     color: Color(0xffA9A1B2),
                                     fontFamily: FontFamily.gothamPro,

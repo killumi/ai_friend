@@ -1,12 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
-
-import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 import 'package:intl/intl.dart';
-
+import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 part 'i_assistant.g.dart';
 
 @HiveType(typeId: 4)
@@ -35,9 +32,14 @@ class IAssistant extends HiveObject {
   int? scriptMessageIndex;
   @HiveField(12)
   bool? hide;
-
-  // photos: List<String>.from(
-  //       (map['photos'] as List).map((item) => item as String)),
+  @HiveField(13)
+  final String paywallImage;
+  @HiveField(14)
+  final String description;
+  @HiveField(15)
+  final List<String> hobby;
+  @HiveField(16)
+  final String startMessage;
 
   IAssistant({
     required this.id,
@@ -52,6 +54,10 @@ class IAssistant extends HiveObject {
     this.scriptDayIndex,
     this.scriptMessageIndex,
     this.hide,
+    required this.paywallImage,
+    required this.description,
+    required this.hobby,
+    required this.startMessage,
   });
 
   IAssistant copyWith({
@@ -67,6 +73,10 @@ class IAssistant extends HiveObject {
     int? scriptDayIndex,
     int? scriptMessageIndex,
     bool? hide,
+    String? paywallImage,
+    String? description,
+    List<String>? hobby,
+    String? startMessage,
   }) {
     return IAssistant(
       id: id ?? this.id,
@@ -81,6 +91,10 @@ class IAssistant extends HiveObject {
       scriptDayIndex: scriptDayIndex ?? this.scriptDayIndex,
       scriptMessageIndex: scriptMessageIndex ?? this.scriptMessageIndex,
       hide: hide ?? this.hide,
+      paywallImage: paywallImage ?? this.paywallImage,
+      description: description ?? this.description,
+      hobby: hobby ?? this.hobby,
+      startMessage: startMessage ?? this.startMessage,
     );
   }
 
@@ -98,6 +112,10 @@ class IAssistant extends HiveObject {
       'scriptDayIndex': scriptDayIndex,
       'scriptMessageIndex': scriptMessageIndex,
       'hide': hide,
+      'paywallImage': paywallImage,
+      'description': description,
+      'hobby': hobby,
+      'startMessage': startMessage,
     };
   }
 
@@ -138,6 +156,11 @@ class IAssistant extends HiveObject {
           ? map['scriptMessageIndex'] as int
           : 0,
       hide: map['hide'] != null ? map['hide'] as bool : false,
+      paywallImage: map['paywallImage'] as String,
+      description: map['description'] as String,
+      hobby: List<String>.from(
+          (map['hobby'] as List).map((item) => item as String)),
+      startMessage: map['startMessage'] as String,
     );
   }
 
@@ -148,7 +171,7 @@ class IAssistant extends HiveObject {
 
   @override
   String toString() {
-    return 'IAssistant(id: $id, name: $name, age: $age, assistantKey: $assistantKey, avatar: $avatar, chatImagesSrc: $chatImagesSrc, chatVideosSrc: $chatVideosSrc, photos: $photos, messages: $messages, scriptDayIndex: $scriptDayIndex, scriptMessageIndex: $scriptMessageIndex, hide: $hide)';
+    return 'IAssistant(id: $id, name: $name, age: $age, assistantKey: $assistantKey, avatar: $avatar, chatImagesSrc: $chatImagesSrc, chatVideosSrc: $chatVideosSrc, photos: $photos, messages: $messages, scriptDayIndex: $scriptDayIndex, scriptMessageIndex: $scriptMessageIndex, hide: $hide, paywallImage: $paywallImage, description: $description, hobby: $hobby, startMessage: $startMessage)';
   }
 
   @override
@@ -163,7 +186,11 @@ class IAssistant extends HiveObject {
         other.chatImagesSrc == chatImagesSrc &&
         other.chatVideosSrc == chatVideosSrc &&
         listEquals(other.photos, photos) &&
-        other.hide == hide;
+        other.hide == hide &&
+        other.paywallImage == paywallImage &&
+        other.description == description &&
+        listEquals(other.hobby, hobby) &&
+        other.startMessage == startMessage;
   }
 
   @override
@@ -176,6 +203,10 @@ class IAssistant extends HiveObject {
         chatImagesSrc.hashCode ^
         chatVideosSrc.hashCode ^
         photos.hashCode ^
-        hide.hashCode;
+        hide.hashCode ^
+        paywallImage.hashCode ^
+        description.hashCode ^
+        hobby.hashCode ^
+        startMessage.hashCode;
   }
 }

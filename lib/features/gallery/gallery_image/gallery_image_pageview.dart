@@ -1,14 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:ai_friend/domain/services/app_router.dart';
-import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
+import 'package:ai_friend/domain/services/locator.dart';
 import 'package:ai_friend/features/gallery/gallery_header.dart';
+import 'package:ai_friend/features/gallery/gallery_helper.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
 import 'package:ai_friend/widgets/blur_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:ai_friend/domain/entity/i_chat_message/i_chat_message.dart';
 import 'package:ai_friend/widgets/screen_wrap.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 
 class GalleryImagePageView extends StatefulWidget {
@@ -62,30 +61,13 @@ class _GalleryImagePageViewState extends State<GalleryImagePageView> {
                   currentIndex: _currentIndex,
                   totalLength: widget.images.length,
                   onSave: () async {
-                    FirebaseAnaliticsService.logOnSaveI();
-
-                    if (widget.images[_currentIndex.toInt()].mediaData ==
-                        null) {
-                      return;
-                    }
                     if (!isHasPremium) {
                       AppRouter.openPaywall(context, false);
                       return;
                     }
-
-                    await ImageGallerySaver.saveImage(
-                      widget.images[_currentIndex.toInt()].mediaData!,
-                      quality: 100,
-                    );
-
-                    showToast(
-                      'Image was saved',
-                      textPadding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
-                      position: ToastPosition.center,
-                      duration: const Duration(seconds: 3),
-                      animationCurve: Curves.ease,
-                    );
+                    final image =
+                        widget.images[_currentIndex.toInt()].mediaData!;
+                    await locator<GalleryHelper>().onSaveImage(image);
                   },
                 ),
                 Expanded(

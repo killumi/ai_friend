@@ -1,9 +1,6 @@
 import 'dart:async';
-
 import 'package:ai_friend/domain/firebase/fire_auth.dart';
-import 'package:ai_friend/domain/firebase/fire_storage.dart';
 import 'package:ai_friend/domain/firebase/firebase_analitics.dart';
-import 'package:ai_friend/domain/firebase/fire_database.dart';
 import 'package:ai_friend/domain/helpers/rate_app_helper.dart';
 import 'package:ai_friend/domain/app_providers/connection_provider.dart';
 import 'package:ai_friend/domain/services/push_notifications.dart';
@@ -13,10 +10,7 @@ import 'package:ai_friend/features/assistants/assistant_storage.dart';
 import 'package:ai_friend/features/assistants/assistant_list_screen.dart';
 import 'package:ai_friend/features/assistants/assistants_provider.dart';
 import 'package:ai_friend/features/chat/chat_provider.dart';
-import 'package:ai_friend/features/chat/chat_screen.dart';
 import 'package:ai_friend/features/chat/chat_script/chat_script_provider.dart';
-import 'package:ai_friend/features/chat/chat_script/chat_script_storage.dart';
-import 'package:ai_friend/features/chat/chat_storage.dart';
 import 'package:ai_friend/domain/firebase/firebase_config.dart';
 import 'package:ai_friend/features/payment/payment_listener.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
@@ -60,8 +54,6 @@ void main() async {
   // INIT HIVE
   await Hive.initFlutter();
   // STORAGES
-  // await ChatScriptStorage.openStorage();
-  // await ChatStorage.openStorage();
   await OnboardingStorage.openStorage();
   await BirthDateStorage.openStorage();
   await NameStorage.openStorage();
@@ -70,16 +62,13 @@ void main() async {
   await RateAppStorage.openStorage();
   await AssistantStorage.openStorage();
   // LOAD ASSISTANT PROFILES
-  // await AssistantStorage().clear();
   await locator<AssistantsProvider>().updateAssistants();
-  // await locator<FireDatabase>().uploadData();
   // INIT GPT
   locator<ChatProvider>().initOpenAI();
   await locator<ProfileProvider>().init();
   // ANALITICS INIT
   await SingularAnalitics.init();
   await FirebaseAnaliticsService.init();
-  // services
   // RATE APP INIT
   await RateAppHelper.init();
   // PUSH NOTIFICATIONS

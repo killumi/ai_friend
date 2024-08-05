@@ -7,6 +7,7 @@ import 'package:ai_friend/features/chat/chat_provider.dart';
 import 'package:ai_friend/features/chat/chat_script/chat_script_provider.dart';
 import 'package:ai_friend/domain/firebase/fire_storage.dart';
 import 'package:ai_friend/domain/firebase/firebase_config.dart';
+import 'package:ai_friend/features/gallery/gallery_helper.dart';
 import 'package:ai_friend/features/onboarding/onboarding_provider.dart';
 import 'package:ai_friend/features/onboarding/onboarding_storage.dart';
 import 'package:ai_friend/features/payment/payment_provider.dart';
@@ -24,6 +25,7 @@ Future<void> initLocator() async {
   // firebase
   locator.registerLazySingleton<FirebaseConfig>(() => FirebaseConfig());
   locator.registerLazySingleton<FireDatabase>(() => FireDatabase());
+  locator.registerLazySingleton<GalleryHelper>(() => GalleryHelper());
   // locator.registerLazySingleton<FireStorage>(() => FireStorage());
   locator.registerLazySingleton<FireStorage>(() => FireStorage());
   // local storages

@@ -54,6 +54,10 @@ class $AssetsColoredIconsGen {
   AssetGenImage get cookingIcon =>
       const AssetGenImage('assets/colored_icons/cooking_icon.png');
 
+  /// File path: assets/colored_icons/creative_icon.png
+  AssetGenImage get creativeIcon =>
+      const AssetGenImage('assets/colored_icons/creative_icon.png');
+
   /// File path: assets/colored_icons/ecology_icon.png
   AssetGenImage get ecologyIcon =>
       const AssetGenImage('assets/colored_icons/ecology_icon.png');
@@ -90,6 +94,10 @@ class $AssetsColoredIconsGen {
   AssetGenImage get heightIcon =>
       const AssetGenImage('assets/colored_icons/height_icon.png');
 
+  /// File path: assets/colored_icons/hiking_icon.png
+  AssetGenImage get hikingIcon =>
+      const AssetGenImage('assets/colored_icons/hiking_icon.png');
+
   /// File path: assets/colored_icons/intellectual_icon.png
   AssetGenImage get intellectualIcon =>
       const AssetGenImage('assets/colored_icons/intellectual_icon.png');
@@ -106,6 +114,10 @@ class $AssetsColoredIconsGen {
   AssetGenImage get musicIcon =>
       const AssetGenImage('assets/colored_icons/music_icon.png');
 
+  /// File path: assets/colored_icons/painting_icon.png
+  AssetGenImage get paintingIcon =>
+      const AssetGenImage('assets/colored_icons/painting_icon.png');
+
   /// File path: assets/colored_icons/photography_icon.png
   AssetGenImage get photographyIcon =>
       const AssetGenImage('assets/colored_icons/photography_icon.png');
@@ -118,9 +130,17 @@ class $AssetsColoredIconsGen {
   AssetGenImage get scienceIcon =>
       const AssetGenImage('assets/colored_icons/science_icon.png');
 
+  /// File path: assets/colored_icons/sincere_icon.png
+  AssetGenImage get sincereIcon =>
+      const AssetGenImage('assets/colored_icons/sincere_icon.png');
+
   /// File path: assets/colored_icons/sports_icon.png
   AssetGenImage get sportsIcon =>
       const AssetGenImage('assets/colored_icons/sports_icon.png');
+
+  /// File path: assets/colored_icons/supportive_icon.png
+  AssetGenImage get supportiveIcon =>
+      const AssetGenImage('assets/colored_icons/supportive_icon.png');
 
   /// File path: assets/colored_icons/technology_icon.png
   AssetGenImage get technologyIcon =>
@@ -137,6 +157,7 @@ class $AssetsColoredIconsGen {
         careerIcon,
         carsIcon,
         cookingIcon,
+        creativeIcon,
         ecologyIcon,
         fashionIcon,
         financeIcon,
@@ -146,14 +167,18 @@ class $AssetsColoredIconsGen {
         gardeningIcon,
         healthIcon,
         heightIcon,
+        hikingIcon,
         intellectualIcon,
         literatureIcon,
         moviesIcon,
         musicIcon,
+        paintingIcon,
         photographyIcon,
         psychologyIcon,
         scienceIcon,
+        sincereIcon,
         sportsIcon,
+        supportiveIcon,
         technologyIcon,
         travelIcon
       ];
