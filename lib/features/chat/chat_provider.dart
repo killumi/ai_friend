@@ -83,7 +83,7 @@ class ChatProvider extends ChangeNotifier {
         isPremiumContent: false,
         type: "text",
         isBot: true,
-        content: "Hey, I think we should talk more. Let's start?😋",
+        content: currentAssistant.startMessage,
       );
       _addNewMessageToList(startMessage);
       currentAssistant.messages?.add(startMessage);
