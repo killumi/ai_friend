@@ -68,12 +68,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               ),
                             ),
                           ),
-                          const Positioned(
+                          Positioned(
                             bottom: -20,
                             child: Text(
-                              'Immerse into deeper\nconnection with Alice',
+                              'Immerse into deeper\nconnection with ${currentAssistant?.name ?? "Alice"}',
                               textAlign: TextAlign.center,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Color(0xFFFBFBFB),
                                 fontSize: 28,
                                 fontFamily: FontFamily.gothamPro,
