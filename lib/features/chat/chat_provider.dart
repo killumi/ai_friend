@@ -51,6 +51,7 @@ class ChatProvider extends ChangeNotifier {
   String get imageSrc => currentAssistant.chatImagesSrc;
   String get videoSrc => currentAssistant.chatVideosSrc;
 
+  bool get showMedia => firebaseConfig.showMedia;
   String get apiKey => firebaseConfig.gptKey;
   String get assistantId => currentAssistant.assistantKey;
 
@@ -200,12 +201,17 @@ class ChatProvider extends ChangeNotifier {
     for (var e in answer) {
       await Future.delayed(Duration(milliseconds: milliseconds));
       e = e.copyWith(content: e.content.replaceUserName());
+      if (e.isImage && !showMedia || e.isVideo && !showMedia) {
+        showLoader(false);
+        await Future.delayed(const Duration(milliseconds: 500));
+        scrollDown();
+        return;
+      }
       await saveMessageToBox(e);
       final updatedMessage = await saveMessageWithMedia(e);
       _addNewMessageToList(updatedMessage ?? e);
       playIncomingMessageRingtone();
     }
-    // await Future.delayed(const Duration(seconds: 1));
     await Future.delayed(const Duration(milliseconds: 500));
     showLoader(false);
     await Future.delayed(const Duration(milliseconds: 500));
@@ -220,9 +226,6 @@ class ChatProvider extends ChangeNotifier {
 
     final index = currentAssistant.messages!.indexOf(e);
     // log('INDEX VIDEO OR IMAGE MESSAGE: $index , ${e.type}, ${e.content}');
-
-    if (e.isImage && !firebaseConfig.showMedia ||
-        e.isVideo && !firebaseConfig.showMedia) return null;
 
     if (e.type.contains('video')) {
       if (rateAppStorage.show) {
