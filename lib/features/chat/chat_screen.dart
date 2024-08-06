@@ -33,6 +33,8 @@ class _ChatScreenState extends State<ChatScreen> {
     super.initState();
     provider = context.read<ChatProvider>();
     provider.chatListKey = GlobalKey<AnimatedListState>();
+    provider.node = FocusNode();
+    provider.textController = TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) => _initializeChat());
   }
 

@@ -27,6 +27,13 @@ class _ChatInputState extends State<ChatInput> {
   }
 
   @override
+  void dispose() {
+    chatProvider.textController.dispose();
+    chatProvider.node.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final chatProvider = context.read<ChatProvider>();
     final scriptProvider = context.read<ChatScriptProvider>();

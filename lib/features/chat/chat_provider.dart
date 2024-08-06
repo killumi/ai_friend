@@ -39,10 +39,12 @@ class ChatProvider extends ChangeNotifier {
   late String runId;
   late String status;
   late OpenAI openAI;
+  late TextEditingController textController;
+  late FocusNode node;
 
   final _scrollController = ScrollController();
-  final _textController = TextEditingController();
-  final _node = FocusNode();
+  // final _textController = TextEditingController();
+  // final _node = FocusNode();
   final _player = AudioPlayer();
 
   IAssistant get currentAssistant => _assistantsProvider.currentAssistant!;
@@ -57,8 +59,8 @@ class ChatProvider extends ChangeNotifier {
 
   List<IChatMessage> get messages => _messages;
   ScrollController get scrollController => _scrollController;
-  TextEditingController get textController => _textController;
-  FocusNode get node => _node;
+  // TextEditingController get textController => _textController;
+  // FocusNode get node => _node;
 
   ChatProvider(this._assistantsProvider, this._chatScriptProvider);
 
@@ -182,7 +184,7 @@ class ChatProvider extends ChangeNotifier {
     );
     await Future.delayed(const Duration(milliseconds: 550));
     _addNewMessageToList(userMessage);
-    _textController.clear();
+    textController.clear();
     playIncomingMessageRingtone();
     await saveMessageToBox(userMessage);
     FirebaseAnaliticsService.logOnSendScriptMessage(messages.length);
@@ -287,10 +289,10 @@ class ChatProvider extends ChangeNotifier {
     String? customValue,
     bool isBot = false,
   }) async {
-    final text = _textController.text.trim();
+    final text = textController.text.trim();
     // check text & custom val
     if (text.isEmpty && customValue == null) {
-      _textController.clear();
+      textController.clear();
       notifyListeners();
       return;
     }
@@ -299,7 +301,7 @@ class ChatProvider extends ChangeNotifier {
     final message = _createMessage(customValue ?? text, isBot: isBot);
     await saveMessageToBox(message);
     // create message in thread
-    _textController.clear();
+    textController.clear();
     showSendButton = false;
     await _createMessageInThread(message.content, false);
     playIncomingMessageRingtone();
@@ -415,7 +417,7 @@ class ChatProvider extends ChangeNotifier {
   }
 
   void onChangeFocusListener() async {
-    isHasFocus = _node.hasFocus;
+    isHasFocus = node.hasFocus;
     notifyListeners();
     if (isHasFocus) {
       _chatScriptProvider.expandScriptBox(false);
